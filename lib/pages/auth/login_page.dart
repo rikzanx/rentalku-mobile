@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rentalku/pages/routes.dart';
 import 'package:rentalku/styles/styles.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -65,6 +66,9 @@ class LoginPage extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       child: ElevatedButton(
                         onPressed: () {
+                          // TODO: Remove this
+                          Navigator.pushNamed(context, Routes.dashboard);
+
                           if (_formKey.currentState!.validate()) {
                             // process here
                           }
