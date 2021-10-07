@@ -67,7 +67,7 @@ class LoginPage extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           // TODO: Remove this
-                          Navigator.pushNamed(context, Routes.dashboard);
+                          Navigator.pushReplacementNamed(context, Routes.dashboard);
 
                           if (_formKey.currentState!.validate()) {
                             // process here

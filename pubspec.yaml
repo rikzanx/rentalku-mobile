@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^2.1.0
+  intl: ^0.17.0
   provider: ^6.0.1
   url_launcher: ^6.0.12
 
@@ -54,6 +55,8 @@ flutter:
     - assets/images/booking_icon.png
     - assets/images/chat_icon.png
     - assets/images/profil_icon.png
+    - assets/images/rentalku.png
+    - assets/images/cart_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

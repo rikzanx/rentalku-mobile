@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rentalku/pages/dashboard/home_page.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
 import 'package:rentalku/styles/colors.dart';
 
@@ -18,15 +19,17 @@ class DashboardPage extends StatelessWidget {
       child: Consumer<DashboardProvider>(
         builder: (context, dashboard, _) => Scaffold(
           backgroundColor: Colors.white,
-          body: PageView(
-            controller: controller,
-            children: [
-              Center(child: Text("Home")),
-              Center(child: Text("MyBooking")),
-              Center(child: Text("Chat")),
-              Center(child: Text("Profil")),
-            ],
-            onPageChanged: (index) => dashboard.bottomNavIndex = index,
+          body: SafeArea(
+            child: PageView(
+              controller: controller,
+              children: [
+                DashboardHomePage(),
+                Center(child: Text("MyBooking")),
+                Center(child: Text("Chat")),
+                Center(child: Text("Profil")),
+              ],
+              onPageChanged: (index) => dashboard.bottomNavIndex = index,
+            ),
           ),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
