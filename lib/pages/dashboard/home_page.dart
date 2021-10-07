@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rentalku/widgets/balance_widget.dart';
+import 'package:rentalku/widgets/promo_card_widget.dart';
 
 class DashboardHomePage extends StatelessWidget {
   const DashboardHomePage({Key? key}) : super(key: key);
@@ -149,6 +150,7 @@ class DashboardHomePage extends StatelessWidget {
             ),
           ),
           SingleChildScrollView(
+            padding: EdgeInsets.symmetric(vertical: 2),
             scrollDirection: Axis.horizontal,
             child: Row(
               children: List.generate(
@@ -158,25 +160,8 @@ class DashboardHomePage extends StatelessWidget {
                     left: index == 0 ? 16 : 4,
                     right: index == 4 ? 16 : 4,
                   ),
-                  child: Material(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.white,
-                    elevation: 1,
-                    child: Ink(
-                      width: 210,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              "https://lorempixel.com/300/200/transport"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: InkWell(
-                        onTap: () {},
-                      ),
-                    ),
+                  child: PromoCardWidget(
+                    url: "https://lorempixel.com/300/200/transport",
                   ),
                 ),
               ),
