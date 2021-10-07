@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rentalku/pages/routes.dart';
 import 'package:rentalku/providers/home-provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -35,14 +36,18 @@ class HomePage extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.login);
+                    },
                     child: Text("LOG IN"),
                   ),
                 ),
                 SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.register);
+                    },
                     child: Text("REGISTER"),
                   ),
                 ),
