@@ -59,22 +59,18 @@ class RegisterPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 4),
-                          Material(
-                            elevation: 1,
-                            borderRadius: BorderRadius.circular(20),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                hintText: "Muhammad Andri",
-                              ),
-                              style: AppStyle.regularText,
-                              textInputAction: TextInputAction.next,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Kolom nama lengkap wajib diisi';
-                                }
-                                return null;
-                              },
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "Muhammad Andri",
                             ),
+                            style: AppStyle.regularText,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Kolom nama lengkap wajib diisi';
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(height: 16),
                           Text(
@@ -84,23 +80,19 @@ class RegisterPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 4),
-                          Material(
-                            elevation: 1,
-                            borderRadius: BorderRadius.circular(20),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                hintText: "muhammad@gmail.com",
-                              ),
-                              keyboardType: TextInputType.emailAddress,
-                              style: AppStyle.regularText,
-                              textInputAction: TextInputAction.next,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Kolom email wajib diisi';
-                                }
-                                return null;
-                              },
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "muhammad@gmail.com",
                             ),
+                            keyboardType: TextInputType.emailAddress,
+                            style: AppStyle.regularText,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Kolom email wajib diisi';
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(height: 16),
                           Text(
@@ -110,24 +102,20 @@ class RegisterPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 4),
-                          Material(
-                            elevation: 1,
-                            borderRadius: BorderRadius.circular(20),
-                            child: TextFormField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                hintText: "password",
-                              ),
-                              style: AppStyle.regularText,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Kolom password wajib diisi';
-                                } else if (value.length < 6) {
-                                  return 'Panjang password minimal 6 karakter';
-                                }
-                                return null;
-                              },
+                          TextFormField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              hintText: "password",
                             ),
+                            style: AppStyle.regularText,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Kolom password wajib diisi';
+                              } else if (value.length < 6) {
+                                return 'Panjang password minimal 6 karakter';
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(height: 16),
                           Text(
@@ -137,24 +125,20 @@ class RegisterPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 4),
-                          Material(
-                            elevation: 1,
-                            borderRadius: BorderRadius.circular(20),
-                            child: TextFormField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                hintText: "password",
-                              ),
-                              style: AppStyle.regularText,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Kolom password wajib diisi';
-                                } else if (value.length < 6) {
-                                  return 'Panjang password minimal 6 karakter';
-                                }
-                                return null;
-                              },
+                          TextFormField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              hintText: "password",
                             ),
+                            style: AppStyle.regularText,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Kolom password wajib diisi';
+                              } else if (value.length < 6) {
+                                return 'Panjang password minimal 6 karakter';
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(height: 16),
                           SizedBox(
