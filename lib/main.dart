@@ -5,6 +5,7 @@ import 'package:rentalku/pages/auth/login_page.dart';
 import 'package:rentalku/pages/auth/register_page.dart';
 import 'package:rentalku/pages/dashboard_page.dart';
 import 'package:rentalku/pages/home_page.dart';
+import 'package:rentalku/pages/profil/update_password_page.dart';
 import 'package:rentalku/pages/routes.dart';
 import 'package:rentalku/providers/home_provider.dart';
 import 'package:rentalku/styles/colors.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
           Routes.login: (context) => LoginPage(),
           Routes.register: (context) => RegisterPage(),
           Routes.dashboard: (context) => DashboardPage(),
+          Routes.updatePassword: (context) => UpdatePasswordPage(),
         },
         theme: ThemeData(
           primaryColor: AppColor.theme,

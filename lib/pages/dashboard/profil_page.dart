@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rentalku/pages/routes.dart';
 
 class DashboardProfilPage extends StatelessWidget {
   const DashboardProfilPage({Key? key}) : super(key: key);
@@ -65,7 +66,9 @@ class DashboardProfilPage extends StatelessWidget {
               'Ganti Password',
               style: GoogleFonts.montserrat(fontSize: 13),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.updatePassword);
+            },
           ),
           ListTile(
             leading: Icon(Icons.directions_car_outlined),
