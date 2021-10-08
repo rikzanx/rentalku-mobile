@@ -49,6 +49,8 @@ class DashboardHomePage extends StatelessWidget {
                       ),
                       Text(
                         "Muhammad",
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
                         style: GoogleFonts.montserrat(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
