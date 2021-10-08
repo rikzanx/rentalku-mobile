@@ -36,8 +36,8 @@ class DashboardPage extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
             currentIndex: dashboard.bottomNavIndex,
             selectedItemColor: AppColor.green,
-            selectedLabelStyle: GoogleFonts.montserrat(fontSize: 10),
-            unselectedLabelStyle: GoogleFonts.montserrat(fontSize: 10),
+            selectedLabelStyle: GoogleFonts.poppins(fontSize: 10),
+            unselectedLabelStyle: GoogleFonts.poppins(fontSize: 10),
             items: [
               BottomNavigationBarItem(
                 icon: Image.asset('assets/images/home_icon.png', height: 24),

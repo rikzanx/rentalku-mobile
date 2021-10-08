@@ -20,49 +20,56 @@ class HomePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: AppColor.green,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50),
-              ),
+          Material(
+            elevation: 3,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(50),
+              bottomRight: Radius.circular(50),
             ),
-            padding: EdgeInsets.fromLTRB(24, 64, 24, 48),
-            child: Column(
-              children: [
-                Text(
-                  "Halo, selamat datang di RentalKu",
-                  style: AppStyle.title1Text.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                    height: 1.5,
-                  ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColor.green,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(50),
+                  bottomRight: Radius.circular(50),
                 ),
-                SizedBox(height: 8),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      child: Text(
-                        "Masuk",
-                        style: AppStyle.regularText.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 24,
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, Routes.login);
-                      },
+              ),
+              padding: EdgeInsets.fromLTRB(24, 64, 24, 48),
+              child: Column(
+                children: [
+                  Text(
+                    "Halo, selamat datang di RentalKu",
+                    style: AppStyle.title1Text.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                      height: 1.5,
                     ),
-                  ],
-                )
-              ],
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        child: Text(
+                          "Masuk",
+                          style: AppStyle.regularText.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 24,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.login);
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
           Spacer(),

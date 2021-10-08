@@ -45,13 +45,13 @@ class DashboardHomePage extends StatelessWidget {
                     children: [
                       Text(
                         "Halo,",
-                        style: GoogleFonts.montserrat(fontSize: 13),
+                        style: GoogleFonts.poppins(fontSize: 13),
                       ),
                       Text(
                         "Muhammad",
                         maxLines: 1,
                         overflow: TextOverflow.clip,
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.poppins(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
                         ),
@@ -79,7 +79,7 @@ class DashboardHomePage extends StatelessWidget {
                       child: TextFormField(
                         decoration: InputDecoration(
                           hintText: "Search on RentalKu",
-                          hintStyle: GoogleFonts.montserrat(
+                          hintStyle: GoogleFonts.poppins(
                             fontSize: 10,
                             color: Colors.black,
                           ),
@@ -145,7 +145,7 @@ class DashboardHomePage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Text(
               "Promotion for you",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 10,
                 fontWeight: FontWeight.w700,
               ),

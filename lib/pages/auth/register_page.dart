@@ -122,7 +122,7 @@ class RegisterPage extends StatelessWidget {
                   ),
                   TextSpan(
                     text: ".",
-                    style: GoogleFonts.roboto(fontSize: 13),
+                    style: GoogleFonts.poppins(fontSize: 13),
                   ),
                 ],
               ),

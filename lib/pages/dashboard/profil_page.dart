@@ -26,13 +26,13 @@ class DashboardProfilPage extends StatelessWidget {
                   children: [
                     Text(
                       "Halo,",
-                      style: GoogleFonts.montserrat(fontSize: 13),
+                      style: GoogleFonts.poppins(fontSize: 13),
                     ),
                     Text(
                       "Muhammad",
                       maxLines: 1,
                       overflow: TextOverflow.clip,
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.poppins(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
                       ),
@@ -54,7 +54,7 @@ class DashboardProfilPage extends StatelessWidget {
             visualDensity: VisualDensity.compact,
             title: Text(
               'Edit Data Diri',
-              style: GoogleFonts.montserrat(fontSize: 13),
+              style: GoogleFonts.poppins(fontSize: 13),
             ),
             onTap: () {},
           ),
@@ -64,7 +64,7 @@ class DashboardProfilPage extends StatelessWidget {
             horizontalTitleGap: 0,
             title: Text(
               'Ganti Password',
-              style: GoogleFonts.montserrat(fontSize: 13),
+              style: GoogleFonts.poppins(fontSize: 13),
             ),
             onTap: () {
               Navigator.pushNamed(context, Routes.updatePassword);
@@ -76,7 +76,7 @@ class DashboardProfilPage extends StatelessWidget {
             horizontalTitleGap: 0,
             title: Text(
               'Rental Mobil',
-              style: GoogleFonts.montserrat(fontSize: 13),
+              style: GoogleFonts.poppins(fontSize: 13),
             ),
             onTap: () {},
           ),
@@ -90,7 +90,7 @@ class DashboardProfilPage extends StatelessWidget {
             visualDensity: VisualDensity.compact,
             title: Text(
               'Logout',
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.poppins(
                 fontSize: 13,
                 color: Colors.redAccent,
               ),
@@ -102,7 +102,7 @@ class DashboardProfilPage extends StatelessWidget {
                   return AlertDialog(
                     title: Text(
                       "Yakin untuk logout?",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.poppins(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
                       ),
@@ -111,7 +111,7 @@ class DashboardProfilPage extends StatelessWidget {
                       TextButton(
                         child: Text(
                           "Tidak",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.poppins(
                             fontSize: 13,
                             color: Colors.grey,
                           ),
@@ -123,7 +123,7 @@ class DashboardProfilPage extends StatelessWidget {
                       TextButton(
                         child: Text(
                           "Ya",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.poppins(
                             fontSize: 13,
                             color: Colors.redAccent,
                           ),

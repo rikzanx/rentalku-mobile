@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/pages/auth/login_page.dart';
 import 'package:rentalku/pages/auth/register_page.dart';
 import 'package:rentalku/pages/dashboard_page.dart';
@@ -37,24 +38,29 @@ class MyApp extends StatelessWidget {
           primaryColor: AppColor.green,
           inputDecorationTheme: InputDecorationTheme(
             isDense: true,
-            contentPadding: EdgeInsets.all(16),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            fillColor: Colors.white,
+            filled: true,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.zero,
-              borderSide: BorderSide(width: 2, color: AppColor.green),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.zero,
-              borderSide: BorderSide(width: 2, color: AppColor.green),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.zero,
-              borderSide: BorderSide(width: 2, color: AppColor.green),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
+            hintStyle: AppStyle.regularText.copyWith(
+              color: Color(0xFF696969),
             ),
           ),
           appBarTheme: AppBarTheme(
             backgroundColor: AppColor.green,
-            titleTextStyle: GoogleFonts.roboto(
-              fontSize: 13,
+            titleTextStyle: GoogleFonts.poppins(
+              fontSize: 17,
               fontWeight: FontWeight.w500,
             ),
             titleSpacing: 0,
@@ -67,9 +73,9 @@ class MyApp extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              textStyle: GoogleFonts.roboto(
+              textStyle: GoogleFonts.poppins(
                 fontSize: 18,
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
             ),
@@ -82,7 +88,7 @@ class MyApp extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              textStyle: GoogleFonts.roboto(
+              textStyle: GoogleFonts.poppins(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Colors.black,

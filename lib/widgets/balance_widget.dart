@@ -32,14 +32,14 @@ class BalanceWidget extends StatelessWidget {
               children: [
                 Text(
                   "Saldo Anda",
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.poppins(
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 Text(
                   formatCurrency.format(balance),
-                  style: GoogleFonts.roboto(fontSize: 10),
+                  style: GoogleFonts.poppins(fontSize: 10),
                 )
               ],
             ),
@@ -49,7 +49,7 @@ class BalanceWidget extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.all(0),
                 visualDensity: VisualDensity.compact,
-                textStyle: GoogleFonts.roboto(
+                textStyle: GoogleFonts.poppins(
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                 ),
