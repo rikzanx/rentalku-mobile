@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class HomeProvider extends ChangeNotifier{
+class WelcomeProvider extends ChangeNotifier{
   bool _isFirstTimeHomePageLoads = true;
 
   void initializeProvider(){

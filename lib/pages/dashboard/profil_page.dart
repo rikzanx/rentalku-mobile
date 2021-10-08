@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rentalku/pages/routes.dart';
+import 'package:rentalku/commons/routes.dart';
 
 class DashboardProfilPage extends StatelessWidget {
   const DashboardProfilPage({Key? key}) : super(key: key);

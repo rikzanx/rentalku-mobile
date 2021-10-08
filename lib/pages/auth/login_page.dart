@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rentalku/pages/routes.dart';
-import 'package:rentalku/styles/styles.dart';
+import 'package:rentalku/commons/routes.dart';
+import 'package:rentalku/commons/styles.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Masuk", style: AppStyle.headingText),
+            Text("Masuk", style: AppStyle.heading1Text),
             SizedBox(height: 20),
             Form(
               key: _formKey,

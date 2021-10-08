@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rentalku/styles/styles.dart';
+import 'package:rentalku/commons/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -29,7 +29,7 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Registrasi", style: AppStyle.headingText),
+            Text("Registrasi", style: AppStyle.heading1Text),
             SizedBox(height: 20),
             Form(
               key: _formKey,

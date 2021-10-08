@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rentalku/pages/dashboard/home_page.dart';
 import 'package:rentalku/pages/dashboard/profil_page.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
-import 'package:rentalku/styles/colors.dart';
+import 'package:rentalku/commons/colors.dart';
 
 final controller = PageController();
 
@@ -35,7 +35,7 @@ class DashboardPage extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             currentIndex: dashboard.bottomNavIndex,
-            selectedItemColor: AppColor.theme,
+            selectedItemColor: AppColor.green,
             selectedLabelStyle: GoogleFonts.montserrat(fontSize: 10),
             unselectedLabelStyle: GoogleFonts.montserrat(fontSize: 10),
             items: [
