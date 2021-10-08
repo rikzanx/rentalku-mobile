@@ -4,7 +4,6 @@ import 'package:flutter/painting.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -67,6 +66,7 @@ class LoginPage extends StatelessWidget {
                               decoration: InputDecoration(
                                 hintText: "muhammad@gmail.com",
                               ),
+                              keyboardType: TextInputType.emailAddress,
                               style: AppStyle.regularText,
                               textInputAction: TextInputAction.next,
                               validator: (value) {
@@ -155,6 +155,7 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 20),
           ],
         ),
       ),
