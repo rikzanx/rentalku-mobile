@@ -10,6 +10,17 @@ class DashboardProfilPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          AppBar(
+            title: Text("Profil"),
+            centerTitle: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(50),
+                bottomRight: Radius.circular(50),
+              ),
+            ),
+            elevation: 2,
+          ),
           SizedBox(height: 24),
           Row(
             children: [
@@ -76,6 +87,26 @@ class DashboardProfilPage extends StatelessWidget {
             horizontalTitleGap: 0,
             title: Text(
               'Rental Mobil',
+              style: GoogleFonts.poppins(fontSize: 13),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(Icons.account_balance_wallet_outlined),
+            visualDensity: VisualDensity.compact,
+            horizontalTitleGap: 0,
+            title: Text(
+              'Dompetku',
+              style: GoogleFonts.poppins(fontSize: 13),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(Icons.car_rental_outlined),
+            visualDensity: VisualDensity.compact,
+            horizontalTitleGap: 0,
+            title: Text(
+              'Be a Car Owner',
               style: GoogleFonts.poppins(fontSize: 13),
             ),
             onTap: () {},

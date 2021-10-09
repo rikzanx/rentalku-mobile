@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rentalku/pages/dashboard/chat_page.dart';
 import 'package:rentalku/pages/dashboard/home_page.dart';
+import 'package:rentalku/pages/dashboard/my_booking_page.dart';
 import 'package:rentalku/pages/dashboard/profil_page.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
 import 'package:rentalku/commons/colors.dart';
@@ -24,8 +26,8 @@ class DashboardPage extends StatelessWidget {
             controller: controller,
             children: [
               DashboardHomePage(),
-              Center(child: Text("MyBooking")),
-              Center(child: Text("Chat")),
+              DashboardMyBookingPage(),
+              DashboardChatPage(),
               DashboardProfilPage(),
             ],
             onPageChanged: (index) => dashboard.bottomNavIndex = index,
