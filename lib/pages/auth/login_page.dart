@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50),
               ),
-              elevation: 3,
+              elevation: 5,
               child: Padding(
                 padding: EdgeInsets.fromLTRB(24, 24, 24, 30),
                 child: Column(

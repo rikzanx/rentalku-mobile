@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:rentalku/commons/colors.dart';
 
 class BalanceWidget extends StatelessWidget {
   final int balance;
@@ -47,6 +48,11 @@ class BalanceWidget extends StatelessWidget {
               child: Text("Top Up"),
               onPressed: () {},
               style: ElevatedButton.styleFrom(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                primary: AppColor.green,
                 padding: EdgeInsets.all(0),
                 visualDensity: VisualDensity.compact,
                 textStyle: GoogleFonts.poppins(

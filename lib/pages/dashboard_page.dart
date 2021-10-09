@@ -20,17 +20,15 @@ class DashboardPage extends StatelessWidget {
       child: Consumer<DashboardProvider>(
         builder: (context, dashboard, _) => Scaffold(
           backgroundColor: Colors.white,
-          body: SafeArea(
-            child: PageView(
-              controller: controller,
-              children: [
-                DashboardHomePage(),
-                Center(child: Text("MyBooking")),
-                Center(child: Text("Chat")),
-                DashboardProfilPage(),
-              ],
-              onPageChanged: (index) => dashboard.bottomNavIndex = index,
-            ),
+          body: PageView(
+            controller: controller,
+            children: [
+              DashboardHomePage(),
+              Center(child: Text("MyBooking")),
+              Center(child: Text("Chat")),
+              DashboardProfilPage(),
+            ],
+            onPageChanged: (index) => dashboard.bottomNavIndex = index,
           ),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
