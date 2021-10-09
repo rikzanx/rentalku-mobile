@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/widgets/text_field_with_shadow.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -52,18 +53,9 @@ class RegisterPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Masukkan nama lengkap anda",
-                            style: AppStyle.labelText.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: "Muhammad Andri",
-                            ),
-                            style: AppStyle.regularText,
+                          TextFieldWithShadow(
+                            labelText: "Masukkan nama lengkap anda",
+                            hintText: "Muhammad Andri",
                             textInputAction: TextInputAction.next,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -73,19 +65,10 @@ class RegisterPage extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 16),
-                          Text(
-                            "Masukkan email anda",
-                            style: AppStyle.labelText.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: "muhammad@gmail.com",
-                            ),
+                          TextFieldWithShadow(
+                            labelText: "Masukkan email anda",
+                            hintText: "muhammad@gmail.com",
                             keyboardType: TextInputType.emailAddress,
-                            style: AppStyle.regularText,
                             textInputAction: TextInputAction.next,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -95,19 +78,10 @@ class RegisterPage extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 16),
-                          Text(
-                            "Masukkan password anda",
-                            style: AppStyle.labelText.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          TextFormField(
+                          TextFieldWithShadow(
+                            labelText: "Masukkan password anda",
+                            hintText: "password",
                             obscureText: true,
-                            decoration: InputDecoration(
-                              hintText: "password",
-                            ),
-                            style: AppStyle.regularText,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Kolom password wajib diisi';
@@ -118,19 +92,10 @@ class RegisterPage extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 16),
-                          Text(
-                            "Masukkan ulang password anda",
-                            style: AppStyle.labelText.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          TextFormField(
+                          TextFieldWithShadow(
+                            labelText: "Masukkan ulang password anda",
+                            hintText: "password",
                             obscureText: true,
-                            decoration: InputDecoration(
-                              hintText: "password",
-                            ),
-                            style: AppStyle.regularText,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Kolom password wajib diisi';
@@ -146,9 +111,6 @@ class RegisterPage extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: () {
                                 // TODO: Remove this
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.dashboard);
-
                                 if (_formKey.currentState!.validate()) {
                                   // process here
                                 }

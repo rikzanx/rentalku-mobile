@@ -56,6 +56,11 @@ class MyApp extends StatelessWidget {
             hintStyle: AppStyle.regularText.copyWith(
               color: Color(0xFF696969),
             ),
+            errorStyle: AppStyle.regularText.copyWith(
+              fontSize: 12,
+              height: 1,
+              color: Colors.redAccent,
+            ),
           ),
           appBarTheme: AppBarTheme(
             backgroundColor: AppColor.green,
@@ -68,7 +73,7 @@ class MyApp extends StatelessWidget {
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
               primary: AppColor.yellow,
-              elevation: 0,
+              elevation: 3,
               padding: EdgeInsets.all(12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
