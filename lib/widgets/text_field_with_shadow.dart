@@ -10,6 +10,7 @@ class TextFieldWithShadow extends StatelessWidget {
   final TextInputType? keyboardType;
   final double height;
   final bool obscureText;
+  final Color labelColor;
 
   const TextFieldWithShadow({
     Key? key,
@@ -21,6 +22,7 @@ class TextFieldWithShadow extends StatelessWidget {
     this.textInputAction,
     this.validator,
     this.obscureText = false,
+    this.labelColor = Colors.white,
   }) : super(key: key);
 
   @override
@@ -34,7 +36,7 @@ class TextFieldWithShadow extends StatelessWidget {
             child: Text(
               labelText!,
               style: AppStyle.labelText.copyWith(
-                color: Colors.white,
+                color: labelColor,
               ),
             ),
           ),

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:rentalku/commons/routes.dart';
+import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/widgets/text_field_with_shadow.dart';
+
+final _formKey = GlobalKey<FormState>();
 
 class UpdatePasswordPage extends StatelessWidget {
   const UpdatePasswordPage({Key? key}) : super(key: key);
@@ -9,12 +14,79 @@ class UpdatePasswordPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           splashRadius: 24,
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.chevron_left),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Text("Ganti password"),
+        titleTextStyle: AppStyle.title2Text.copyWith(color: Colors.white),
+        centerTitle: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(50),
+            bottomRight: Radius.circular(50),
+          ),
+        ),
+        elevation: 2,
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFieldWithShadow(
+                labelText: "Masukkan password anda",
+                hintText: "password",
+                obscureText: true,
+                labelColor: Colors.black,
+                textInputAction: TextInputAction.next,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Kolom password wajib diisi';
+                  } else if (value.length < 6) {
+                    return 'Panjang password minimal 6 karakter';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16),
+              TextFieldWithShadow(
+                labelText: "Masukkan ulang password anda",
+                hintText: "password",
+                obscureText: true,
+                labelColor: Colors.black,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Kolom password wajib diisi';
+                  } else if (value.length < 6) {
+                    return 'Panjang password minimal 6 karakter';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // TODO: Remove this
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                    Navigator.pushReplacementNamed(
+                        context, Routes.dashboard);
+
+                    if (_formKey.currentState!.validate()) {
+                      // process here
+                    }
+                  },
+                  child: Text("Simpan perubahan"),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
