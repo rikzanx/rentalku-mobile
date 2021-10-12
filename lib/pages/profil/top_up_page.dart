@@ -1,12 +1,18 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';
 
 final _formKey = GlobalKey<FormState>();
+final CurrencyTextInputFormatter _formatter = CurrencyTextInputFormatter(
+  locale: 'id',
+  decimalDigits: 0,
+  symbol: "Rp. ",
+);
 
-class UpdatePasswordPage extends StatelessWidget {
-  const UpdatePasswordPage({Key? key}) : super(key: key);
+class TopUpPage extends StatelessWidget {
+  const TopUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,7 @@ class UpdatePasswordPage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text("Ganti password"),
+        title: Text("Top Up Dompetku"),
         titleTextStyle: AppStyle.title2Text.copyWith(color: Colors.white),
         centerTitle: true,
         shape: RoundedRectangleBorder(
@@ -38,31 +44,17 @@ class UpdatePasswordPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFieldWithShadow(
-                labelText: "Masukkan password anda",
-                hintText: "password",
-                obscureText: true,
+                labelText: "Jumlah saldo",
+                hintText: "Rp. 500.000",
+                // prefixText: "Rp. ",
                 labelColor: Colors.black,
-                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.number,
+                inputFormatters: [_formatter],
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Kolom password wajib diisi';
-                  } else if (value.length < 6) {
-                    return 'Panjang password minimal 6 karakter';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFieldWithShadow(
-                labelText: "Masukkan ulang password anda",
-                hintText: "password",
-                obscureText: true,
-                labelColor: Colors.black,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Kolom password wajib diisi';
-                  } else if (value.length < 6) {
-                    return 'Panjang password minimal 6 karakter';
+                    return 'Kolom saldo wajib diisi';
+                  } else if(_formatter.getUnformattedValue() < 10000){
+                    return 'Top up minimal Rp. 10.000';
                   }
                   return null;
                 },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rentalku/commons/styles.dart';
 
 class TextFieldWithShadow extends StatelessWidget {
@@ -11,6 +12,8 @@ class TextFieldWithShadow extends StatelessWidget {
   final double height;
   final bool obscureText;
   final Color labelColor;
+  final String? prefixText;
+  final List<TextInputFormatter>? inputFormatters;
 
   const TextFieldWithShadow({
     Key? key,
@@ -23,6 +26,8 @@ class TextFieldWithShadow extends StatelessWidget {
     this.validator,
     this.obscureText = false,
     this.labelColor = Colors.white,
+    this.prefixText,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -54,7 +59,12 @@ class TextFieldWithShadow extends StatelessWidget {
             ),
             TextFormField(
               obscureText: obscureText,
-              decoration: InputDecoration(hintText: hintText),
+              decoration: InputDecoration(
+                hintText: hintText,
+                prefixText: prefixText,
+                prefixStyle: AppStyle.regularText,
+              ),
+              inputFormatters: inputFormatters,
               keyboardType: keyboardType,
               style: AppStyle.regularText,
               textInputAction: textInputAction,

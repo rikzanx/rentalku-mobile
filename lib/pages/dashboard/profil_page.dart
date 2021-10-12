@@ -99,7 +99,9 @@ class DashboardProfilPage extends StatelessWidget {
               'Dompetku',
               style: GoogleFonts.poppins(fontSize: 13),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.topUp);
+            },
           ),
           ListTile(
             leading: Icon(Icons.car_rental_outlined),

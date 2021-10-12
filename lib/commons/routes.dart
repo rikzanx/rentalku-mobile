@@ -4,4 +4,5 @@ class Routes{
   static String register = '/register';
   static String dashboard = '/dashboard';
   static String updatePassword = '/update-password';
+  static String topUp = '/top-up';
 }

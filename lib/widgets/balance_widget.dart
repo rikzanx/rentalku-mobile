@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/routes.dart';
 
 class BalanceWidget extends StatelessWidget {
   final int balance;
@@ -46,7 +47,9 @@ class BalanceWidget extends StatelessWidget {
             ),
             ElevatedButton(
               child: Text("Top Up"),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.topUp);
+              },
               style: ElevatedButton.styleFrom(
                 elevation: 0,
                 shape: RoundedRectangleBorder(
