@@ -57,8 +57,10 @@ flutter:
     - assets/images/booking_icon.png
     - assets/images/chat_icon.png
     - assets/images/profil_icon.png
+    - assets/images/home_icon_active.png
+    - assets/images/booking_icon_active.png
+    - assets/images/profil_icon_active.png
     - assets/images/rentalku.png
-    - assets/images/cart_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

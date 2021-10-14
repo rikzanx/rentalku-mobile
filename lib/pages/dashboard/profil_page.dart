@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
+import 'package:rentalku/commons/styles.dart';
 
 class DashboardProfilPage extends StatelessWidget {
   const DashboardProfilPage({Key? key}) : super(key: key);
@@ -11,15 +13,24 @@ class DashboardProfilPage extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: Text("Profil"),
-            centerTitle: true,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50),
+            title: Text(
+              "Profil",
+              style: GoogleFonts.poppins(
+                fontSize: 17,
+                fontWeight: FontWeight.w600,
+                color: AppColor.green,
               ),
             ),
-            elevation: 2,
+            backgroundColor: Colors.white,
+            centerTitle: true,
+            elevation: 0,
+            actions: [
+              IconButton(
+                splashRadius: 24,
+                icon: Image.asset('assets/images/chat_icon.png', height: 24),
+                onPressed: () {},
+              )
+            ],
           ),
           SizedBox(height: 24),
           Row(
@@ -52,13 +63,20 @@ class DashboardProfilPage extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 16),
+              InkWell(
+                child: Text(
+                  "Jadi Pemilik Mobil?",
+                  style: AppStyle.smallText.copyWith(
+                    color: AppColor.green,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                onTap: () {},
+              ),
+              SizedBox(width: 16),
             ],
           ),
-          SizedBox(height: 24),
-          Container(
-            height: 8,
-            color: Colors.grey[300],
-          ),
+          SizedBox(height: 16),
           ListTile(
             leading: Icon(Icons.person_outline),
             horizontalTitleGap: 0,
@@ -104,20 +122,6 @@ class DashboardProfilPage extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, Routes.topUp);
             },
-          ),
-          ListTile(
-            leading: Icon(Icons.car_rental_outlined),
-            visualDensity: VisualDensity.compact,
-            horizontalTitleGap: 0,
-            title: Text(
-              'Be a Car Owner',
-              style: GoogleFonts.poppins(fontSize: 13),
-            ),
-            onTap: () {},
-          ),
-          Container(
-            height: 8,
-            color: Colors.grey[300],
           ),
           ListTile(
             leading: Icon(Icons.logout, color: Colors.redAccent),
