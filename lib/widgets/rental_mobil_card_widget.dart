@@ -4,12 +4,12 @@ import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/rental_mobil.dart';
 
-class RentalMobilCard extends StatelessWidget {
-  final RentalMobil data;
+class RentalMobilCardWidget extends StatelessWidget {
+  final RentalMobil rentalMobil;
 
-  const RentalMobilCard({
+  const RentalMobilCardWidget({
     Key? key,
-    required this.data,
+    required this.rentalMobil,
   }) : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class RentalMobilCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 3,
-              child: Image.network(data.imageURL),
+              child: Image.network(rentalMobil.imageURL),
             ),
             SizedBox(width: 8),
             Expanded(
@@ -38,7 +38,7 @@ class RentalMobilCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    data.name,
+                    rentalMobil.name,
                     maxLines: 1,
                     overflow: TextOverflow.clip,
                     style: AppStyle.regular1Text.copyWith(
@@ -46,13 +46,13 @@ class RentalMobilCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    data.description,
+                    rentalMobil.description,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppStyle.regular1Text,
                   ),
                   Text(
-                    data.withDriver ? "Dengan Supir" : "Tanpa Supir",
+                    rentalMobil.withDriver ? "Dengan Supir" : "Tanpa Supir",
                     style: AppStyle.smallText,
                   ),
                   Text(
@@ -62,7 +62,7 @@ class RentalMobilCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    formatCurrency.format(data.price) + "/Hari",
+                    formatCurrency.format(rentalMobil.price) + "/Hari",
                     style: AppStyle.smallText.copyWith(
                       fontWeight: FontWeight.w600,
                       color: AppColor.yellow,
@@ -81,7 +81,7 @@ class RentalMobilCard extends StatelessWidget {
                     Icon(Icons.star, size: 12, color: AppColor.yellow),
                     SizedBox(width: 2),
                     Text(
-                      data.rating.toString(),
+                      rentalMobil.rating.toString(),
                       style: AppStyle.smallText,
                     ),
                   ],
@@ -92,7 +92,7 @@ class RentalMobilCard extends StatelessWidget {
                     Icon(Icons.people, size: 12, color: AppColor.green),
                     SizedBox(width: 2),
                     Text(
-                      data.totalReviews.toString(),
+                      rentalMobil.totalReviews.toString(),
                       style: AppStyle.smallText,
                     )
                   ],

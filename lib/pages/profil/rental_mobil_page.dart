@@ -35,8 +35,8 @@ class RentalMobilPage extends StatelessWidget {
             6,
             (i) => Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              child: RentalMobilCard(
-                data: RentalMobil(
+              child: RentalMobilCardWidget(
+                rentalMobil: RentalMobil(
                   id: 1,
                   name: "Toyota Avanza",
                   description: "Mini MPV",

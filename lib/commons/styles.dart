@@ -51,4 +51,9 @@ class AppStyle {
     fontSize: 10,
     color: Colors.black,
   );
+
+  static TextStyle tinyText = GoogleFonts.poppins(
+    fontSize: 8,
+    color: Colors.black,
+  );
 }

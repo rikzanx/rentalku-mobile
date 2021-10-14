@@ -27,8 +27,13 @@ class BalanceWidget extends StatelessWidget {
           vertical: 0,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Icon(
+              Icons.account_balance_wallet,
+              size: 24,
+              color: AppColor.green,
+            ),
+            SizedBox(width: 6),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -45,6 +50,7 @@ class BalanceWidget extends StatelessWidget {
                 )
               ],
             ),
+            Spacer(),
             ElevatedButton(
               child: Text("Top Up"),
               onPressed: () {
