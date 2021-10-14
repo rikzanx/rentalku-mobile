@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
@@ -8,8 +9,9 @@ import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/pages/undefined_page.dart';
 import 'package:rentalku/providers/welcome_provider.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('id_ID', null).then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -69,6 +71,7 @@ class MyApp extends StatelessWidget {
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
               primary: AppColor.yellow,
+              onPrimary: Colors.white,
               elevation: 3,
               padding: EdgeInsets.all(12),
               shape: RoundedRectangleBorder(
@@ -77,7 +80,6 @@ class MyApp extends StatelessWidget {
               textStyle: GoogleFonts.poppins(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: Colors.white,
               ),
             ),
           ),

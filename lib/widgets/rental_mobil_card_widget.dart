@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/rental_mobil.dart';
 
@@ -14,12 +15,6 @@ class RentalMobilCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatCurrency = new NumberFormat.currency(
-      locale: "id_ID",
-      symbol: "Rp. ",
-      decimalDigits: 0,
-    );
-
     return Material(
       elevation: 2,
       borderRadius: BorderRadius.circular(5),
@@ -62,7 +57,7 @@ class RentalMobilCardWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    formatCurrency.format(rentalMobil.price) + "/Hari",
+                    Helper.toIDR(rentalMobil.price) + "/Hari",
                     style: AppStyle.smallText.copyWith(
                       fontWeight: FontWeight.w600,
                       color: AppColor.yellow,

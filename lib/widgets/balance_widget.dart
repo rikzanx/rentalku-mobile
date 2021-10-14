@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/routes.dart';
 
 class BalanceWidget extends StatelessWidget {
@@ -11,12 +12,6 @@ class BalanceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatCurrency = new NumberFormat.currency(
-      locale: "id_ID",
-      symbol: "Rp. ",
-      decimalDigits: 0,
-    );
-
     return Material(
       color: Colors.white,
       elevation: 1,
@@ -45,7 +40,7 @@ class BalanceWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  formatCurrency.format(balance),
+                  Helper.toIDR(balance),
                   style: GoogleFonts.poppins(fontSize: 10),
                 )
               ],

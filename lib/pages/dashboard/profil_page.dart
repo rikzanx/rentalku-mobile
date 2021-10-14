@@ -120,7 +120,7 @@ class DashboardProfilPage extends StatelessWidget {
               style: GoogleFonts.poppins(fontSize: 13),
             ),
             onTap: () {
-              Navigator.pushNamed(context, Routes.topUp);
+              Navigator.pushNamed(context, Routes.dompetku);
             },
           ),
           ListTile(

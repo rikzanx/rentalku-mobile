@@ -5,8 +5,9 @@ import 'package:rentalku/pages/article_page.dart';
 import 'package:rentalku/pages/auth/login_page.dart';
 import 'package:rentalku/pages/auth/register_page.dart';
 import 'package:rentalku/pages/dashboard_page.dart';
+import 'package:rentalku/pages/dompetku/dompetku_page.dart';
 import 'package:rentalku/pages/profil/rental_mobil_page.dart';
-import 'package:rentalku/pages/profil/top_up_page.dart';
+import 'package:rentalku/pages/dompetku/top_up_page.dart';
 import 'package:rentalku/pages/profil/update_password_page.dart';
 import 'package:rentalku/pages/undefined_page.dart';
 import 'package:rentalku/pages/welcome_page.dart';
@@ -24,6 +25,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => DashboardPage());
     case Routes.updatePassword:
       return MaterialPageRoute(builder: (_) => UpdatePasswordPage());
+    case Routes.dompetku:
+      return MaterialPageRoute(builder: (_) => DompetkuPage());
     case Routes.topUp:
       return MaterialPageRoute(builder: (_) => TopUpPage());
     case Routes.rentalMobil:
