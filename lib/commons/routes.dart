@@ -5,4 +5,5 @@ class Routes{
   static String dashboard = '/dashboard';
   static String updatePassword = '/update-password';
   static String topUp = '/top-up';
+  static String rentalMobil = '/rental-mobil';
 }

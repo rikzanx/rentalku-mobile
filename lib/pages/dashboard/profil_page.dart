@@ -89,7 +89,9 @@ class DashboardProfilPage extends StatelessWidget {
               'Rental Mobil',
               style: GoogleFonts.poppins(fontSize: 13),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.rentalMobil);
+            },
           ),
           ListTile(
             leading: Icon(Icons.account_balance_wallet_outlined),
