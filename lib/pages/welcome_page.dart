@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
                       ElevatedButton(
                         child: Text(
                           "Masuk",
-                          style: AppStyle.regularText.copyWith(
+                          style: AppStyle.regular1Text.copyWith(
                             color: Colors.black,
                             fontWeight: FontWeight.w600,
                           ),

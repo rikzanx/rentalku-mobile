@@ -57,10 +57,10 @@ class MyApp extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide.none,
             ),
-            hintStyle: AppStyle.regularText.copyWith(
+            hintStyle: AppStyle.regular1Text.copyWith(
               color: Color(0xFF696969),
             ),
-            errorStyle: AppStyle.regularText.copyWith(
+            errorStyle: AppStyle.regular1Text.copyWith(
               fontSize: 12,
               height: 1,
               color: Colors.redAccent,

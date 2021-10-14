@@ -37,8 +37,13 @@ class AppStyle {
     height: 1.3,
   );
 
-  static TextStyle regularText = GoogleFonts.poppins(
+  static TextStyle regular1Text = GoogleFonts.poppins(
     fontSize: 14,
+    color: Colors.black,
+  );
+
+  static TextStyle regular2Text = GoogleFonts.poppins(
+    fontSize: 12,
     color: Colors.black,
   );
 

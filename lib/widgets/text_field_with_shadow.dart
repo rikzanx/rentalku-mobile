@@ -62,11 +62,11 @@ class TextFieldWithShadow extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: hintText,
                 prefixText: prefixText,
-                prefixStyle: AppStyle.regularText,
+                prefixStyle: AppStyle.regular1Text,
               ),
               inputFormatters: inputFormatters,
               keyboardType: keyboardType,
-              style: AppStyle.regularText,
+              style: AppStyle.regular1Text,
               textInputAction: textInputAction,
               validator: validator,
             ),

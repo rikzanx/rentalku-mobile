@@ -106,11 +106,11 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 20),
             RichText(
               text: TextSpan(
-                style: AppStyle.regularText,
+                style: AppStyle.regular1Text,
                 children: [
                   TextSpan(
                     text: "Belum punya akun? ",
-                    style: AppStyle.regularText.copyWith(
+                    style: AppStyle.regular1Text.copyWith(
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w500,
                       color: Colors.black,
@@ -118,7 +118,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   TextSpan(
                     text: "Daftar",
-                    style: AppStyle.regularText.copyWith(
+                    style: AppStyle.regular1Text.copyWith(
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w500,
                       color: AppColor.yellow,

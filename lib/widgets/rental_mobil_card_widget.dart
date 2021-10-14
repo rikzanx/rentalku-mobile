@@ -41,7 +41,7 @@ class RentalMobilCard extends StatelessWidget {
                     data.name,
                     maxLines: 1,
                     overflow: TextOverflow.clip,
-                    style: AppStyle.regularText.copyWith(
+                    style: AppStyle.regular1Text.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -49,7 +49,7 @@ class RentalMobilCard extends StatelessWidget {
                     data.description,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: AppStyle.regularText,
+                    style: AppStyle.regular1Text,
                   ),
                   Text(
                     data.withDriver ? "Dengan Supir" : "Tanpa Supir",
