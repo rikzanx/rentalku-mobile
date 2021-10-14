@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           splashRadius: 24,
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.chevron_left),
           onPressed: () {
             Navigator.pop(context);
           },

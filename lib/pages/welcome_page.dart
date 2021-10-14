@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
@@ -36,6 +37,7 @@ class HomePage extends StatelessWidget {
               ),
               padding: EdgeInsets.fromLTRB(24, 64, 24, 48),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Halo, selamat datang di RentalKu",
@@ -45,29 +47,51 @@ class HomePage extends StatelessWidget {
                       height: 1.5,
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        child: Text(
-                          "Masuk",
-                          style: AppStyle.regular1Text.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 24,
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, Routes.login);
-                        },
+                  ElevatedButton(
+                    child: Text(
+                      "Masuk",
+                      style: AppStyle.regular1Text.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
                       ),
-                    ],
-                  )
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 36),
+                      elevation: 0,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.login);
+                    },
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: AppStyle.regular2Text,
+                      children: [
+                        TextSpan(
+                          text: "Belum punya akun? ",
+                          style: AppStyle.regular2Text.copyWith(
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "Daftar",
+                          style: AppStyle.regular2Text.copyWith(
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.yellow,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushReplacementNamed(
+                                  context, Routes.register);
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
