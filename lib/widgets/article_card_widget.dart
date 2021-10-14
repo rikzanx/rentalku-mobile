@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/article.dart';
 
@@ -53,7 +54,9 @@ class ArticleCardWidget extends StatelessWidget {
             SizedBox(height: 8),
           ],
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, Routes.article, arguments: article);
+        },
       ),
     );
   }

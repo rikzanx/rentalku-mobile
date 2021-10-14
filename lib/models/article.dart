@@ -5,12 +5,14 @@ class Article extends Equatable {
   final String title;
   final String category;
   final String imageURL;
+  final String? webURL;
 
   Article({
     required this.id,
     required this.title,
     required this.category,
     required this.imageURL,
+    this.webURL,
   });
 
   @override

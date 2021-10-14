@@ -1,9 +1,10 @@
 class Routes{
-  static String home = '/';
-  static String login = '/login';
-  static String register = '/register';
-  static String dashboard = '/dashboard';
-  static String updatePassword = '/update-password';
-  static String topUp = '/top-up';
-  static String rentalMobil = '/rental-mobil';
+  static const String home = '/';
+  static const String login = '/login';
+  static const String register = '/register';
+  static const String dashboard = '/dashboard';
+  static const String updatePassword = '/update-password';
+  static const String topUp = '/top-up';
+  static const String rentalMobil = '/rental-mobil';
+  static const String article = '/article';
 }

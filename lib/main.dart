@@ -3,14 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
-import 'package:rentalku/pages/auth/login_page.dart';
-import 'package:rentalku/pages/auth/register_page.dart';
-import 'package:rentalku/pages/dashboard_page.dart';
-import 'package:rentalku/pages/profil/rental_mobil_page.dart';
-import 'package:rentalku/pages/profil/top_up_page.dart';
-import 'package:rentalku/pages/welcome_page.dart';
-import 'package:rentalku/pages/profil/update_password_page.dart';
+import 'package:rentalku/commons/router.dart' as router;
 import 'package:rentalku/commons/routes.dart';
+import 'package:rentalku/pages/undefined_page.dart';
 import 'package:rentalku/providers/welcome_provider.dart';
 
 void main() {
@@ -29,15 +24,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Provider and Routes',
         initialRoute: Routes.home,
-        routes: {
-          Routes.home: (context) => HomePage(),
-          Routes.login: (context) => LoginPage(),
-          Routes.register: (context) => RegisterPage(),
-          Routes.dashboard: (context) => DashboardPage(),
-          Routes.updatePassword: (context) => UpdatePasswordPage(),
-          Routes.topUp: (context) => TopUpPage(),
-          Routes.rentalMobil: (context) => RentalMobilPage(),
-        },
+        onGenerateRoute: router.generateRoute,
+        onUnknownRoute: (settings) => MaterialPageRoute(
+          builder: (context) => UndefinedPage(
+            name: settings.name.toString(),
+          ),
+        ),
         theme: ThemeData(
           primaryColor: AppColor.green,
           inputDecorationTheme: InputDecorationTheme(
