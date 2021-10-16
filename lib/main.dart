@@ -9,7 +9,7 @@ import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/pages/undefined_page.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
 import 'package:rentalku/providers/top_up_provider.dart';
-import 'package:rentalku/providers/welcome_provider.dart';
+import 'package:rentalku/providers/app_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<WelcomeProvider>(
-      create: (context) => WelcomeProvider(),
+    return ChangeNotifierProvider<AppProvider>(
+      create: (context) => AppProvider(),
       child: MaterialApp(
         title: 'Provider and Routes',
         initialRoute: Routes.home,

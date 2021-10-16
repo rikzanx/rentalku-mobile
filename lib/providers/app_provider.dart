@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rentalku/commons/types.dart';
 
-class WelcomeProvider extends ChangeNotifier{
+class AppProvider extends ChangeNotifier {
   bool _isFirstTimeHomePageLoads = true;
 
-  void initializeProvider(){
+  void initializeProvider() {
     isFirstTimeHomePageLoads = false;
   }
 
@@ -13,4 +14,10 @@ class WelcomeProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  UserType _userType = UserType.User;
+  UserType get userType => _userType;
+  set userType(UserType userType) {
+    _userType = userType;
+    notifyListeners();
+  }
 }

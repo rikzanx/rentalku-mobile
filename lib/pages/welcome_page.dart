@@ -4,16 +4,16 @@ import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
-import 'package:rentalku/providers/welcome_provider.dart';
+import 'package:rentalku/providers/app_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    WelcomeProvider _welcomeProvider = Provider.of<WelcomeProvider>(context);
+    AppProvider _AppProvider = Provider.of<AppProvider>(context);
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      _welcomeProvider.initializeProvider();
+      _AppProvider.initializeProvider();
     });
 
     return Scaffold(
