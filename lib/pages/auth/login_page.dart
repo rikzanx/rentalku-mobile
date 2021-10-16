@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
                         children: [
                           TextFieldWithShadow(
                             labelText: "Masukkan email anda",
-                            hintText: "muhammad@gmail.com",
+                            hintText: "alamatemail@gmail.com",
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
                             validator: (value) {
@@ -101,35 +101,6 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-            ),
-            SizedBox(height: 20),
-            RichText(
-              text: TextSpan(
-                style: AppStyle.regular1Text,
-                children: [
-                  TextSpan(
-                    text: "Belum punya akun? ",
-                    style: AppStyle.regular1Text.copyWith(
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "Daftar",
-                    style: AppStyle.regular1Text.copyWith(
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.yellow,
-                    ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigator.pushReplacementNamed(
-                            context, Routes.register);
-                      },
-                  ),
-                ],
               ),
             ),
             SizedBox(height: 20),

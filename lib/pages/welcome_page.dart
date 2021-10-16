@@ -49,15 +49,17 @@ class HomePage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     child: Text(
-                      "Masuk",
+                      "Silahkan Masuk",
                       style: AppStyle.regular1Text.copyWith(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      padding: EdgeInsets.symmetric(horizontal: 36),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 36,
+                        vertical: 0,
+                      ),
                       elevation: 0,
                     ),
                     onPressed: () {
@@ -85,7 +87,7 @@ class HomePage extends StatelessWidget {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.pushReplacementNamed(
+                              Navigator.pushNamed(
                                   context, Routes.register);
                             },
                         ),
@@ -105,8 +107,9 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              "We try to be the best for our customers",
+              "Sewa mobil dengan mudah dan berkualitas bersama kami",
               style: AppStyle.title2Text,
+              textAlign: TextAlign.center,
             ),
           ),
           Spacer(),
