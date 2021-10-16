@@ -5,6 +5,7 @@ import 'package:rentalku/pages/article_page.dart';
 import 'package:rentalku/pages/auth/login_page.dart';
 import 'package:rentalku/pages/auth/register_page.dart';
 import 'package:rentalku/pages/dashboard_page.dart';
+import 'package:rentalku/pages/dompetku/detail_top_up_page.dart';
 import 'package:rentalku/pages/dompetku/dompetku_page.dart';
 import 'package:rentalku/pages/profil/rental_mobil_page.dart';
 import 'package:rentalku/pages/dompetku/top_up_page.dart';
@@ -29,6 +30,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => DompetkuPage());
     case Routes.topUp:
       return MaterialPageRoute(builder: (_) => TopUpPage());
+    case Routes.detailTopUp:
+      return MaterialPageRoute(builder: (_) => DetailTopUpPage());
     case Routes.rentalMobil:
       return MaterialPageRoute(builder: (_) => RentalMobilPage());
     case Routes.article:

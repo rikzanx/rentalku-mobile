@@ -3,6 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rentalku/commons/colors.dart';
 
 class AppStyle {
+  static TextStyle display1Text = GoogleFonts.poppins(
+    fontSize: 30,
+    fontWeight: FontWeight.w600,
+    color: Colors.black,
+    height: 1.25,
+  );
+
   static TextStyle heading1Text = GoogleFonts.poppins(
     fontSize: 24,
     fontWeight: FontWeight.w700,

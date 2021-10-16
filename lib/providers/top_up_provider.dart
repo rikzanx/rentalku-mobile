@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rentalku/commons/variables.dart';
+import 'package:rentalku/commons/types.dart';
 import 'package:rentalku/models/payment_method.dart';
 
 class TopUpProvider extends ChangeNotifier {
@@ -32,34 +32,5 @@ class TopUpProvider extends ChangeNotifier {
 
   List<int> get selectableAmount =>
       [20000, 50000, 100000, 200000, 300000, 500000];
-  List<PaymentMethod> get selectablePaymentMethod => [
-        PaymentMethod(
-            name: "Bank Negara Indonesia",
-            imageURL: "bni.png",
-            paymentMethodType: PaymentMethodType.BankAccount),
-        PaymentMethod(
-            name: "Bank Central Asia",
-            imageURL: "bca.png",
-            paymentMethodType: PaymentMethodType.BankAccount),
-        PaymentMethod(
-            name: "Bank Rakyat Indonesia",
-            imageURL: "bri.png",
-            paymentMethodType: PaymentMethodType.BankAccount),
-        PaymentMethod(
-            name: "GoPay",
-            imageURL: "gopay.png",
-            paymentMethodType: PaymentMethodType.EWallet),
-        PaymentMethod(
-            name: "OVO",
-            imageURL: "ovo.png",
-            paymentMethodType: PaymentMethodType.EWallet),
-        PaymentMethod(
-            name: "Dana",
-            imageURL: "dana.png",
-            paymentMethodType: PaymentMethodType.EWallet),
-        PaymentMethod(
-            name: "ShopeePay",
-            imageURL: "shopeepay.png",
-            paymentMethodType: PaymentMethodType.EWallet),
-      ];
+  List<PaymentMethod> get selectablePaymentMethod => PaymentMethod.list;
 }

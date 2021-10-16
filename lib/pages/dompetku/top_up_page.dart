@@ -2,8 +2,8 @@ import 'package:collapsible/collapsible.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/providers/top_up_provider.dart';
 import 'package:rentalku/widgets/amount_card_widget.dart';
@@ -249,12 +249,12 @@ class TopUpPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   child: Consumer<TopUpProvider>(
                     builder: (context, topUp, _) => ElevatedButton(
-                      onPressed:
-                          (topUp.amount >= 10000 && topUp.paymentMethod != null)
-                              ? () {
-                                  // process here
-                                }
-                              : null,
+                      onPressed: (topUp.amount >= 10000 &&
+                              topUp.paymentMethod != null)
+                          ? () {
+                              Navigator.pushNamed(context, Routes.detailTopUp);
+                            }
+                          : null,
                       child: Text("Bayar Sekarang"),
                     ),
                   ),
