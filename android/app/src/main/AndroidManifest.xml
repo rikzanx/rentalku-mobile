@@ -2,6 +2,7 @@
     package="com.example.rentalku">
    <uses-permission android:name="android.permission.INTERNET" />
    <application
+        android:usesCleartextTraffic="true"
         android:label="rentalku"
         android:icon="@mipmap/ic_launcher">
         <activity

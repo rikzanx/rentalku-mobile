@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,12 +8,16 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class ArticlePage extends StatelessWidget {
   final Article article;
+  final Completer<WebViewController> _controller =
+      Completer<WebViewController>();
 
-  const ArticlePage({Key? key, required this.article}) : super(key: key);
+  ArticlePage({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    final Completer<WebViewController> _controller =
+        Completer<WebViewController>();
 
     return Scaffold(
       appBar: AppBar(
@@ -36,6 +41,11 @@ class ArticlePage extends StatelessWidget {
       ),
       body: WebView(
         initialUrl: article.webURL,
+        javascriptMode: JavascriptMode.unrestricted,
+        onWebViewCreated: (WebViewController webViewController) async {
+          _controller.complete(webViewController);
+        },
+        gestureNavigationEnabled: true,
       ),
     );
   }

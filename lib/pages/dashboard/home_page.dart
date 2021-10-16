@@ -52,7 +52,7 @@ class DashboardHomePage extends StatelessWidget {
                     title: "Enam Teknik Mencuci Mobil yang Benar, Jangan Asal!",
                     category: "Otomotif",
                     imageURL: "https://i.imgur.com/9waAALi.jpg",
-                    webURL: "https://www.id.wikipedia.org/wiki/Rantai_blok",
+                    webURL: "http://id.wikipedia.org/wiki/Rantai_blok",
                   ),
                 ),
               ),
