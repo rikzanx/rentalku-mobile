@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  collapsible: ^1.0.0
   currency_text_input_formatter: ^2.1.4
   equatable: ^2.0.3
   google_fonts: ^2.1.0
@@ -62,6 +63,13 @@ flutter:
     - assets/images/booking_icon_active.png
     - assets/images/profil_icon_active.png
     - assets/images/rentalku.png
+    - assets/logos/bni.png
+    - assets/logos/bca.png
+    - assets/logos/bri.png
+    - assets/logos/gopay.png
+    - assets/logos/ovo.png
+    - assets/logos/dana.png
+    - assets/logos/shopeepay.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

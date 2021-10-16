@@ -1,0 +1,4 @@
+enum PaymentMethodType {
+  BankAccount,
+  EWallet,
+}

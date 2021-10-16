@@ -14,6 +14,7 @@ class TextFieldWithShadow extends StatelessWidget {
   final Color labelColor;
   final String? prefixText;
   final List<TextInputFormatter>? inputFormatters;
+  final Function(String)? onChanged;
 
   const TextFieldWithShadow({
     Key? key,
@@ -28,6 +29,7 @@ class TextFieldWithShadow extends StatelessWidget {
     this.labelColor = Colors.white,
     this.prefixText,
     this.inputFormatters,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -58,6 +60,7 @@ class TextFieldWithShadow extends StatelessWidget {
               ),
             ),
             TextFormField(
+              controller: controller,
               obscureText: obscureText,
               decoration: InputDecoration(
                 hintText: hintText,
@@ -69,6 +72,7 @@ class TextFieldWithShadow extends StatelessWidget {
               style: AppStyle.regular1Text,
               textInputAction: textInputAction,
               validator: validator,
+              onChanged: onChanged,
             ),
           ],
         ),
