@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/article.dart';
+import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/widgets/article_card_widget.dart';
 import 'package:rentalku/widgets/balance_widget.dart';
 
@@ -20,114 +22,9 @@ class DashboardHomePage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: Image.asset("assets/images/rentalku.png", height: 16),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 16, right: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Nama User
-                Expanded(
-                  flex: 45,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Halo,",
-                        style: GoogleFonts.poppins(fontSize: 13),
-                      ),
-                      Text(
-                        "Muhammad",
-                        maxLines: 1,
-                        overflow: TextOverflow.clip,
-                        style: GoogleFonts.poppins(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Saldo
-                Expanded(
-                  flex: 55,
-                  child: BalanceWidget(balance: 500000),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: Form(
-              child: Material(
-                color: Colors.white,
-                elevation: 1,
-                borderRadius: BorderRadius.circular(5),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Cari di RentalKu",
-                          hintStyle: GoogleFonts.poppins(
-                            fontSize: 10,
-                            color: Colors.black,
-                          ),
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.fromLTRB(8, 4, 4, 4),
-                        ),
-                        textInputAction: TextInputAction.search,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Kolom username wajib diisi';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(4, 4, 8, 4),
-                      child: Icon(Icons.search, size: 16),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(
-                4,
-                (index) => Material(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                  elevation: 1,
-                  child: Container(
-                    width: (MediaQuery.of(context).size.width - 56) / 4,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(4, 12, 4, 4),
-                        child: Column(
-                          children: [
-                            Image.network("https://i.imgur.com/vtUhSMq.png"),
-                            SizedBox(height: 4),
-                            Text("Lihat serupa", style: AppStyle.tinyText),
-                          ],
-                        ),
-                      ),
-                      onTap: () {},
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          Consumer<AppProvider>(
+            builder: (context, app, _) =>
+                app.isUser ? UserInfo(context) : Container(),
           ),
           SizedBox(height: 12),
           Container(
@@ -164,6 +61,122 @@ class DashboardHomePage extends StatelessWidget {
           SizedBox(height: 6),
         ],
       ),
+    );
+  }
+
+  Widget UserInfo(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 16, right: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Nama User
+              Expanded(
+                flex: 45,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Halo,",
+                      style: GoogleFonts.poppins(fontSize: 13),
+                    ),
+                    Text(
+                      "Muhammad",
+                      maxLines: 1,
+                      overflow: TextOverflow.clip,
+                      style: GoogleFonts.poppins(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Saldo
+              Expanded(
+                flex: 55,
+                child: BalanceWidget(balance: 500000),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Form(
+            child: Material(
+              color: Colors.white,
+              elevation: 1,
+              borderRadius: BorderRadius.circular(5),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Cari di RentalKu",
+                        hintStyle: GoogleFonts.poppins(
+                          fontSize: 10,
+                          color: Colors.black,
+                        ),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.fromLTRB(8, 4, 4, 4),
+                      ),
+                      textInputAction: TextInputAction.search,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Kolom username wajib diisi';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(4, 4, 8, 4),
+                    child: Icon(Icons.search, size: 16),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(
+              4,
+              (index) => Material(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.white,
+                elevation: 1,
+                child: Container(
+                  width: (MediaQuery.of(context).size.width - 56) / 4,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(4, 12, 4, 4),
+                      child: Column(
+                        children: [
+                          Image.network("https://i.imgur.com/vtUhSMq.png"),
+                          SizedBox(height: 4),
+                          Text("Lihat serupa", style: AppStyle.tinyText),
+                        ],
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
