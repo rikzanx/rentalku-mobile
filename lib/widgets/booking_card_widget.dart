@@ -53,7 +53,9 @@ class BookingCardWidget extends StatelessWidget {
                       booking.description,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppStyle.regular1Text,
+                      style: AppStyle.regular1Text.copyWith(
+                        color: Colors.grey[500],
+                      ),
                     ),
                     Text(
                       Helper.toIDR(booking.price) + "/Hari",

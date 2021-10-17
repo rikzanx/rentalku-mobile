@@ -9,5 +9,6 @@ class Routes{
   static const String dompetku = '/dompetku';
   static const String topUp = '/dompetku/top-up';
   static const String detailTopUp = '/dompetku/detail-top-up/';
+  static const String detailBooking = '/bookings/detail';
   static const String addReviewPage = '/bookings/add-reviews';
 }

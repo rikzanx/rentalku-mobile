@@ -33,6 +33,7 @@ class AddReviewPage extends StatelessWidget {
           elevation: 2,
         ),
         body: ListView.separated(
+          padding: EdgeInsets.symmetric(vertical: 16),
           itemCount: 4,
           separatorBuilder: (context, index) => Divider(
             thickness: 6,
@@ -67,7 +68,9 @@ class AddReviewPage extends StatelessWidget {
                               state.bookings[index].description,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: AppStyle.regular1Text,
+                              style: AppStyle.regular1Text.copyWith(
+                                color: Colors.grey[500],
+                              ),
                             ),
                           ],
                         ),

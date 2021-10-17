@@ -141,7 +141,9 @@ class DashboardMyBookingPage extends StatelessWidget {
                         ),
                         child: BookingCardWidget(
                           booking: dashboard.bookings.elementAt(index),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.detailBooking);
+                          },
                           actionIcon: Icons.star,
                           actionText: 'Beri Nilai',
                           actionOnTap: () {
