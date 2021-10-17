@@ -38,19 +38,20 @@ class RegisterPage extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(24, 24, 24, 30),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
                       "Daftar Pengguna Baru",
                       style: AppStyle.heading1Text.copyWith(
                         color: Colors.white,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 20),
                     Form(
                       key: _formKey,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           TextFieldWithShadow(
                             labelText: "Masukkan nama lengkap anda",
@@ -105,17 +106,14 @@ class RegisterPage extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 16),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // TODO: Remove this
-                                if (_formKey.currentState!.validate()) {
-                                  // process here
-                                }
-                              },
-                              child: Text("Daftar"),
-                            ),
+                          ElevatedButton(
+                            onPressed: () {
+                              // TODO: Remove this
+                              if (_formKey.currentState!.validate()) {
+                                // process here
+                              }
+                            },
+                            child: Text("Daftar"),
                           ),
                         ],
                       ),

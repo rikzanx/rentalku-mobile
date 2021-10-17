@@ -37,6 +37,7 @@ class DompetkuPage extends StatelessWidget {
         child: Material(
           elevation: 2,
           borderRadius: BorderRadius.circular(10),
+          clipBehavior: Clip.hardEdge,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

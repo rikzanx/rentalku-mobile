@@ -39,19 +39,20 @@ class LoginPage extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(24, 24, 24, 30),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
                       "Silahkan Masuk",
                       style: AppStyle.heading1Text.copyWith(
                         color: Colors.white,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 20),
                     Form(
                       key: _formKey,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           TextFieldWithShadow(
                             labelText: "Masukkan email anda",
@@ -80,21 +81,18 @@ class LoginPage extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 16),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // TODO: Remove this
-                                Navigator.popUntil(context, (route) => route.isFirst);
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.dashboard);
+                          ElevatedButton(
+                            onPressed: () {
+                              // TODO: Remove this
+                              Navigator.popUntil(context, (route) => route.isFirst);
+                              Navigator.pushReplacementNamed(
+                                  context, Routes.dashboard);
 
-                                if (_formKey.currentState!.validate()) {
-                                  // process here
-                                }
-                              },
-                              child: Text("Masuk"),
-                            ),
+                              if (_formKey.currentState!.validate()) {
+                                // process here
+                              }
+                            },
+                            child: Text("Masuk"),
                           ),
                         ],
                       ),
