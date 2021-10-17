@@ -6,7 +6,7 @@ import 'package:rentalku/models/payment_method.dart';
 class PaymentMethodOption extends StatelessWidget {
   final PaymentMethod paymentMethod;
   final bool isSelected;
-  final Function? onTap;
+  final void Function()? onTap;
 
   const PaymentMethodOption({
     Key? key,
@@ -20,9 +20,7 @@ class PaymentMethodOption extends StatelessWidget {
     return Material(
       color: isSelected ? AppColor.green.withOpacity(0.25) : Colors.white,
       child: InkWell(
-        onTap: () {
-          onTap!();
-        },
+        onTap: onTap,
         child: Column(
           children: [
             Divider(

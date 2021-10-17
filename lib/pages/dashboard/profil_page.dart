@@ -15,10 +15,9 @@ class DashboardProfilPage extends StatelessWidget {
           AppBar(
             title: Text(
               "Profil",
-              style: GoogleFonts.poppins(
-                fontSize: 17,
-                fontWeight: FontWeight.w600,
+              style: AppStyle.title2Text.copyWith(
                 color: AppColor.green,
+                fontWeight: FontWeight.w600,
               ),
             ),
             backgroundColor: Colors.white,

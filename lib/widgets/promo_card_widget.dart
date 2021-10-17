@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PromoCardWidget extends StatelessWidget {
   final String url;
-  final Function? onTap;
+  final void Function()? onTap;
 
   const PromoCardWidget({Key? key, required this.url, this.onTap}) : super(key: key);
 
@@ -23,11 +23,7 @@ class PromoCardWidget extends StatelessWidget {
           ),
         ),
         child: InkWell(
-          onTap: (){
-            if(onTap != null){
-              onTap!();
-            }
-          },
+          onTap: onTap,
         ),
       ),
     );

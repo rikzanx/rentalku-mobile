@@ -59,7 +59,7 @@ class DashboardPage extends StatelessWidget {
                   'assets/images/booking_icon_active.png',
                   height: 24,
                 ),
-                label: "My Booking",
+                label: "PesananKu",
               ),
               BottomNavigationBarItem(
                 icon: Image.asset(

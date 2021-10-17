@@ -7,16 +7,18 @@ import 'package:rentalku/models/transaction.dart';
 
 class TransactionCardWidget extends StatelessWidget {
   final Transaction transaction;
+  final void Function()? onTap;
 
   const TransactionCardWidget({
     Key? key,
     required this.transaction,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Column(
         children: [
           Divider(

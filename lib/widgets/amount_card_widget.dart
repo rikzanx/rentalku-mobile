@@ -6,7 +6,7 @@ import 'package:rentalku/commons/styles.dart';
 class AmountCardWidget extends StatelessWidget {
   final int amount;
   final bool isSelected;
-  final Function onTap;
+  final void Function()? onTap;
 
   const AmountCardWidget({
     Key? key,
@@ -23,9 +23,7 @@ class AmountCardWidget extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       color: isSelected ? AppColor.yellow : Colors.white,
       child: InkWell(
-        onTap: () {
-          onTap();
-        },
+        onTap: onTap,
         child: Center(
           child: Text(
             Helper.toIDR(amount),

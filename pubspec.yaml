@@ -65,6 +65,7 @@ flutter:
     - assets/images/booking_icon_active.png
     - assets/images/profil_icon_active.png
     - assets/images/rentalku.png
+    - assets/images/empty_order.png
     - assets/logos/bni.png
     - assets/logos/bca.png
     - assets/logos/bri.png
