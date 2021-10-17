@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/strings.dart';
@@ -7,8 +11,24 @@ import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/payment_method.dart';
 import 'package:rentalku/models/top_up.dart';
 
-class DetailTopUpPage extends StatelessWidget {
+class DetailTopUpPage extends StatefulWidget {
   const DetailTopUpPage({Key? key}) : super(key: key);
+
+  @override
+  _DetailTopUpPageState createState() => _DetailTopUpPageState();
+}
+
+class _DetailTopUpPageState extends State<DetailTopUpPage> {
+  File? _image;
+
+  Future getImage(ImageSource media) async {
+    XFile? img = await ImagePicker().pickImage(source: media);
+    setState(() {
+      if (img != null) {
+        _image = File(img.path);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -272,19 +292,18 @@ class DetailTopUpPage extends StatelessWidget {
               color: Colors.grey,
             ),
             SizedBox(height: 16),
-            Center(
-              child: InkWell(
-                borderRadius: BorderRadius.circular(5),
-                splashColor: AppColor.green.withOpacity(0.2),
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.all(4),
-                  child: Text(
-                    "Lihat Cara Transfer",
-                    style: AppStyle.smallText.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.green,
-                    ),
+            InkWell(
+              borderRadius: BorderRadius.circular(5),
+              splashColor: AppColor.green.withOpacity(0.2),
+              onTap: () {},
+              child: Padding(
+                padding: EdgeInsets.all(4),
+                child: Text(
+                  "Lihat Cara Transfer",
+                  textAlign: TextAlign.center,
+                  style: AppStyle.smallText.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColor.green,
                   ),
                 ),
               ),
@@ -292,19 +311,89 @@ class DetailTopUpPage extends StatelessWidget {
             SizedBox(height: 16),
             Divider(height: 3, color: Colors.grey),
             SizedBox(height: 16),
-            Center(
-              child: Text(
-                "Anda sudah melakukan transfer?",
-                style: AppStyle.regular2Text,
-              ),
+            Text(
+              "Anda sudah melakukan transfer?",
+              style: AppStyle.regular2Text,
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("Konfirmasi Transfer"),
-            ),
+            _image == null
+                ? ElevatedButton(
+                    onPressed: () {
+                      myAlert();
+                    },
+                    child: Text("Konfirmasi Transfer"),
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.file(
+                          _image!,
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height / 5,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Text("Kirim Bukti Transfer"),
+                      )
+                    ],
+                  ),
             SizedBox(height: 16),
           ],
+        ),
+      ),
+    );
+  }
+
+  void myAlert() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        title: Text("Silahkan pilih media"),
+        content: Container(
+          height: MediaQuery.of(context).size.height / 6,
+          child: Column(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  getImage(ImageSource.gallery);
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.black,
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.image),
+                    SizedBox(width: 5),
+                    Text("Galeri"),
+                  ],
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  getImage(ImageSource.camera);
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.black,
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.camera),
+                    SizedBox(width: 5),
+                    Text("Kamera"),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
