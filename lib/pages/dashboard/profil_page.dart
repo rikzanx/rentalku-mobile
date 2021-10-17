@@ -106,10 +106,12 @@ class DashboardProfilPage extends StatelessWidget {
             horizontalTitleGap: 0,
             visualDensity: VisualDensity.compact,
             title: Text(
-              'Edit Data Diri',
+              'Data Diri',
               style: GoogleFonts.poppins(fontSize: 13),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, Routes.myProfile);
+            },
           ),
           ListTile(
             leading: Icon(Icons.lock_outline),
