@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/providers/app_provider.dart';
 
 class DashboardProfilPage extends StatelessWidget {
   const DashboardProfilPage({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class DashboardProfilPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppBar(
             title: Text(
@@ -64,7 +67,7 @@ class DashboardProfilPage extends StatelessWidget {
               SizedBox(width: 16),
               InkWell(
                 child: Text(
-                  "Jadi Pemilik Mobil?",
+                  "Jadi Pemilik Mobil  >",
                   style: AppStyle.smallText.copyWith(
                     color: AppColor.green,
                     fontWeight: FontWeight.w600,
@@ -75,7 +78,29 @@ class DashboardProfilPage extends StatelessWidget {
               SizedBox(width: 16),
             ],
           ),
-          SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Material(
+              borderRadius: BorderRadius.circular(10),
+              color: AppColor.green,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Consumer<AppProvider>(
+                  builder: (context, state, _) => Text(
+                    state.isUser
+                        ? "Saya Penyewa"
+                        : state.isOwner
+                            ? "Saya Pemilik Mobil"
+                            : "Saya Sopir",
+                    style: AppStyle.smallText.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
           ListTile(
             leading: Icon(Icons.person_outline),
             horizontalTitleGap: 0,
