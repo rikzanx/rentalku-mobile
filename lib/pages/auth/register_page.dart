@@ -54,7 +54,7 @@ class RegisterPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           TextFieldWithShadow(
-                            labelText: "Masukkan nama lengkap anda",
+                            labelText: "Ketik nama lengkap anda",
                             hintText: "Nama Lengkap",
                             textInputAction: TextInputAction.next,
                             validator: (value) {
@@ -66,7 +66,7 @@ class RegisterPage extends StatelessWidget {
                           ),
                           SizedBox(height: 16),
                           TextFieldWithShadow(
-                            labelText: "Masukkan email anda",
+                            labelText: "Ketik email anda",
                             hintText: "alamatemail@gmail.com",
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
@@ -79,7 +79,7 @@ class RegisterPage extends StatelessWidget {
                           ),
                           SizedBox(height: 16),
                           TextFieldWithShadow(
-                            labelText: "Masukkan password anda",
+                            labelText: "Ketik password anda",
                             hintText: "password",
                             obscureText: true,
                             validator: (value) {
@@ -93,7 +93,7 @@ class RegisterPage extends StatelessWidget {
                           ),
                           SizedBox(height: 16),
                           TextFieldWithShadow(
-                            labelText: "Masukkan ulang password anda",
+                            labelText: "Ketik ulang password anda",
                             hintText: "password",
                             obscureText: true,
                             validator: (value) {

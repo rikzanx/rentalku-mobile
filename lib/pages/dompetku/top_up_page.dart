@@ -67,7 +67,7 @@ class TopUpPage extends StatelessWidget {
                   child: Consumer<TopUpProvider>(
                     builder: (context, topUp, _) => TextFieldWithShadow(
                       controller: _amountController,
-                      labelText: "Masukkan Nominal (Rp)",
+                      labelText: "Ketik Nominal (Rp)",
                       hintText: "Rp. 0",
                       labelColor: Colors.black,
                       keyboardType: TextInputType.number,

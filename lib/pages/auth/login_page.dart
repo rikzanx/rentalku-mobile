@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           TextFieldWithShadow(
-                            labelText: "Masukkan email anda",
+                            labelText: "Ketik email anda",
                             hintText: "alamatemail@gmail.com",
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
@@ -68,7 +68,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           SizedBox(height: 16),
                           TextFieldWithShadow(
-                            labelText: "Masukkan password anda",
+                            labelText: "Ketik password anda",
                             hintText: "password",
                             obscureText: true,
                             validator: (value) {

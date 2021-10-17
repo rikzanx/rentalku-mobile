@@ -38,7 +38,7 @@ class UpdatePasswordPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFieldWithShadow(
-                labelText: "Masukkan password anda",
+                labelText: "Ketik password anda",
                 hintText: "password",
                 obscureText: true,
                 labelColor: Colors.black,
@@ -54,7 +54,7 @@ class UpdatePasswordPage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               TextFieldWithShadow(
-                labelText: "Masukkan ulang password anda",
+                labelText: "Ketik ulang password anda",
                 hintText: "password",
                 obscureText: true,
                 labelColor: Colors.black,
