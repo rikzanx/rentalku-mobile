@@ -7,11 +7,17 @@ import 'package:rentalku/models/booking.dart';
 class BookingCardWidget extends StatelessWidget {
   final Booking booking;
   final void Function()? onTap;
+  final String actionText;
+  final IconData actionIcon;
+  final void Function()? actionOnTap;
 
   const BookingCardWidget({
     Key? key,
     required this.booking,
     this.onTap,
+    required this.actionText,
+    required this.actionIcon,
+    this.actionOnTap,
   }) : super(key: key);
 
   @override
@@ -66,7 +72,7 @@ class BookingCardWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                       clipBehavior: Clip.hardEdge,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: actionOnTap,
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 4,
@@ -74,10 +80,10 @@ class BookingCardWidget extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.phone, size: 12, color: Colors.white),
+                              Icon(actionIcon, size: 12, color: Colors.white),
                               SizedBox(width: 3),
                               Text(
-                                "Hubungi pemilik mobil",
+                                actionText,
                                 style: AppStyle.smallText.copyWith(
                                   color: Colors.white,
                                 ),

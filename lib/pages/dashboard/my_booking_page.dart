@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/booking.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
@@ -141,6 +142,11 @@ class DashboardMyBookingPage extends StatelessWidget {
                         child: BookingCardWidget(
                           booking: dashboard.bookings.elementAt(index),
                           onTap: () {},
+                          actionIcon: Icons.star,
+                          actionText: 'Beri Nilai',
+                          actionOnTap: () {
+                            Navigator.pushNamed(context, Routes.addReviewPage);
+                          },
                         ),
                       ),
                     ),
