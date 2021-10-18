@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
@@ -41,19 +40,17 @@ class DashboardHomePage extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            children: List.generate(
-              3,
-              (index) => Padding(
-                padding: EdgeInsets.fromLTRB(16, 0, 16, 10),
-                child: ArticleCardWidget(
-                  article: Article(
-                    id: 1,
-                    title: "Enam Teknik Mencuci Mobil yang Benar, Jangan Asal!",
-                    category: "Otomotif",
-                    imageURL: "https://i.imgur.com/9waAALi.jpg",
-                    webURL: "http://id.wikipedia.org/wiki/Rantai_blok",
-                  ),
+          ...List.generate(
+            3,
+            (index) => Padding(
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 10),
+              child: ArticleCardWidget(
+                article: Article(
+                  id: 1,
+                  title: "Enam Teknik Mencuci Mobil yang Benar, Jangan Asal!",
+                  category: "Otomotif",
+                  imageURL: "https://i.imgur.com/9waAALi.jpg",
+                  webURL: "http://id.wikipedia.org/wiki/Rantai_blok",
                 ),
               ),
             ),

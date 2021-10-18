@@ -33,41 +33,38 @@ class RentalMobilPage extends StatelessWidget {
         ),
         elevation: 2,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 16, bottom: 24),
-        child: Column(
-          children: List.generate(
-            6,
-            (i) => Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              child: RentalMobilCardWidget(
-                  rentalMobil: RentalMobil(
-                    id: 1,
-                    name: "Toyota Avanza",
-                    description: "Mini MPV",
-                    withDriver: true,
-                    imageURL: 'https://i.imgur.com/vtUhSMq.png',
-                    price: 280000,
-                    rating: 4.2,
-                    capacity: 6,
-                  ),
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      Routes.rentalMobilDetail,
-                      arguments: RentalMobil(
-                        id: 1,
-                        name: "Toyota Avanza",
-                        description: "Mini MPV",
-                        withDriver: true,
-                        imageURL: 'https://i.imgur.com/vtUhSMq.png',
-                        price: 280000,
-                        rating: 4.2,
-                        capacity: 6,
-                      ),
-                    );
-                  }),
+      body: ListView.builder(
+        padding: EdgeInsets.only(top: 16, bottom: 16),
+        itemCount: 10,
+        itemBuilder: (context, index) => Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RentalMobilCardWidget(
+            rentalMobil: RentalMobil(
+              id: 1,
+              name: "Toyota Avanza",
+              description: "Mini MPV",
+              withDriver: true,
+              imageURL: 'https://i.imgur.com/vtUhSMq.png',
+              price: 280000,
+              rating: 4.2,
+              capacity: 6,
             ),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                Routes.rentalMobilDetail,
+                arguments: RentalMobil(
+                  id: 1,
+                  name: "Toyota Avanza",
+                  description: "Mini MPV",
+                  withDriver: true,
+                  imageURL: 'https://i.imgur.com/vtUhSMq.png',
+                  price: 280000,
+                  rating: 4.2,
+                  capacity: 6,
+                ),
+              );
+            },
           ),
         ),
       ),

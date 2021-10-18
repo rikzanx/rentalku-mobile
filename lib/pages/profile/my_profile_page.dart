@@ -29,6 +29,7 @@ class MyProfilePage extends StatelessWidget {
         elevation: 2,
       ),
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -36,8 +37,9 @@ class MyProfilePage extends StatelessWidget {
             Stack(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      16, MediaQuery.of(context).size.width * 0.125, 16, 0),
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.width * 0.125,
+                  ),
                   child: Material(
                     elevation: 3,
                     color: Color(0xFFBFDED9),
@@ -113,29 +115,27 @@ class MyProfilePage extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.editProfile);
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.edit,
-                      size: 16,
+            SizedBox(height: 4),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.editProfile);
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.edit,
+                    size: 16,
+                    color: AppColor.green,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "Edit",
+                    style: AppStyle.regular1Text.copyWith(
                       color: AppColor.green,
                     ),
-                    SizedBox(width: 5),
-                    Text(
-                      "Edit",
-                      style: AppStyle.regular1Text.copyWith(
-                        color: AppColor.green,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

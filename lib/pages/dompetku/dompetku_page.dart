@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/routes.dart';
@@ -103,17 +102,15 @@ class DompetkuPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Column(
-                children: List.generate(
-                  10,
-                  (index) => TransactionCardWidget(
-                    transaction: Transaction(
-                      id: 1,
-                      title: "Pembayaran",
-                      description: "Toyota Avanza",
-                      dateTime: DateTime.now(),
-                      amount: 280000,
-                    ),
+              ...List.generate(
+                10,
+                (index) => TransactionCardWidget(
+                  transaction: Transaction(
+                    id: 1,
+                    title: "Pembayaran",
+                    description: "Toyota Avanza",
+                    dateTime: DateTime.now(),
+                    amount: 280000,
                   ),
                 ),
               ),

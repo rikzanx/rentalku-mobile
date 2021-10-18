@@ -18,7 +18,11 @@ class BoxChatWidget extends StatelessWidget {
       child: ClipPath(
         child: Container(
           padding: EdgeInsets.fromLTRB(
-              isSender ? 16 : 40, 16, isSender ? 40 : 16, 16),
+            isSender ? 16 : 40,
+            8,
+            isSender ? 40 : 16,
+            8,
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: isSender ? Color(0xFFBFDED9) : Color(0xFFF0F0F0),

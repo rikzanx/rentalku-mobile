@@ -55,52 +55,50 @@ class ViewChatPage extends StatelessWidget {
               onRefresh: () async {},
             );
           } else {
-            return Center(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      reverse: true,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: List.generate(
-                          chats.length,
-                          (index) => BoxChatWidget(
-                            text: chats[index].text,
-                            isSender: chats[index].isSender,
-                          ),
+            return Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    reverse: true,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: List.generate(
+                        chats.length,
+                        (index) => BoxChatWidget(
+                          text: chats[index].text,
+                          isSender: chats[index].isSender,
                         ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextFieldWithShadow(
-                            hintText: "Ketik chat disini....",
-                            labelColor: Colors.black,
-                            textInputAction: TextInputAction.send,
-                          ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldWithShadow(
+                          hintText: "Ketik chat disini....",
+                          labelColor: Colors.black,
+                          textInputAction: TextInputAction.send,
                         ),
-                        SizedBox(width: 10),
-                        Material(
-                          shape: CircleBorder(),
-                          color: AppColor.green,
-                          elevation: 3,
-                          child: IconButton(
-                            icon: Icon(Icons.send),
-                            color: Colors.white,
-                            onPressed: () {},
-                            splashRadius: 24,
-                          ),
+                      ),
+                      SizedBox(width: 10),
+                      Material(
+                        shape: CircleBorder(),
+                        color: AppColor.green,
+                        elevation: 3,
+                        child: IconButton(
+                          icon: Icon(Icons.send),
+                          color: Colors.white,
+                          onPressed: () {},
+                          splashRadius: 24,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           }
         },
@@ -108,11 +106,3 @@ class ViewChatPage extends StatelessWidget {
     );
   }
 }
-
-/*
-ListView.builder(
-itemBuilder: (context, index) => Text(chats[index].text),
-itemCount: chats.length,
-shrinkWrap: true,
-physics: NeverScrollableScrollPhysics(),
-),*/

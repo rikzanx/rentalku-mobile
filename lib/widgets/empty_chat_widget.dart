@@ -8,16 +8,11 @@ class EmptyChatWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => RefreshIndicator(
-        onRefresh: onRefresh,
-        child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: constraints.maxHeight,
-              minWidth: constraints.maxWidth,
-            ),
+    return RefreshIndicator(
+      onRefresh: onRefresh,
+      child: Stack(
+        children: [
+          Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,7 +37,8 @@ class EmptyChatWidget extends StatelessWidget {
               ],
             ),
           ),
-        ),
+          ListView(),
+        ],
       ),
     );
   }

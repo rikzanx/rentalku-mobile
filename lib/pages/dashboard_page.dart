@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/pages/dashboard/home_page.dart';
 import 'package:rentalku/pages/dashboard/my_booking_page.dart';
 import 'package:rentalku/pages/dashboard/profil_page.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
-import 'package:rentalku/commons/colors.dart';
 
 final controller = PageController();
 

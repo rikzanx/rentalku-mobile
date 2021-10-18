@@ -39,24 +39,27 @@ class AddReviewPage extends StatelessWidget {
             thickness: 6,
             color: Color(0xFFE0E0E0),
           ),
-          itemBuilder: (context, index) => Consumer<AddReviewProvider>(
-            builder: (context, state, _) => Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(16, 8, 16, 4),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Image.network(state.bookings[index].imageURL),
+          itemBuilder: (context, index) => Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 8, 16, 4),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Consumer<AddReviewProvider>(
+                        builder: (context, state, _) =>
+                            Image.network(state.bookings[index].imageURL),
                       ),
-                      SizedBox(width: 8),
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Consumer<AddReviewProvider>(
+                            builder: (context, state, _) => Text(
                               state.bookings[index].name,
                               maxLines: 1,
                               overflow: TextOverflow.clip,
@@ -64,7 +67,9 @@ class AddReviewPage extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            Text(
+                          ),
+                          Consumer<AddReviewProvider>(
+                            builder: (context, state, _) => Text(
                               state.bookings[index].description,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -72,16 +77,18 @@ class AddReviewPage extends StatelessWidget {
                                 color: Colors.grey[500],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Divider(
-                  color: Colors.grey[500],
-                ),
-                Center(
+              ),
+              Divider(
+                color: Colors.grey[500],
+              ),
+              Consumer<AddReviewProvider>(
+                builder: (context, state, _) => Center(
                   child: StarRating(
                     rating: state.ratings[index],
                     onRatingChanged: (rating) {
@@ -89,27 +96,27 @@ class AddReviewPage extends StatelessWidget {
                     },
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: AppColor.green,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: AppColor.green,
                     ),
-                    child: TextField(
-                      maxLines: 5,
-                      decoration: InputDecoration(
-                        hintText:
-                            "Beritahu pengguna lain mengapa Anda sangat menyukai produk ini.",
-                      ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: TextField(
+                    maxLines: 5,
+                    decoration: InputDecoration(
+                      hintText:
+                          "Beritahu pengguna lain mengapa Anda sangat menyukai produk ini.",
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

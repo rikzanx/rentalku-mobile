@@ -57,37 +57,36 @@ class TopUpPage extends StatelessWidget {
           elevation: 2,
         ),
         body: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(16, 24, 16, 16),
           child: Form(
             key: _formKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(16, 24, 16, 8),
-                  child: Consumer<TopUpProvider>(
-                    builder: (context, topUp, _) => TextFieldWithShadow(
-                      controller: _amountController,
-                      labelText: "Ketik Nominal (Rp)",
-                      hintText: "Rp. 0",
-                      labelColor: Colors.black,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [_formatter],
-                      onChanged: (string) {
-                        topUp.amount = _formatter.getUnformattedValue().toInt();
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Kolom saldo wajib diisi';
-                        } else if (_formatter.getUnformattedValue() < 10000) {
-                          return 'Top up minimal Rp. 10.000';
-                        }
-                        return null;
-                      },
-                    ),
+                Consumer<TopUpProvider>(
+                  builder: (context, state, _) => TextFieldWithShadow(
+                    controller: _amountController,
+                    labelText: "Ketik Nominal (Rp)",
+                    hintText: "Rp. 0",
+                    labelColor: Colors.black,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [_formatter],
+                    onChanged: (string) {
+                      state.amount = _formatter.getUnformattedValue().toInt();
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Kolom saldo wajib diisi';
+                      } else if (_formatter.getUnformattedValue() < 10000) {
+                        return 'Top up minimal Rp. 10.000';
+                      }
+                      return null;
+                    },
                   ),
                 ),
+                SizedBox(height: 8),
                 GridView.builder(
-                  padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  padding: EdgeInsets.symmetric(horizontal: 2, vertical: 8),
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -98,165 +97,154 @@ class TopUpPage extends StatelessWidget {
                   ),
                   itemCount: 6,
                   itemBuilder: (context, i) => Consumer<TopUpProvider>(
-                    builder: (context, topUp, _) => AmountCardWidget(
-                      amount: topUp.selectableAmount.elementAt(i),
+                    builder: (context, state, _) => AmountCardWidget(
+                      amount: state.selectableAmount.elementAt(i),
                       isSelected:
-                          topUp.selectableAmount.elementAt(i) == topUp.amount,
+                          state.selectableAmount.elementAt(i) == state.amount,
                       onTap: () {
-                        if (topUp.selectableAmount.elementAt(i) ==
-                            topUp.amount) {
-                          topUp.amount = 0;
+                        if (state.selectableAmount.elementAt(i) ==
+                            state.amount) {
+                          state.amount = 0;
                           setAmount(0);
                         } else {
-                          topUp.amount = topUp.selectableAmount.elementAt(i);
-                          setAmount(topUp.selectableAmount.elementAt(i));
+                          state.amount = state.selectableAmount.elementAt(i);
+                          setAmount(state.selectableAmount.elementAt(i));
                         }
                       },
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  child: Material(
-                    elevation: 3,
-                    clipBehavior: Clip.hardEdge,
-                    borderRadius: BorderRadius.circular(20),
-                    child: Consumer<TopUpProvider>(
-                      builder: (context, topUp, _) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              topUp.bankCollapsed = !topUp.bankCollapsed;
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 10,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Transfer Bank",
-                                    style: AppStyle.regular1Text.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                SizedBox(height: 8),
+                Material(
+                  elevation: 3,
+                  clipBehavior: Clip.hardEdge,
+                  borderRadius: BorderRadius.circular(20),
+                  child: Consumer<TopUpProvider>(
+                    builder: (context, state, _) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            state.bankCollapsed = !state.bankCollapsed;
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 10,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Transfer Bank",
+                                  style: AppStyle.regular1Text.copyWith(
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  Icon(
-                                    topUp.bankCollapsed
+                                ),
+                                Icon(
+                                  state.bankCollapsed
+                                      ? Icons.expand_more
+                                      : Icons.expand_less,
+                                  size: 20,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Collapsible(
+                          axis: CollapsibleAxis.vertical,
+                          collapsed: state.bankCollapsed,
+                          child: Column(
+                            children: List.generate(
+                              3,
+                              (i) => PaymentMethodOption(
+                                paymentMethod:
+                                    state.selectablePaymentMethod.elementAt(i),
+                                isSelected: state.paymentMethod ==
+                                    state.selectablePaymentMethod.elementAt(i),
+                                onTap: () {
+                                  state.paymentMethod = state
+                                      .selectablePaymentMethod
+                                      .elementAt(i);
+                                },
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Material(
+                  elevation: 3,
+                  clipBehavior: Clip.hardEdge,
+                  borderRadius: BorderRadius.circular(20),
+                  child: Consumer<TopUpProvider>(
+                    builder: (context, state, _) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            state.walletCollapsed = !state.walletCollapsed;
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 10,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "E-Wallet",
+                                  style: AppStyle.regular1Text.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Icon(
+                                    state.walletCollapsed
                                         ? Icons.expand_more
                                         : Icons.expand_less,
-                                    size: 20,
-                                  ),
-                                ],
+                                    size: 20),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Collapsible(
+                          axis: CollapsibleAxis.vertical,
+                          collapsed: state.walletCollapsed,
+                          child: Column(
+                            children: List.generate(
+                              4,
+                              (i) => PaymentMethodOption(
+                                paymentMethod: state.selectablePaymentMethod
+                                    .elementAt(i + 3),
+                                isSelected: state.paymentMethod ==
+                                    state.selectablePaymentMethod
+                                        .elementAt(i + 3),
+                                onTap: () {
+                                  state.paymentMethod = state
+                                      .selectablePaymentMethod
+                                      .elementAt(i + 3);
+                                },
                               ),
                             ),
                           ),
-                          Collapsible(
-                            axis: CollapsibleAxis.vertical,
-                            collapsed: topUp.bankCollapsed,
-                            child: Column(
-                              children: List.generate(
-                                3,
-                                (i) => PaymentMethodOption(
-                                  paymentMethod: topUp.selectablePaymentMethod
-                                      .elementAt(i),
-                                  isSelected: topUp.paymentMethod ==
-                                      topUp.selectablePaymentMethod
-                                          .elementAt(i),
-                                  onTap: () {
-                                    topUp.paymentMethod = topUp
-                                        .selectablePaymentMethod
-                                        .elementAt(i);
-                                  },
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                        )
+                      ],
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  child: Material(
-                    elevation: 3,
-                    clipBehavior: Clip.hardEdge,
-                    borderRadius: BorderRadius.circular(20),
-                    child: Consumer<TopUpProvider>(
-                      builder: (context, topUp, _) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              topUp.walletCollapsed = !topUp.walletCollapsed;
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 10,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "E-Wallet",
-                                    style: AppStyle.regular1Text.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Icon(
-                                      topUp.walletCollapsed
-                                          ? Icons.expand_more
-                                          : Icons.expand_less,
-                                      size: 20),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Collapsible(
-                            axis: CollapsibleAxis.vertical,
-                            collapsed: topUp.walletCollapsed,
-                            child: Column(
-                              children: List.generate(
-                                4,
-                                (i) => PaymentMethodOption(
-                                  paymentMethod: topUp.selectablePaymentMethod
-                                      .elementAt(i + 3),
-                                  isSelected: topUp.paymentMethod ==
-                                      topUp.selectablePaymentMethod
-                                          .elementAt(i + 3),
-                                  onTap: () {
-                                    topUp.paymentMethod = topUp
-                                        .selectablePaymentMethod
-                                        .elementAt(i + 3);
-                                  },
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(16, 8, 16, 24),
-                  width: MediaQuery.of(context).size.width,
-                  child: Consumer<TopUpProvider>(
-                    builder: (context, topUp, _) => ElevatedButton(
-                      onPressed: (topUp.amount >= 10000 &&
-                              topUp.paymentMethod != null)
-                          ? () {
-                              Navigator.pushNamed(context, Routes.detailTopUp);
-                            }
-                          : null,
-                      child: Text("Bayar Sekarang"),
-                    ),
+                SizedBox(height: 16),
+                Consumer<TopUpProvider>(
+                  builder: (context, state, _) => ElevatedButton(
+                    onPressed: !state.complete
+                        ? null
+                        : () {
+                            Navigator.pushNamed(context, Routes.detailTopUp);
+                          },
+                    child: Text("Bayar Sekarang"),
                   ),
                 ),
               ],

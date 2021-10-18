@@ -3,18 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
-import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/commons/router.dart' as router;
 import 'package:rentalku/commons/routes.dart';
+import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/pages/undefined_page.dart';
-import 'package:rentalku/providers/chat_provider.dart';
-import 'package:rentalku/providers/dashboard_provider.dart';
-import 'package:rentalku/providers/rental_mobil_provider.dart';
-import 'package:rentalku/providers/top_up_provider.dart';
 import 'package:rentalku/providers/app_provider.dart';
+import 'package:rentalku/providers/chat_provider.dart';
+import 'package:rentalku/providers/rental_mobil_provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  timeago.setLocaleMessages('id', timeago.IdMessages());
   await initializeDateFormatting('id_ID', null).then((_) => runApp(MyApp()));
 }
 

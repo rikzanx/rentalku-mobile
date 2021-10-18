@@ -16,6 +16,7 @@ class DashboardMyBookingPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => DashboardProvider(),
       child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
         child: Column(
           children: [
             AppBar(
@@ -30,81 +31,80 @@ class DashboardMyBookingPage extends StatelessWidget {
               backgroundColor: Colors.white,
               elevation: 0,
             ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(16, 48, 16, 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Material(
-                      color: AppColor.green,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                      ),
-                      clipBehavior: Clip.hardEdge,
-                      child: Consumer<DashboardProvider>(
-                        builder: (context, dashboard, _) => InkWell(
-                          child: Text(
-                            "Sedang di pesan",
-                            textAlign: TextAlign.center,
-                            style: AppStyle.regular1Text.copyWith(
-                              color: dashboard.myBookingIndex == 0
-                                  ? AppColor.yellow
-                                  : Colors.white,
-                            ),
+            SizedBox(height: 48),
+            Row(
+              children: [
+                Expanded(
+                  child: Material(
+                    color: AppColor.green,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                    ),
+                    clipBehavior: Clip.hardEdge,
+                    child: Consumer<DashboardProvider>(
+                      builder: (context, dashboard, _) => InkWell(
+                        child: Text(
+                          "Sedang di pesan",
+                          textAlign: TextAlign.center,
+                          style: AppStyle.regular1Text.copyWith(
+                            color: dashboard.myBookingIndex == 0
+                                ? AppColor.yellow
+                                : Colors.white,
                           ),
-                          onTap: () {
-                            dashboard.myBookingIndex = 0;
-                            dashboard.bookings = [];
-                          },
                         ),
+                        onTap: () {
+                          dashboard.myBookingIndex = 0;
+                          dashboard.bookings = [];
+                        },
                       ),
                     ),
                   ),
-                  SizedBox(width: 2),
-                  Expanded(
-                    child: Material(
-                      color: AppColor.green,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                      ),
-                      clipBehavior: Clip.hardEdge,
-                      child: Consumer<DashboardProvider>(
-                        builder: (context, dashboard, _) => InkWell(
-                          child: Text(
-                            "Selesai",
-                            textAlign: TextAlign.center,
-                            style: AppStyle.regular1Text.copyWith(
-                              color: dashboard.myBookingIndex == 1
-                                  ? AppColor.yellow
-                                  : Colors.white,
-                            ),
+                ),
+                SizedBox(width: 2),
+                Expanded(
+                  child: Material(
+                    color: AppColor.green,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                    clipBehavior: Clip.hardEdge,
+                    child: Consumer<DashboardProvider>(
+                      builder: (context, dashboard, _) => InkWell(
+                        child: Text(
+                          "Selesai",
+                          textAlign: TextAlign.center,
+                          style: AppStyle.regular1Text.copyWith(
+                            color: dashboard.myBookingIndex == 1
+                                ? AppColor.yellow
+                                : Colors.white,
                           ),
-                          onTap: () {
-                            dashboard.myBookingIndex = 1;
-                            dashboard.bookings = List.generate(
-                              4,
-                              (index) => Booking(
-                                id: 1,
-                                name: "Toyota Innova Reborn",
-                                description: "Compact MPV",
-                                withDriver: true,
-                                price: 500000,
-                                imageURL: "https://i.imgur.com/vtUhSMq.png",
-                                startDate: DateTime.now(),
-                                endDate: DateTime.now().add(Duration(days: 2)),
-                                address: "Jl. Anjasmoro No. 2, Waru, Sidoarjo",
-                              ),
-                            );
-                          },
                         ),
+                        onTap: () {
+                          dashboard.myBookingIndex = 1;
+                          dashboard.bookings = List.generate(
+                            4,
+                            (index) => Booking(
+                              id: 1,
+                              name: "Toyota Innova Reborn",
+                              description: "Compact MPV",
+                              withDriver: true,
+                              price: 500000,
+                              imageURL: "https://i.imgur.com/vtUhSMq.png",
+                              startDate: DateTime.now(),
+                              endDate: DateTime.now().add(Duration(days: 2)),
+                              address: "Jl. Anjasmoro No. 2, Waru, Sidoarjo",
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+            SizedBox(height: 16),
             Consumer<DashboardProvider>(
               builder: (context, dashboard, _) {
                 if (dashboard.bookings.isEmpty) {
@@ -135,10 +135,7 @@ class DashboardMyBookingPage extends StatelessWidget {
                     children: List.generate(
                       dashboard.bookings.length,
                       (index) => Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 6,
-                        ),
+                        padding: EdgeInsets.symmetric(vertical: 6),
                         child: BookingCardWidget(
                           booking: dashboard.bookings.elementAt(index),
                           onTap: () {
@@ -156,7 +153,6 @@ class DashboardMyBookingPage extends StatelessWidget {
                 }
               },
             ),
-            SizedBox(height: 8),
           ],
         ),
       ),

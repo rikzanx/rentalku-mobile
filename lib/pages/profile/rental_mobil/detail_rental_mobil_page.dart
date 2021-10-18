@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
+import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/rental_mobil.dart';
 import 'package:rentalku/widgets/star_rating_widget.dart';
@@ -106,7 +107,9 @@ class DetailRentalMobilPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.reviewProduct);
+                          },
                         ),
                       ],
                     ),
@@ -136,7 +139,9 @@ class DetailRentalMobilPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.reviewOwner);
+                      },
                     ),
                     SizedBox(height: 16),
                     Divider(thickness: 2, color: Colors.grey[500]),

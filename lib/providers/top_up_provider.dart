@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rentalku/commons/types.dart';
 import 'package:rentalku/models/payment_method.dart';
 
 class TopUpProvider extends ChangeNotifier {
@@ -34,4 +33,6 @@ class TopUpProvider extends ChangeNotifier {
   List<int> get selectableAmount =>
       [20000, 50000, 100000, 200000, 300000, 500000];
   List<PaymentMethod> get selectablePaymentMethod => PaymentMethod.list;
+
+  bool get complete => _amount >= 10000 && _paymentMethod != null;
 }
