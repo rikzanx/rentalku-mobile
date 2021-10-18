@@ -9,6 +9,9 @@ class Routes{
   static const String updatePassword = '/update-password';
   static const String rentalMobil = '/rental-mobil';
 
+  static const String chats = '/chats';
+  static const String viewChat = '/chats/view';
+
   static const String article = '/article';
 
   static const String dompetku = '/dompetku';

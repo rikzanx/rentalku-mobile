@@ -30,7 +30,9 @@ class DashboardProfilPage extends StatelessWidget {
               IconButton(
                 splashRadius: 24,
                 icon: Image.asset('assets/images/chat_icon.png', height: 24),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.chats);
+                },
               )
             ],
           ),

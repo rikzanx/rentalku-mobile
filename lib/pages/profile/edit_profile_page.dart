@@ -94,7 +94,7 @@ class EditProfilePage extends StatelessWidget {
                 hintText: "No. Handphone",
                 keyboardType: TextInputType.phone,
                 labelColor: Colors.black,
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Kolom nomor hp wajib diisi';

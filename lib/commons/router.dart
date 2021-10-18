@@ -6,6 +6,8 @@ import 'package:rentalku/pages/auth/login_page.dart';
 import 'package:rentalku/pages/auth/register_page.dart';
 import 'package:rentalku/pages/bookings/add_review_page.dart';
 import 'package:rentalku/pages/bookings/detail_booking_page.dart';
+import 'package:rentalku/pages/chats/list_chat_page.dart';
+import 'package:rentalku/pages/chats/view_chat_page.dart';
 import 'package:rentalku/pages/dashboard_page.dart';
 import 'package:rentalku/pages/dompetku/detail_top_up_page.dart';
 import 'package:rentalku/pages/dompetku/dompetku_page.dart';
@@ -46,6 +48,10 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => MyProfilePage());
     case Routes.editProfile:
       return MaterialPageRoute(builder: (_) => EditProfilePage());
+    case Routes.chats:
+      return MaterialPageRoute(builder: (_) => ListChatPage());
+    case Routes.viewChat:
+      return MaterialPageRoute(builder: (_) => ViewChatPage());
     case Routes.article:
       if (arguments is Article)
         return MaterialPageRoute(
