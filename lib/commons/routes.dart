@@ -7,7 +7,9 @@ class Routes {
   static const String myProfile = '/profile';
   static const String editProfile = '/profile/edit';
   static const String updatePassword = '/update-password';
+
   static const String rentalMobil = '/rental-mobil';
+  static const String rentalMobilDetail = '/rental-mobil/detail';
 
   static const String chats = '/chats';
   static const String viewChat = '/chats/view';

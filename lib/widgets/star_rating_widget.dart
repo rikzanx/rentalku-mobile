@@ -11,7 +11,7 @@ class StarRating extends StatelessWidget {
     this.starCount = 5,
     this.rating = .0,
     this.size = 32,
-    required this.onRatingChanged,
+    this.onRatingChanged,
   });
 
   Widget buildStar(BuildContext context, int index) {
@@ -36,7 +36,7 @@ class StarRating extends StatelessWidget {
       );
     }
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4),
+      padding: EdgeInsets.only(left: index == 0 ? 0 : size / 4),
       child: InkResponse(
         radius: 24,
         onTap:

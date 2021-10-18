@@ -7,10 +7,12 @@ import 'package:rentalku/models/rental_mobil.dart';
 
 class RentalMobilCardWidget extends StatelessWidget {
   final RentalMobil rentalMobil;
+  final void Function()? onTap;
 
   const RentalMobilCardWidget({
     Key? key,
     required this.rentalMobil,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -18,83 +20,87 @@ class RentalMobilCardWidget extends StatelessWidget {
     return Material(
       elevation: 2,
       borderRadius: BorderRadius.circular(5),
-      child: Padding(
-        padding: EdgeInsets.all(8),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: Image.network(rentalMobil.imageURL),
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              flex: 5,
-              child: Column(
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child: Image.network(rentalMobil.imageURL),
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                flex: 5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      rentalMobil.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.clip,
+                      style: AppStyle.regular1Text.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      rentalMobil.description,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppStyle.regular1Text,
+                    ),
+                    Text(
+                      rentalMobil.withDriver ? "Dengan Supir" : "Tanpa Supir",
+                      style: AppStyle.smallText,
+                    ),
+                    Text(
+                      "Harga Mulai Dari",
+                      style: AppStyle.smallText.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      Helper.toIDR(rentalMobil.price) + "/Hari",
+                      style: AppStyle.smallText.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AppColor.yellow,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 8),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    rentalMobil.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.clip,
-                    style: AppStyle.regular1Text.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(Icons.star, size: 12, color: AppColor.yellow),
+                      SizedBox(width: 2),
+                      Text(
+                        rentalMobil.rating.toString(),
+                        style: AppStyle.smallText,
+                      ),
+                    ],
                   ),
-                  Text(
-                    rentalMobil.description,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppStyle.regular1Text,
-                  ),
-                  Text(
-                    rentalMobil.withDriver ? "Dengan Supir" : "Tanpa Supir",
-                    style: AppStyle.smallText,
-                  ),
-                  Text(
-                    "Harga Mulai Dari",
-                    style: AppStyle.smallText.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    Helper.toIDR(rentalMobil.price) + "/Hari",
-                    style: AppStyle.smallText.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.yellow,
-                    ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(Icons.people, size: 12, color: AppColor.green),
+                      SizedBox(width: 2),
+                      Text(
+                        rentalMobil.capacity.toString(),
+                        style: AppStyle.smallText,
+                      )
+                    ],
                   ),
                 ],
               ),
-            ),
-            SizedBox(width: 8),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(Icons.star, size: 12, color: AppColor.yellow),
-                    SizedBox(width: 2),
-                    Text(
-                      rentalMobil.rating.toString(),
-                      style: AppStyle.smallText,
-                    ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(Icons.people, size: 12, color: AppColor.green),
-                    SizedBox(width: 2),
-                    Text(
-                      rentalMobil.capacity.toString(),
-                      style: AppStyle.smallText,
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

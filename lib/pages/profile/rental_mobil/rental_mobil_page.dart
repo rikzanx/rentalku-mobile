@@ -41,17 +41,32 @@ class RentalMobilPage extends StatelessWidget {
             (i) => Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
               child: RentalMobilCardWidget(
-                rentalMobil: RentalMobil(
-                  id: 1,
-                  name: "Toyota Avanza",
-                  description: "Mini MPV",
-                  withDriver: true,
-                  imageURL: 'https://i.imgur.com/vtUhSMq.png',
-                  price: 280000,
-                  rating: 4.2,
-                  capacity: 6,
-                ),
-              ),
+                  rentalMobil: RentalMobil(
+                    id: 1,
+                    name: "Toyota Avanza",
+                    description: "Mini MPV",
+                    withDriver: true,
+                    imageURL: 'https://i.imgur.com/vtUhSMq.png',
+                    price: 280000,
+                    rating: 4.2,
+                    capacity: 6,
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.rentalMobilDetail,
+                      arguments: RentalMobil(
+                        id: 1,
+                        name: "Toyota Avanza",
+                        description: "Mini MPV",
+                        withDriver: true,
+                        imageURL: 'https://i.imgur.com/vtUhSMq.png',
+                        price: 280000,
+                        rating: 4.2,
+                        capacity: 6,
+                      ),
+                    );
+                  }),
             ),
           ),
         ),
