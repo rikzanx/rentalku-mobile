@@ -87,7 +87,7 @@ class RentalMobilCardWidget extends StatelessWidget {
                     Icon(Icons.people, size: 12, color: AppColor.green),
                     SizedBox(width: 2),
                     Text(
-                      rentalMobil.totalReviews.toString(),
+                      rentalMobil.capacity.toString(),
                       style: AppStyle.smallText,
                     )
                   ],

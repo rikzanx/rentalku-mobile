@@ -7,7 +7,7 @@ class RentalMobil extends Equatable {
   final bool withDriver;
   final int price;
   final double rating;
-  final int totalReviews;
+  final int capacity;
   final String imageURL;
 
   RentalMobil({
@@ -17,7 +17,7 @@ class RentalMobil extends Equatable {
     this.withDriver = false,
     this.price = 0,
     this.rating = 0,
-    this.totalReviews = 0,
+    this.capacity = 0,
     required this.imageURL,
   });
 

@@ -49,7 +49,7 @@ class RentalMobilPage extends StatelessWidget {
                   imageURL: 'https://i.imgur.com/vtUhSMq.png',
                   price: 280000,
                   rating: 4.2,
-                  totalReviews: 6,
+                  capacity: 6,
                 ),
               ),
             ),
