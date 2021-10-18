@@ -80,14 +80,13 @@ class DashboardHomePage extends StatelessWidget {
                   children: [
                     Text(
                       "Halo,",
-                      style: GoogleFonts.poppins(fontSize: 13),
+                      style: AppStyle.regular1Text,
                     ),
                     Text(
                       "Muhammad",
                       maxLines: 1,
                       overflow: TextOverflow.clip,
-                      style: GoogleFonts.poppins(
-                        fontSize: 13,
+                      style: AppStyle.regular1Text.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -115,8 +114,7 @@ class DashboardHomePage extends StatelessWidget {
                     child: TextFormField(
                       decoration: InputDecoration(
                         hintText: "Cari di RentalKu",
-                        hintStyle: GoogleFonts.poppins(
-                          fontSize: 10,
+                        hintStyle: AppStyle.smallText.copyWith(
                           color: Colors.black,
                         ),
                         enabledBorder: InputBorder.none,

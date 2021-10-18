@@ -52,14 +52,13 @@ class DashboardProfilPage extends StatelessWidget {
                   children: [
                     Text(
                       "Halo,",
-                      style: GoogleFonts.poppins(fontSize: 13),
+                      style: AppStyle.regular1Text,
                     ),
                     Text(
                       "Muhammad",
                       maxLines: 1,
                       overflow: TextOverflow.clip,
-                      style: GoogleFonts.poppins(
-                        fontSize: 13,
+                      style: AppStyle.regular1Text.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -109,7 +108,7 @@ class DashboardProfilPage extends StatelessWidget {
             visualDensity: VisualDensity.compact,
             title: Text(
               'Data Diri',
-              style: GoogleFonts.poppins(fontSize: 13),
+              style: AppStyle.regular1Text,
             ),
             onTap: () {
               Navigator.pushNamed(context, Routes.myProfile);
@@ -121,7 +120,7 @@ class DashboardProfilPage extends StatelessWidget {
             horizontalTitleGap: 0,
             title: Text(
               'Ganti Password',
-              style: GoogleFonts.poppins(fontSize: 13),
+              style: AppStyle.regular1Text,
             ),
             onTap: () {
               Navigator.pushNamed(context, Routes.updatePassword);
@@ -133,7 +132,7 @@ class DashboardProfilPage extends StatelessWidget {
             horizontalTitleGap: 0,
             title: Text(
               'Rental Mobil',
-              style: GoogleFonts.poppins(fontSize: 13),
+              style: AppStyle.regular1Text,
             ),
             onTap: () {
               Navigator.pushNamed(context, Routes.rentalMobil);
@@ -145,7 +144,7 @@ class DashboardProfilPage extends StatelessWidget {
             horizontalTitleGap: 0,
             title: Text(
               'Dompetku',
-              style: GoogleFonts.poppins(fontSize: 13),
+              style: AppStyle.regular1Text,
             ),
             onTap: () {
               Navigator.pushNamed(context, Routes.dompetku);
@@ -157,8 +156,7 @@ class DashboardProfilPage extends StatelessWidget {
             visualDensity: VisualDensity.compact,
             title: Text(
               'Logout',
-              style: GoogleFonts.poppins(
-                fontSize: 13,
+              style: AppStyle.regular1Text.copyWith(
                 color: Colors.redAccent,
               ),
             ),
@@ -169,8 +167,7 @@ class DashboardProfilPage extends StatelessWidget {
                   return AlertDialog(
                     title: Text(
                       "Yakin untuk logout?",
-                      style: GoogleFonts.poppins(
-                        fontSize: 13,
+                      style: AppStyle.regular1Text.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -178,8 +175,7 @@ class DashboardProfilPage extends StatelessWidget {
                       TextButton(
                         child: Text(
                           "Tidak",
-                          style: GoogleFonts.poppins(
-                            fontSize: 13,
+                          style: AppStyle.regular1Text.copyWith(
                             color: Colors.grey,
                           ),
                         ),
@@ -190,8 +186,7 @@ class DashboardProfilPage extends StatelessWidget {
                       TextButton(
                         child: Text(
                           "Ya",
-                          style: GoogleFonts.poppins(
-                            fontSize: 13,
+                          style: AppStyle.regular1Text.copyWith(
                             color: Colors.redAccent,
                           ),
                         ),

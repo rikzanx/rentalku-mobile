@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/pages/dashboard/home_page.dart';
 import 'package:rentalku/pages/dashboard/my_booking_page.dart';
 import 'package:rentalku/pages/dashboard/profil_page.dart';
@@ -35,8 +37,8 @@ class DashboardPage extends StatelessWidget {
             currentIndex: dashboard.bottomNavIndex,
             selectedItemColor: AppColor.yellow,
             unselectedItemColor: Colors.white,
-            selectedLabelStyle: GoogleFonts.poppins(fontSize: 10),
-            unselectedLabelStyle: GoogleFonts.poppins(fontSize: 10),
+            selectedLabelStyle: AppStyle.smallText,
+            unselectedLabelStyle: AppStyle.smallText,
             backgroundColor: AppColor.green,
             items: [
               BottomNavigationBarItem(

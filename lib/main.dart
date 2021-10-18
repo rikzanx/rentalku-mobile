@@ -9,6 +9,7 @@ import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/pages/undefined_page.dart';
 import 'package:rentalku/providers/chat_provider.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
+import 'package:rentalku/providers/rental_mobil_provider.dart';
 import 'package:rentalku/providers/top_up_provider.dart';
 import 'package:rentalku/providers/app_provider.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => AppProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),
+        ChangeNotifierProvider(create: (context) => RentalMobilProvider()),
       ],
       child: MaterialApp(
         title: 'Provider and Routes',

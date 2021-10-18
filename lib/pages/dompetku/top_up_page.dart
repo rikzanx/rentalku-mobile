@@ -34,7 +34,7 @@ class TopUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<TopUpProvider>(
+    return ChangeNotifierProvider(
       create: (context) => TopUpProvider(),
       child: Scaffold(
         appBar: AppBar(

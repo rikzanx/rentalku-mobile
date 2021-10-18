@@ -12,7 +12,7 @@ class TopUpProvider extends ChangeNotifier {
 
   PaymentMethod? _paymentMethod;
   PaymentMethod? get paymentMethod => _paymentMethod;
-  set paymentMethod(PaymentMethod? paymentMethod){
+  set paymentMethod(PaymentMethod? paymentMethod) {
     _paymentMethod = paymentMethod;
     notifyListeners();
   }
@@ -21,11 +21,12 @@ class TopUpProvider extends ChangeNotifier {
   bool _bankCollapsed = false;
   bool get walletCollapsed => _walletCollapsed;
   bool get bankCollapsed => _bankCollapsed;
-  set walletCollapsed(bool walletCollapsed){
+  set walletCollapsed(bool walletCollapsed) {
     _walletCollapsed = walletCollapsed;
     notifyListeners();
   }
-  set bankCollapsed(bool bankCollapsed){
+
+  set bankCollapsed(bool bankCollapsed) {
     _bankCollapsed = bankCollapsed;
     notifyListeners();
   }
