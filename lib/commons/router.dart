@@ -10,6 +10,7 @@ import 'package:rentalku/pages/dashboard_page.dart';
 import 'package:rentalku/pages/dompetku/detail_top_up_page.dart';
 import 'package:rentalku/pages/dompetku/dompetku_page.dart';
 import 'package:rentalku/pages/dompetku/top_up_page.dart';
+import 'package:rentalku/pages/profile/edit_profile_page.dart';
 import 'package:rentalku/pages/profile/my_profile_page.dart';
 import 'package:rentalku/pages/profile/rental_mobil_page.dart';
 import 'package:rentalku/pages/profile/update_password_page.dart';
@@ -43,6 +44,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => AddReviewPage());
     case Routes.myProfile:
       return MaterialPageRoute(builder: (_) => MyProfilePage());
+    case Routes.editProfile:
+      return MaterialPageRoute(builder: (_) => EditProfilePage());
     case Routes.article:
       if (arguments is Article)
         return MaterialPageRoute(

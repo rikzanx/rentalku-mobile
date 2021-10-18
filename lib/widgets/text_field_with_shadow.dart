@@ -14,7 +14,9 @@ class TextFieldWithShadow extends StatelessWidget {
   final Color labelColor;
   final String? prefixText;
   final List<TextInputFormatter>? inputFormatters;
-  final Function(String)? onChanged;
+  final void Function(String)? onChanged;
+  final void Function()? onTap;
+  final bool enabled;
 
   const TextFieldWithShadow({
     Key? key,
@@ -30,6 +32,8 @@ class TextFieldWithShadow extends StatelessWidget {
     this.prefixText,
     this.inputFormatters,
     this.onChanged,
+    this.onTap,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
@@ -73,6 +77,8 @@ class TextFieldWithShadow extends StatelessWidget {
               textInputAction: textInputAction,
               validator: validator,
               onChanged: onChanged,
+              onTap: onTap,
+              enabled: enabled,
             ),
           ],
         ),

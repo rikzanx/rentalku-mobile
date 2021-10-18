@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 
 class MyProfilePage extends StatelessWidget {
@@ -115,7 +116,9 @@ class MyProfilePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.editProfile);
+                },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
