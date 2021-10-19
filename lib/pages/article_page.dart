@@ -7,17 +7,23 @@ import 'package:rentalku/models/article.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ArticlePage extends StatelessWidget {
-  final Article article;
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 
-  ArticlePage({Key? key, required this.article}) : super(key: key);
+  ArticlePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
     final Completer<WebViewController> _controller =
         Completer<WebViewController>();
+    Article article = Article(
+      id: 1,
+      title: "Enam Teknik Mencuci Mobil yang Benar, Jangan Asal!",
+      category: "Otomotif",
+      imageURL: "https://i.imgur.com/9waAALi.jpg",
+      webURL: "http://id.wikipedia.org/wiki/Rantai_blok",
+    );
 
     return Scaffold(
       appBar: AppBar(

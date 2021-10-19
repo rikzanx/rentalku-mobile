@@ -7,13 +7,21 @@ import 'package:rentalku/models/rental_mobil.dart';
 import 'package:rentalku/widgets/star_rating_widget.dart';
 
 class DetailRentalMobilPage extends StatelessWidget {
-  final RentalMobil rentalMobil;
-
-  const DetailRentalMobilPage({Key? key, required this.rentalMobil})
-      : super(key: key);
+  const DetailRentalMobilPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    RentalMobil rentalMobil = RentalMobil(
+      id: 1,
+      name: "Toyota Avanza",
+      description: "Mini MPV",
+      withDriver: true,
+      imageURL: 'https://i.imgur.com/vtUhSMq.png',
+      price: 280000,
+      rating: 4.2,
+      capacity: 6,
+    );
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

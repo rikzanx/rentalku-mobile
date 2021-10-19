@@ -45,11 +45,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.rentalMobil:
       return MaterialPageRoute(builder: (_) => RentalMobilPage());
     case Routes.rentalMobilDetail:
-      if (arguments is RentalMobil)
-        return MaterialPageRoute(
-          builder: (_) => DetailRentalMobilPage(rentalMobil: arguments),
-        );
-      break;
+      return MaterialPageRoute(builder: (_) => DetailRentalMobilPage());
     case Routes.reviewProduct:
       return MaterialPageRoute(builder: (_) => ReviewProductPage());
     case Routes.reviewOwner:
@@ -67,11 +63,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.viewChat:
       return MaterialPageRoute(builder: (_) => ViewChatPage());
     case Routes.article:
-      if (arguments is Article)
-        return MaterialPageRoute(
-          builder: (_) => ArticlePage(article: arguments),
-        );
-      break;
+      return MaterialPageRoute(builder: (_) => ArticlePage());
   }
 
   return MaterialPageRoute(
