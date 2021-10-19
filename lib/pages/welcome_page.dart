@@ -20,6 +20,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Material(
             elevation: 3,
@@ -99,9 +100,12 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Spacer(),
-          Image.asset(
-            "assets/images/splashscreen.png",
-            width: MediaQuery.of(context).size.width * 0.85,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Image.asset(
+              "assets/images/splashscreen.png",
+              width: MediaQuery.of(context).size.width * 0.85,
+            ),
           ),
           SizedBox(height: 16),
           Padding(
