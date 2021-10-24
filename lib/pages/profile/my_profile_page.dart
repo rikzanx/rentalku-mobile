@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
+
+ValueNotifier<File?> _image = ValueNotifier(null);
 
 class MyProfilePage extends StatelessWidget {
   const MyProfilePage({Key? key}) : super(key: key);
@@ -96,20 +101,47 @@ class MyProfilePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.center,
+                Center(
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.25,
                     height: MediaQuery.of(context).size.width * 0.25,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                          MediaQuery.of(context).size.width * 0.125),
+                        MediaQuery.of(context).size.width * 0.125,
+                      ),
                       border: Border.all(color: Colors.white, width: 5),
                     ),
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          "https://lorempixel.com/200/200/people/"),
-                      radius: MediaQuery.of(context).size.width * 0.125,
+                    child: ValueListenableBuilder(
+                      valueListenable: _image,
+                      builder: (context, value, _) => value == null ? CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            "https://lorempixel.com/200/200/people/"),
+                        radius: MediaQuery.of(context).size.width * 0.125,
+                      ) : CircleAvatar(
+                        backgroundImage: FileImage(_image.value!),
+                        radius: MediaQuery.of(context).size.width * 0.125,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: MediaQuery.of(context).size.width * 0.125 + 12,
+                  left: MediaQuery.of(context).size.width * 0.5,
+                  child: Material(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    clipBehavior: Clip.hardEdge,
+                    child: InkWell(
+                      child: Padding(
+                        padding: EdgeInsets.all(4),
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: AppColor.green,
+                        ),
+                      ),
+                      onTap: () {
+                        myAlert(context);
+                      },
                     ),
                   ),
                 ),
@@ -139,6 +171,62 @@ class MyProfilePage extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void getImage(ImageSource media) async {
+    XFile? img = await ImagePicker().pickImage(source: media);
+    if (img != null) {
+      _image.value = File(img.path);
+    }
+  }
+
+  void myAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        title: Text("Silahkan pilih media"),
+        content: Container(
+          height: MediaQuery.of(context).size.height / 6,
+          child: Column(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  getImage(ImageSource.gallery);
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.black,
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.image),
+                    SizedBox(width: 5),
+                    Text("Galeri"),
+                  ],
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  getImage(ImageSource.camera);
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.black,
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.camera),
+                    SizedBox(width: 5),
+                    Text("Kamera"),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
