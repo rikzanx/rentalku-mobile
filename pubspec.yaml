@@ -28,6 +28,7 @@ dependencies:
   collapsible: ^1.0.0
   currency_text_input_formatter: ^2.1.4
   equatable: ^2.0.3
+  flutter_screenutil: ^5.0.0+2
   geocoding: ^2.0.1
   google_fonts: ^2.1.0
   google_maps_flutter: ^2.0.11
