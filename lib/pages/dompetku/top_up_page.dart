@@ -231,7 +231,7 @@ class TopUpPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

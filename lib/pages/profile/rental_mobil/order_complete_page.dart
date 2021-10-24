@@ -53,7 +53,7 @@ class OrderCompletePage extends StatelessWidget {
             Consumer<DashboardProvider>(
               builder: (context, state, _) => ElevatedButton(
                 onPressed: () {
-                  state.bottomNavIndex = 1;
+                  state.jumpToPage(1);
                   Navigator.pop(context);
                 },
                 child: Text("Lihat Sekarang"),

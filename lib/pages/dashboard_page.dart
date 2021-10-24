@@ -7,8 +7,6 @@ import 'package:rentalku/pages/dashboard/my_booking_page.dart';
 import 'package:rentalku/pages/dashboard/profil_page.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
 
-final controller = PageController();
-
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
@@ -17,18 +15,15 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Consumer<DashboardProvider>(
-        builder: (context, state, _){
-          controller.jumpToPage(state.bottomNavIndex);
-          return PageView(
-            controller: controller,
-            children: [
-              DashboardHomePage(),
-              DashboardMyBookingPage(),
-              DashboardProfilPage(),
-            ],
-            onPageChanged: (index) => state.bottomNavIndex = index,
-          );
-        },
+        builder: (context, state, children) => PageView(
+          controller: state.controller,
+          children: const [
+            DashboardHomePage(),
+            DashboardMyBookingPage(),
+            DashboardProfilPage(),
+          ],
+          onPageChanged: (index) => state.bottomNavIndex = index,
+        ),
       ),
       bottomNavigationBar: Consumer<DashboardProvider>(
         builder: (context, state, _) => BottomNavigationBar(
@@ -75,8 +70,7 @@ class DashboardPage extends StatelessWidget {
             ),
           ],
           onTap: (index) {
-            state.bottomNavIndex = index;
-            controller.jumpToPage(index);
+            state.jumpToPage(index);
           },
         ),
       ),

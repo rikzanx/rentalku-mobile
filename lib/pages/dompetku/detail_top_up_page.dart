@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:collapsible/collapsible.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,24 +11,10 @@ import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/payment_method.dart';
 import 'package:rentalku/models/top_up.dart';
 
-class DetailTopUpPage extends StatefulWidget {
+ValueNotifier<File?> _image = ValueNotifier(null);
+
+class DetailTopUpPage extends StatelessWidget {
   const DetailTopUpPage({Key? key}) : super(key: key);
-
-  @override
-  _DetailTopUpPageState createState() => _DetailTopUpPageState();
-}
-
-class _DetailTopUpPageState extends State<DetailTopUpPage> {
-  File? _image;
-
-  Future getImage(ImageSource media) async {
-    XFile? img = await ImagePicker().pickImage(source: media);
-    setState(() {
-      if (img != null) {
-        _image = File(img.path);
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -294,7 +281,6 @@ class _DetailTopUpPageState extends State<DetailTopUpPage> {
             InkWell(
               borderRadius: BorderRadius.circular(5),
               splashColor: AppColor.green.withOpacity(0.2),
-              onTap: () {},
               child: Padding(
                 padding: EdgeInsets.all(4),
                 child: Text(
@@ -306,6 +292,19 @@ class _DetailTopUpPageState extends State<DetailTopUpPage> {
                   ),
                 ),
               ),
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  clipBehavior: Clip.hardEdge,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50),
+                    ),
+                  ),
+                  builder: (context) => ModalSheetBar(),
+                );
+              },
             ),
             SizedBox(height: 16),
             Divider(height: 3, color: Colors.grey),
@@ -316,20 +315,24 @@ class _DetailTopUpPageState extends State<DetailTopUpPage> {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 16),
-            _image == null
-                ? ElevatedButton(
+            ValueListenableBuilder(
+              valueListenable: _image,
+              builder: (context, value, _) {
+                if (_image.value == null)
+                  return ElevatedButton(
                     onPressed: () {
-                      myAlert();
+                      myAlert(context);
                     },
                     child: Text("Konfirmasi Transfer"),
-                  )
-                : Column(
+                  );
+                else
+                  return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.file(
-                          _image!,
+                          _image.value!,
                           fit: BoxFit.cover,
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height / 5,
@@ -337,11 +340,53 @@ class _DetailTopUpPageState extends State<DetailTopUpPage> {
                       ),
                       SizedBox(height: 16),
                       ElevatedButton(
-                        onPressed: () {},
                         child: Text("Kirim Bukti Transfer"),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  "Konfirmasi Transfer",
+                                  style: AppStyle.regular1Text.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                content: Text(
+                                  "Lakukan konfirmasi transfer hanya jika Anda telah selesai melakukan transfer sesuai intruksi sebelumnya",
+                                  style: AppStyle.smallText,
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: Text(
+                                      "Belum",
+                                      style: AppStyle.regular1Text.copyWith(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text(
+                                      "Sudah",
+                                      style: AppStyle.regular1Text.copyWith(
+                                        color: Colors.green[900],
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
                       )
                     ],
-                  ),
+                  );
+              },
+            ),
             SizedBox(height: 16),
           ],
         ),
@@ -349,7 +394,14 @@ class _DetailTopUpPageState extends State<DetailTopUpPage> {
     );
   }
 
-  void myAlert() {
+  void getImage(ImageSource media) async {
+    XFile? img = await ImagePicker().pickImage(source: media);
+    if (img != null) {
+      _image.value = File(img.path);
+    }
+  }
+
+  void myAlert(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -394,6 +446,118 @@ class _DetailTopUpPageState extends State<DetailTopUpPage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  ModalSheetBar() {
+    Map<String, List<String>> tutorials = {
+      "ATM BCA": [
+        "Masukkan Kartu ATM dan PIN BCA Anda",
+        "Masuk e menu “Transfer” dan pilih \"ke rekening BCA\"",
+        "Masukkan nomor rekening BCA milik RentalKu",
+        "Pastikan nama Anda dan jumlah bembayaran sudah benar",
+        "Pembayaran selesai. Simpan struk sebagai bukti pembayaran",
+      ],
+      "KLIK BCA": [],
+      "m-BCA (BCA MOBILE)": [],
+      "m-BCA (STK - SIM Tool Kit)": [],
+    };
+    Map<String, ValueNotifier<bool>> collapsed = Map.fromIterables(
+      tutorials.keys,
+      List.generate(tutorials.length, (index) => ValueNotifier(index != 0)),
+    );
+
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            "Cara Transfer",
+            style: AppStyle.title1Text,
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            "Mohon perhatikan setiap langkah transfer dibawah ini",
+            style: AppStyle.smallText,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 8),
+          for (var tutorial in tutorials.entries)
+            Column(
+              children: [
+                InkWell(
+                  onTap: () {
+                    collapsed[tutorial.key]!.value =
+                        !collapsed[tutorial.key]!.value;
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColor.grey),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          tutorial.key,
+                          style: AppStyle.regular1Text.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        ValueListenableBuilder<bool>(
+                          valueListenable: collapsed[tutorial.key]!,
+                          builder: (context, value, _) => Icon(
+                            value ? Icons.expand_more : Icons.expand_less,
+                            size: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                ValueListenableBuilder<bool>(
+                  valueListenable: collapsed[tutorial.key]!,
+                  builder: (context, value, child) => Collapsible(
+                    axis: CollapsibleAxis.vertical,
+                    collapsed: collapsed[tutorial.key]!.value,
+                    child: child!,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: List.generate(
+                        tutorial.value.length,
+                            (index) => Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 16,
+                              child: Text(
+                                "${index + 1}. ",
+                                style: AppStyle.smallText,
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                "${tutorial.value[index]}",
+                                style: AppStyle.smallText,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+        ],
       ),
     );
   }

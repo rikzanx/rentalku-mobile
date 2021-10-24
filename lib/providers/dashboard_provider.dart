@@ -3,12 +3,19 @@ import 'package:rentalku/models/booking.dart';
 
 class DashboardProvider extends ChangeNotifier{
   int _bottomNavIndex = 0;
-
   int get bottomNavIndex => _bottomNavIndex;
   set bottomNavIndex(int bottomNavIndex){
     _bottomNavIndex = bottomNavIndex;
     notifyListeners();
   }
+  jumpToPage(int bottomNavIndex){
+    _bottomNavIndex = bottomNavIndex;
+    _controller.jumpToPage(bottomNavIndex);
+    notifyListeners();
+  }
+
+  PageController _controller = PageController();
+  PageController get controller => _controller;
 
   int _myBookingIndex = 0;
   int get myBookingIndex => _myBookingIndex;
