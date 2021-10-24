@@ -106,7 +106,7 @@ class DetailBookingPage extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 12,
-                            vertical: 2,
+                            vertical: 6,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -135,7 +135,7 @@ class DetailBookingPage extends StatelessWidget {
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 12,
-                          vertical: 2,
+                          vertical: 6,
                         ),
                         child: Text(
                           booking.address,
@@ -153,7 +153,7 @@ class DetailBookingPage extends StatelessWidget {
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 12,
-                          vertical: 2,
+                          vertical: 6,
                         ),
                         child: Text(
                           "${DateFormat("d MMMM yyyy", "id_ID").format(booking.startDate)} - ${DateFormat("d MMMM yyyy", "id_ID").format(booking.endDate)}",
@@ -175,7 +175,7 @@ class DetailBookingPage extends StatelessWidget {
                               ),
                               padding: EdgeInsets.symmetric(
                                 horizontal: 12,
-                                vertical: 2,
+                                vertical: 6,
                               ),
                               child: Text(
                                 "Asep",
@@ -197,7 +197,7 @@ class DetailBookingPage extends StatelessWidget {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
                                     horizontal: 12,
-                                    vertical: 2,
+                                    vertical: 6,
                                   ),
                                   child: Text(
                                     "Hubungi",
@@ -221,7 +221,7 @@ class DetailBookingPage extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 12,
-                            vertical: 2,
+                            vertical: 6,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,

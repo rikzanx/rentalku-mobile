@@ -42,7 +42,7 @@ class MyProfilePage extends StatelessWidget {
                   ),
                   child: Material(
                     elevation: 3,
-                    color: Color(0xFFBFDED9),
+                    color: AppColor.lightGreen,
                     borderRadius: BorderRadius.circular(10),
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(16, 60, 16, 16),

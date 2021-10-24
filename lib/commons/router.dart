@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rentalku/commons/routes.dart';
-import 'package:rentalku/models/article.dart';
-import 'package:rentalku/models/rental_mobil.dart';
 import 'package:rentalku/pages/article_page.dart';
 import 'package:rentalku/pages/auth/login_page.dart';
 import 'package:rentalku/pages/auth/register_page.dart';
@@ -16,6 +14,8 @@ import 'package:rentalku/pages/dompetku/top_up_page.dart';
 import 'package:rentalku/pages/profile/edit_profile_page.dart';
 import 'package:rentalku/pages/profile/my_profile_page.dart';
 import 'package:rentalku/pages/profile/rental_mobil/detail_rental_mobil_page.dart';
+import 'package:rentalku/pages/profile/rental_mobil/order_rental_mobil_page.dart';
+import 'package:rentalku/pages/profile/rental_mobil/pick_location_page.dart';
 import 'package:rentalku/pages/profile/rental_mobil/rental_mobil_page.dart';
 import 'package:rentalku/pages/profile/rental_mobil/review_owner_page.dart';
 import 'package:rentalku/pages/profile/rental_mobil/review_product_page.dart';
@@ -46,6 +46,10 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => RentalMobilPage());
     case Routes.rentalMobilDetail:
       return MaterialPageRoute(builder: (_) => DetailRentalMobilPage());
+    case Routes.rentalMobilOrder:
+      return MaterialPageRoute(builder: (_) => OrderRentalMobilPage());
+    case Routes.pickLocation:
+      return MaterialPageRoute(builder: (_) => PickLocationPage());
     case Routes.reviewProduct:
       return MaterialPageRoute(builder: (_) => ReviewProductPage());
     case Routes.reviewOwner:

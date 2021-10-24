@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/router.dart' as router;
@@ -12,10 +12,9 @@ import 'package:rentalku/providers/chat_provider.dart';
 import 'package:rentalku/providers/rental_mobil_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
   timeago.setLocaleMessages('id', timeago.IdMessages());
-  await initializeDateFormatting('id_ID', null).then((_) => runApp(MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -38,6 +37,12 @@ class MyApp extends StatelessWidget {
             name: settings.name.toString(),
           ),
         ),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate
+        ],
+        supportedLocales: [
+          const Locale('id'),
+        ],
         theme: ThemeData(
           primaryColor: AppColor.green,
           inputDecorationTheme: InputDecorationTheme(

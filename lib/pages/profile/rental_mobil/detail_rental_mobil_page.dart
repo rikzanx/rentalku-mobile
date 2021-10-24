@@ -272,7 +272,9 @@ class DetailRentalMobilPage extends StatelessWidget {
             SizedBox(height: 16),
             ElevatedButton(
               child: Text("Lanjut ke Pemesanan"),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.rentalMobilOrder);
+              },
             ),
           ],
         ),
