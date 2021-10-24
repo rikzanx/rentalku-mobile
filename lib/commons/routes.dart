@@ -14,6 +14,7 @@ class Routes {
   static const String reviewOwner = '/rental-mobil/detail/review-owner';
   static const String rentalMobilOrder = '/rental-mobil/detail/order';
   static const String pickLocation = '/rental-mobil/detail/order/location';
+  static const String orderComplete = '/rental-mobil/detail/order/complete';
 
   static const String chats = '/chats';
   static const String viewChat = '/chats/view';

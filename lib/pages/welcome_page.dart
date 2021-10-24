@@ -112,7 +112,7 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               "Sewa mobil dengan mudah dan berkualitas bersama kami",
-              style: AppStyle.title2Text,
+              style: AppStyle.title3Text,
               textAlign: TextAlign.center,
             ),
           ),

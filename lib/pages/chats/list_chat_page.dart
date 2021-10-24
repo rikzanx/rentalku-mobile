@@ -20,7 +20,7 @@ class ListChatPage extends StatelessWidget {
           },
         ),
         title: Text("Obrolan"),
-        titleTextStyle: AppStyle.title2Text.copyWith(color: Colors.white),
+        titleTextStyle: AppStyle.title3Text.copyWith(color: Colors.white),
         centerTitle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

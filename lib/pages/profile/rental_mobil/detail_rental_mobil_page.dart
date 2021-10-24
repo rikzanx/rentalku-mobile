@@ -32,7 +32,7 @@ class DetailRentalMobilPage extends StatelessWidget {
           },
         ),
         title: Text("Detail Produk"),
-        titleTextStyle: AppStyle.title2Text.copyWith(color: Colors.white),
+        titleTextStyle: AppStyle.title3Text.copyWith(color: Colors.white),
         centerTitle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

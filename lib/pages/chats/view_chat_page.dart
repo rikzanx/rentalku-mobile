@@ -37,7 +37,7 @@ class ViewChatPage extends StatelessWidget {
             ],
           ),
         ),
-        titleTextStyle: AppStyle.title2Text.copyWith(color: Colors.white),
+        titleTextStyle: AppStyle.title3Text.copyWith(color: Colors.white),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(50),

@@ -33,7 +33,7 @@ class DetailBookingPage extends StatelessWidget {
           },
         ),
         title: Text("Detail Pemesanan"),
-        titleTextStyle: AppStyle.title2Text.copyWith(color: Colors.white),
+        titleTextStyle: AppStyle.title3Text.copyWith(color: Colors.white),
         centerTitle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -248,7 +248,7 @@ class DetailBookingPage extends StatelessWidget {
               color: Color(0xFFE0E0E0),
             ),
             SizedBox(height: 16),
-            Text("Data Diri Pemesan", style: AppStyle.title2Text),
+            Text("Data Diri Pemesan", style: AppStyle.title3Text),
             Padding(
               padding: EdgeInsets.all(16),
               child: Material(

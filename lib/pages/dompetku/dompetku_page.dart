@@ -21,7 +21,7 @@ class DompetkuPage extends StatelessWidget {
           },
         ),
         title: Text("Dompetku"),
-        titleTextStyle: AppStyle.title2Text.copyWith(color: Colors.white),
+        titleTextStyle: AppStyle.title3Text.copyWith(color: Colors.white),
         centerTitle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -58,7 +58,7 @@ class DompetkuPage extends StatelessWidget {
                       children: [
                         Text(
                           "Jumlah Saldo",
-                          style: AppStyle.title2Text.copyWith(
+                          style: AppStyle.title3Text.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
                           ),
@@ -97,7 +97,7 @@ class DompetkuPage extends StatelessWidget {
                 padding: EdgeInsets.all(13),
                 child: Text(
                   "Transaksi Terakhir",
-                  style: AppStyle.title2Text.copyWith(
+                  style: AppStyle.title3Text.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
                 ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/routes.dart';
+import 'package:rentalku/commons/styles.dart';
 
 class BalanceWidget extends StatelessWidget {
   final int balance;
@@ -40,14 +40,13 @@ class BalanceWidget extends StatelessWidget {
               children: [
                 Text(
                   "Saldo Anda",
-                  style: GoogleFonts.poppins(
-                    fontSize: 10,
+                  style: AppStyle.smallText.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 Text(
                   Helper.toIDR(balance),
-                  style: GoogleFonts.poppins(fontSize: 10),
+                  style: AppStyle.smallText,
                 )
               ],
             ),
@@ -66,8 +65,7 @@ class BalanceWidget extends StatelessWidget {
                   primary: AppColor.green,
                   padding: EdgeInsets.all(0),
                   visualDensity: VisualDensity.compact,
-                  textStyle: GoogleFonts.poppins(
-                    fontSize: 10,
+                  textStyle: AppStyle.smallText.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
                 ),

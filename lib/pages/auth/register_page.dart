@@ -21,7 +21,13 @@ class RegisterPage extends StatelessWidget {
           },
         ),
         elevation: 0,
-        title: Text("Kembali"),
+        title: Text(
+          "Kembali",
+          style: AppStyle.title1Text.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

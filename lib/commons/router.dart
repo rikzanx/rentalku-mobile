@@ -14,6 +14,7 @@ import 'package:rentalku/pages/dompetku/top_up_page.dart';
 import 'package:rentalku/pages/profile/edit_profile_page.dart';
 import 'package:rentalku/pages/profile/my_profile_page.dart';
 import 'package:rentalku/pages/profile/rental_mobil/detail_rental_mobil_page.dart';
+import 'package:rentalku/pages/profile/rental_mobil/order_complete_page.dart';
 import 'package:rentalku/pages/profile/rental_mobil/order_rental_mobil_page.dart';
 import 'package:rentalku/pages/profile/rental_mobil/pick_location_page.dart';
 import 'package:rentalku/pages/profile/rental_mobil/rental_mobil_page.dart';
@@ -50,6 +51,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => OrderRentalMobilPage());
     case Routes.pickLocation:
       return MaterialPageRoute(builder: (_) => PickLocationPage());
+    case Routes.orderComplete:
+      return MaterialPageRoute(builder: (_) => OrderCompletePage());
     case Routes.reviewProduct:
       return MaterialPageRoute(builder: (_) => ReviewProductPage());
     case Routes.reviewOwner:

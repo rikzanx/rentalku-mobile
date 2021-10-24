@@ -23,7 +23,13 @@ class LoginPage extends StatelessWidget {
           },
         ),
         elevation: 0,
-        title: Text("Kembali"),
+        title: Text(
+          "Kembali",
+          style: AppStyle.title1Text.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -83,7 +89,8 @@ class LoginPage extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () {
                               // TODO: Remove this
-                              Navigator.popUntil(context, (route) => route.isFirst);
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
                               Navigator.pushReplacementNamed(
                                   context, Routes.dashboard);
 

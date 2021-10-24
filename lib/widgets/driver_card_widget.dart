@@ -29,13 +29,13 @@ class DriverCardWidget extends StatelessWidget {
               child: CircleAvatar(
                 backgroundImage:
                     NetworkImage("https://lorempixel.com/200/200/people/"),
-                radius: 30,
+                radius: 20,
               ),
             ),
             SizedBox(height: 5),
             Text(
               "Asep",
-              style: AppStyle.title2Text,
+              style: AppStyle.regular2Text,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,

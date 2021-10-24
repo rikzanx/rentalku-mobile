@@ -42,7 +42,7 @@ class OrderRentalMobilPage extends StatelessWidget {
             },
           ),
           title: Text("Pemesanan"),
-          titleTextStyle: AppStyle.title2Text.copyWith(color: Colors.white),
+          titleTextStyle: AppStyle.title3Text.copyWith(color: Colors.white),
           centerTitle: true,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -271,7 +271,7 @@ class OrderRentalMobilPage extends StatelessWidget {
               SizedBox(height: 16),
               Text(
                 "Konfirmasi Data Diri Pemesan",
-                style: AppStyle.title2Text,
+                style: AppStyle.title3Text,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 16),
@@ -402,6 +402,8 @@ class OrderRentalMobilPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // TODO: Remove this
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                  Navigator.pushNamed(context, Routes.orderComplete);
 
                   if (_formKey.currentState!.validate()) {
                     // process here

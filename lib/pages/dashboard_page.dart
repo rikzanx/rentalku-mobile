@@ -14,70 +14,70 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DashboardProvider(),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Consumer<DashboardProvider>(
-          builder: (context, dashboard, _) => PageView(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Consumer<DashboardProvider>(
+        builder: (context, state, _){
+          controller.jumpToPage(state.bottomNavIndex);
+          return PageView(
             controller: controller,
             children: [
               DashboardHomePage(),
               DashboardMyBookingPage(),
               DashboardProfilPage(),
             ],
-            onPageChanged: (index) => dashboard.bottomNavIndex = index,
-          ),
-        ),
-        bottomNavigationBar: Consumer<DashboardProvider>(
-          builder: (context, dashboard, _) => BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: dashboard.bottomNavIndex,
-            selectedItemColor: AppColor.yellow,
-            unselectedItemColor: Colors.white,
-            selectedLabelStyle: AppStyle.smallText,
-            unselectedLabelStyle: AppStyle.smallText,
-            backgroundColor: AppColor.green,
-            items: [
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/home_icon.png',
-                  height: 24,
-                ),
-                activeIcon: Image.asset(
-                  'assets/images/home_icon_active.png',
-                  height: 24,
-                ),
-                label: "Home",
+            onPageChanged: (index) => state.bottomNavIndex = index,
+          );
+        },
+      ),
+      bottomNavigationBar: Consumer<DashboardProvider>(
+        builder: (context, state, _) => BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: state.bottomNavIndex,
+          selectedItemColor: AppColor.yellow,
+          unselectedItemColor: Colors.white,
+          selectedLabelStyle: AppStyle.smallText,
+          unselectedLabelStyle: AppStyle.smallText,
+          backgroundColor: AppColor.green,
+          items: [
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/images/home_icon.png',
+                height: 24,
               ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/booking_icon.png',
-                  height: 24,
-                ),
-                activeIcon: Image.asset(
-                  'assets/images/booking_icon_active.png',
-                  height: 24,
-                ),
-                label: "PesananKu",
+              activeIcon: Image.asset(
+                'assets/images/home_icon_active.png',
+                height: 24,
               ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/profil_icon.png',
-                  height: 24,
-                ),
-                activeIcon: Image.asset(
-                  'assets/images/profil_icon_active.png',
-                  height: 24,
-                ),
-                label: "Profil",
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/images/booking_icon.png',
+                height: 24,
               ),
-            ],
-            onTap: (index) {
-              dashboard.bottomNavIndex = index;
-              controller.jumpToPage(index);
-            },
-          ),
+              activeIcon: Image.asset(
+                'assets/images/booking_icon_active.png',
+                height: 24,
+              ),
+              label: "PesananKu",
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/images/profil_icon.png',
+                height: 24,
+              ),
+              activeIcon: Image.asset(
+                'assets/images/profil_icon_active.png',
+                height: 24,
+              ),
+              label: "Profil",
+            ),
+          ],
+          onTap: (index) {
+            state.bottomNavIndex = index;
+            controller.jumpToPage(index);
+          },
         ),
       ),
     );

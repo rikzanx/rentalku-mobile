@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/router.dart' as router;
@@ -9,6 +8,7 @@ import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/pages/undefined_page.dart';
 import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/providers/chat_provider.dart';
+import 'package:rentalku/providers/dashboard_provider.dart';
 import 'package:rentalku/providers/rental_mobil_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AppProvider()),
+        ChangeNotifierProvider(create: (context) => DashboardProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),
         ChangeNotifierProvider(create: (context) => RentalMobilProvider()),
       ],
@@ -37,9 +38,7 @@ class MyApp extends StatelessWidget {
             name: settings.name.toString(),
           ),
         ),
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate
-        ],
+        localizationsDelegates: [GlobalMaterialLocalizations.delegate],
         supportedLocales: [
           const Locale('id'),
         ],
@@ -73,8 +72,7 @@ class MyApp extends StatelessWidget {
           ),
           appBarTheme: AppBarTheme(
             backgroundColor: AppColor.green,
-            titleTextStyle: GoogleFonts.poppins(
-              fontSize: 17,
+            titleTextStyle: AppStyle.regular1Text.copyWith(
               fontWeight: FontWeight.w500,
             ),
             titleSpacing: 0,
@@ -88,10 +86,7 @@ class MyApp extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              textStyle: GoogleFonts.poppins(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
+              textStyle: AppStyle.title2Text,
             ),
           ),
           outlinedButtonTheme: OutlinedButtonThemeData(
@@ -102,11 +97,7 @@ class MyApp extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              textStyle: GoogleFonts.poppins(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
+              textStyle: AppStyle.title2Text,
             ),
           ),
         ),

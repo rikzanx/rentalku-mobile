@@ -17,7 +17,7 @@ class AppStyle {
   );
 
   static TextStyle heading2Text = GoogleFonts.poppins(
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: FontWeight.w600,
     color: Colors.black,
     height: 1,
@@ -31,6 +31,13 @@ class AppStyle {
   );
 
   static TextStyle title2Text = GoogleFonts.poppins(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: Colors.black,
+    height: 1.1,
+  );
+
+  static TextStyle title3Text = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w600,
     color: Colors.black,

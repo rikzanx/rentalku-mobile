@@ -17,7 +17,7 @@ class DashboardProfilPage extends StatelessWidget {
           AppBar(
             title: Text(
               "Profil",
-              style: AppStyle.title2Text.copyWith(
+              style: AppStyle.title3Text.copyWith(
                 color: AppColor.green,
                 fontWeight: FontWeight.w600,
               ),
