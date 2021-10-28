@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
 

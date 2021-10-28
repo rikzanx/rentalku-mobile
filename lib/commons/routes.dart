@@ -27,4 +27,6 @@ class Routes {
 
   static const String detailBooking = '/bookings/detail';
   static const String addReviewPage = '/bookings/add-reviews';
+
+  static const String upgradeToOwner = 'upgrade-to-owner';
 }

@@ -315,10 +315,10 @@ class DetailTopUpPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 16),
-            ValueListenableBuilder(
+            ValueListenableBuilder<File?>(
               valueListenable: _image,
-              builder: (context, value, _) {
-                if (_image.value == null)
+              builder: (context, image, _) {
+                if (image == null)
                   return ElevatedButton(
                     onPressed: () {
                       myAlert(context);
@@ -332,7 +332,7 @@ class DetailTopUpPage extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.file(
-                          _image.value!,
+                          image,
                           fit: BoxFit.cover,
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height / 5,
@@ -450,7 +450,7 @@ class DetailTopUpPage extends StatelessWidget {
     );
   }
 
-  ModalSheetBar() {
+  Widget ModalSheetBar() {
     Map<String, List<String>> tutorials = {
       "ATM BCA": [
         "Masukkan Kartu ATM dan PIN BCA Anda",

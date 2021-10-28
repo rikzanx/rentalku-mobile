@@ -111,14 +111,14 @@ class MyProfilePage extends StatelessWidget {
                       ),
                       border: Border.all(color: Colors.white, width: 5),
                     ),
-                    child: ValueListenableBuilder(
+                    child: ValueListenableBuilder<File?>(
                       valueListenable: _image,
                       builder: (context, value, _) => value == null ? CircleAvatar(
                         backgroundImage: NetworkImage(
                             "https://lorempixel.com/200/200/people/"),
                         radius: MediaQuery.of(context).size.width * 0.125,
                       ) : CircleAvatar(
-                        backgroundImage: FileImage(_image.value!),
+                        backgroundImage: FileImage(value),
                         radius: MediaQuery.of(context).size.width * 0.125,
                       ),
                     ),

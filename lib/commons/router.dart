@@ -7,6 +7,7 @@ import 'package:rentalku/pages/bookings/add_review_page.dart';
 import 'package:rentalku/pages/bookings/detail_booking_page.dart';
 import 'package:rentalku/pages/chats/list_chat_page.dart';
 import 'package:rentalku/pages/chats/view_chat_page.dart';
+import 'package:rentalku/pages/dashboard/upgrade_owner_car_page.dart';
 import 'package:rentalku/pages/dashboard_page.dart';
 import 'package:rentalku/pages/dompetku/detail_top_up_page.dart';
 import 'package:rentalku/pages/dompetku/dompetku_page.dart';
@@ -71,6 +72,9 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => ViewChatPage());
     case Routes.article:
       return MaterialPageRoute(builder: (_) => ArticlePage());
+    // pemilik mobil
+    case Routes.upgradeToOwner:
+      return MaterialPageRoute(builder: (_) => UpgradeOwnerCarPage());
   }
 
   return MaterialPageRoute(

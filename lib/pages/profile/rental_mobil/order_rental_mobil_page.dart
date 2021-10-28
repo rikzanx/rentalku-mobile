@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
@@ -10,6 +11,7 @@ import 'package:rentalku/models/rental_mobil.dart';
 import 'package:rentalku/providers/order_provider.dart';
 import 'package:rentalku/widgets/balance_widget.dart';
 import 'package:rentalku/widgets/driver_card_widget.dart';
+import 'package:rentalku/widgets/text_field_upload_with_shadow_widget.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -323,63 +325,19 @@ class OrderRentalMobilPage extends StatelessWidget {
                         },
                       ),
                       SizedBox(height: 16),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(bottom: 4),
-                        child: Text(
-                          "Upload KTP",
-                          style: AppStyle.labelText,
-                        ),
-                      ),
-                      Material(
-                        elevation: 3,
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        clipBehavior: Clip.hardEdge,
-                        child: Consumer<OrderProvider>(
-                          builder: (context, state, _) => InkWell(
-                            child: Ink(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 12,
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.photo,
-                                    size: 24,
-                                    color: Colors.grey[600],
-                                  ),
-                                  SizedBox(width: 16),
-                                  Text(
-                                    "Upload",
-                                    style: AppStyle.regular1Text.copyWith(
-                                      color: Colors.grey[600],
-                                    ),
-                                  ),
-                                  if (state.image != null) Spacer(),
-                                  if (state.image != null)
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: Image.file(
-                                        state.image!,
-                                        fit: BoxFit.cover,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
-                                        height:
-                                            MediaQuery.of(context).size.width /
-                                                10,
-                                      ),
-                                    ),
-                                ],
-                              ),
-                            ),
-                            onTap: () {
-                              myAlert(context, state);
-                            },
-                          ),
-                        ),
+                      TextFieldUploadWithShadow(
+                        labelText: "Upload Foto KTP",
+                        hintText: "Upload",
+                        textInputAction: TextInputAction.done,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Kolom upload KTP wajib diisi';
+                          }
+                          return null;
+                        },
+                        onFileChanged: (File file) {
+                          debugPrint(file.path);
+                        },
                       ),
                       SizedBox(height: 16),
                     ],
@@ -412,55 +370,6 @@ class OrderRentalMobilPage extends StatelessWidget {
                 child: Text("Pesan Sekarang"),
               ),
               SizedBox(height: 16),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  void myAlert(BuildContext context, OrderProvider state) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        title: Text("Silahkan pilih media"),
-        content: Container(
-          height: MediaQuery.of(context).size.height / 6,
-          child: Column(
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  state.getImage(ImageSource.gallery);
-                },
-                style: TextButton.styleFrom(
-                  primary: Colors.black,
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.image),
-                    SizedBox(width: 5),
-                    Text("Galeri"),
-                  ],
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  state.getImage(ImageSource.camera);
-                },
-                style: TextButton.styleFrom(
-                  primary: Colors.black,
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.camera),
-                    SizedBox(width: 5),
-                    Text("Kamera"),
-                  ],
-                ),
-              ),
             ],
           ),
         ),

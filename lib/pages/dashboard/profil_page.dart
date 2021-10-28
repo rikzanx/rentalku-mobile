@@ -73,7 +73,9 @@ class DashboardProfilPage extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.upgradeToOwner);
+                },
               ),
               SizedBox(width: 16),
             ],

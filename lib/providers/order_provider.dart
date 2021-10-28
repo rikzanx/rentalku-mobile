@@ -37,12 +37,9 @@ class OrderProvider extends ChangeNotifier {
   }
 
   File? _image;
-  Future getImage(ImageSource media) async {
-    XFile? img = await ImagePicker().pickImage(source: media);
-    if (img != null) {
-      _image = File(img.path);
-      notifyListeners();
-    }
+  set image(File? image){
+    _image = image;
+    notifyListeners();
   }
   File? get image => _image;
 }
