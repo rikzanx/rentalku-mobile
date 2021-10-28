@@ -12,6 +12,8 @@ import 'package:rentalku/pages/dashboard_page.dart';
 import 'package:rentalku/pages/dompetku/detail_top_up_page.dart';
 import 'package:rentalku/pages/dompetku/dompetku_page.dart';
 import 'package:rentalku/pages/dompetku/top_up_page.dart';
+import 'package:rentalku/pages/dompetku/withdraw_complete_page.dart';
+import 'package:rentalku/pages/dompetku/withdraw_page.dart';
 import 'package:rentalku/pages/profile/edit_profile_page.dart';
 import 'package:rentalku/pages/profile/my_profile_page.dart';
 import 'package:rentalku/pages/profile/rental_mobil/detail_rental_mobil_page.dart';
@@ -75,6 +77,10 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     // pemilik mobil
     case Routes.upgradeToOwner:
       return MaterialPageRoute(builder: (_) => UpgradeOwnerCarPage());
+    case Routes.withdraw:
+      return MaterialPageRoute(builder: (_) => WithdrawPage());
+    case Routes.withdrawComplete:
+      return MaterialPageRoute(builder: (_) => WithdrawCompletePage());
   }
 
   return MaterialPageRoute(

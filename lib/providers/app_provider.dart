@@ -14,7 +14,7 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  UserType _userType = UserType.User;
+  UserType _userType = UserType.Owner;
   UserType get userType => _userType;
   bool get isUser => _userType == UserType.User;
   bool get isOwner => _userType == UserType.Owner;

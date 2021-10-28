@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/article.dart';
 import 'package:rentalku/providers/app_provider.dart';
@@ -16,14 +17,18 @@ class DashboardHomePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 24),
+          SizedBox(height: 48),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Image.asset("assets/images/rentalku.png", height: 16),
           ),
+          SizedBox(height: 8),
           Consumer<AppProvider>(
-            builder: (context, app, _) =>
-                app.isUser ? UserInfo(context) : Container(),
+            builder: (context, app, _) => app.isUser
+                ? UserInfo(context)
+                : app.isOwner
+                    ? OwnerInfo(context)
+                    : Container(),
           ),
           SizedBox(height: 12),
           Container(
@@ -62,11 +67,11 @@ class DashboardHomePage extends StatelessWidget {
   }
 
   Widget UserInfo(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(left: 16, right: 16),
-          child: Row(
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Nama User
@@ -93,14 +98,17 @@ class DashboardHomePage extends StatelessWidget {
               // Saldo
               Expanded(
                 flex: 55,
-                child: BalanceWidget(balance: 500000),
+                child: BalanceWidget(
+                  balance: 500000,
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.topUp);
+                  },
+                ),
               ),
             ],
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Form(
+          SizedBox(height: 12),
+          Form(
             child: Material(
               color: Colors.white,
               elevation: 1,
@@ -136,10 +144,8 @@ class DashboardHomePage extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
+          SizedBox(height: 12),
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(
               4,
@@ -170,8 +176,190 @@ class DashboardHomePage extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
+    );
+  }
+
+  Widget OwnerInfo(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Nama User
+              Expanded(
+                flex: 45,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Halo,",
+                      style: AppStyle.regular1Text,
+                    ),
+                    Text(
+                      "Muhammad",
+                      maxLines: 1,
+                      overflow: TextOverflow.clip,
+                      style: AppStyle.regular1Text.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Saldo
+              Expanded(
+                flex: 55,
+                child: BalanceWidget(
+                  balance: 500000,
+                  actionName: "Tarik",
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.withdraw);
+                  },
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 12),
+          Form(
+            child: Material(
+              color: Colors.white,
+              elevation: 1,
+              borderRadius: BorderRadius.circular(5),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(4, 4, 8, 4),
+                    child: Icon(Icons.location_pin, size: 16),
+                  ),
+                  Expanded(
+                    child: TextFormField(
+                      controller: TextEditingController(text: "Surabaya"),
+                      decoration: InputDecoration(
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.fromLTRB(8, 4, 4, 4),
+                      ),
+                      enabled: false,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Material(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: AppColor.green),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  color: Colors.white,
+                  elevation: 1,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: -6,
+                          left: -6,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColor.green,
+                              shape: BoxShape.circle,
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: Icon(
+                              Icons.directions_car,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          right: -10,
+                          top: -25,
+                          child: Icon(
+                            Icons.directions_car,
+                            color: AppColor.lightGreen,
+                            size: 108,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 25),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Galeri Unitku",
+                            style: AppStyle.regular2Text,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {},
+                  ),
+                ),
+              ),
+              SizedBox(width: 16),
+              Expanded(
+                child: Material(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: AppColor.green),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  color: Colors.white,
+                  elevation: 1,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: -6,
+                          left: -6,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColor.green,
+                              shape: BoxShape.circle,
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: Icon(
+                              Icons.add_circle_outline,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          right: -10,
+                          top: -25,
+                          child: Icon(
+                            Icons.add_circle_outline,
+                            color: AppColor.lightGreen,
+                            size: 108,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 25),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Tambah Unit Rental",
+                            style: AppStyle.regular2Text,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {},
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

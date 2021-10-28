@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
-import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 
 class BalanceWidget extends StatelessWidget {
   final int balance;
-  final bool enableTopUp;
+  final bool enableAction;
+  final String actionName;
   final EdgeInsets? padding;
+  final void Function()? onPressed;
 
   const BalanceWidget({
     Key? key,
     this.balance = 0,
-    this.enableTopUp = true,
+    this.enableAction = true,
+    this.actionName = "Top Up",
     this.padding,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -23,10 +26,11 @@ class BalanceWidget extends StatelessWidget {
       elevation: 1,
       borderRadius: BorderRadius.circular(5),
       child: Padding(
-        padding: padding ?? EdgeInsets.symmetric(
-          horizontal: 6,
-          vertical: 0,
-        ),
+        padding: padding ??
+            EdgeInsets.symmetric(
+              horizontal: 6,
+              vertical: 0,
+            ),
         child: Row(
           children: [
             Icon(
@@ -50,13 +54,11 @@ class BalanceWidget extends StatelessWidget {
                 )
               ],
             ),
-            if (enableTopUp) Spacer(),
-            if (enableTopUp)
+            if (enableAction) Spacer(),
+            if (enableAction)
               ElevatedButton(
-                child: Text("Top Up"),
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.topUp);
-                },
+                child: Text(actionName),
+                onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   shape: RoundedRectangleBorder(

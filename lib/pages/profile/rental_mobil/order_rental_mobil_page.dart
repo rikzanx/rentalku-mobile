@@ -353,6 +353,9 @@ class OrderRentalMobilPage extends StatelessWidget {
                     horizontal: 16,
                     vertical: 8,
                   ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.topUp);
+                  },
                 ),
               ),
               Text("Pembayaran dengan dompetKu", style: AppStyle.smallText),

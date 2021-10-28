@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/transaction.dart';
+import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/widgets/transaction_card_widget.dart';
 
 class DompetkuPage extends StatelessWidget {
@@ -71,22 +73,27 @@ class DompetkuPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    ElevatedButton(
-                      child: Text("Top Up"),
-                      onPressed: () {
-                        Navigator.pushNamed(context, Routes.topUp);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        primary: Colors.white,
-                        onPrimary: AppColor.green,
-                        padding: EdgeInsets.all(0),
-                        visualDensity: VisualDensity.compact,
-                        textStyle: AppStyle.regular1Text.copyWith(
-                          fontWeight: FontWeight.w700,
+                    Consumer<AppProvider>(
+                      builder: (context, state, _) => ElevatedButton(
+                        child: Text(state.isUser ? "Top Up" : "Tarik"),
+                        onPressed: () {
+                          if (state.isUser)
+                            Navigator.pushNamed(context, Routes.topUp);
+                          else
+                            Navigator.pushNamed(context, Routes.withdraw);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          primary: Colors.white,
+                          onPrimary: AppColor.green,
+                          padding: EdgeInsets.all(0),
+                          visualDensity: VisualDensity.compact,
+                          textStyle: AppStyle.regular1Text.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),
