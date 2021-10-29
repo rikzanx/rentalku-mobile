@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/commons/types.dart';
 import 'package:rentalku/providers/app_provider.dart';
 
 class DashboardProfilPage extends StatelessWidget {
@@ -65,16 +66,36 @@ class DashboardProfilPage extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 16),
-              InkWell(
-                child: Text(
-                  "Jadi Pemilik Mobil  >",
-                  style: AppStyle.smallText.copyWith(
-                    color: AppColor.green,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, Routes.upgradeToOwner);
+              Consumer<AppProvider>(
+                builder: (context, state, _) {
+                  if (state.isUser)
+                    return InkWell(
+                      child: Text(
+                        "Jadi Pemilik Mobil  >",
+                        style: AppStyle.smallText.copyWith(
+                          color: AppColor.green,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.upgradeToOwner);
+                      },
+                    );
+                  else if (state.isOwner)
+                    return InkWell(
+                      child: Text(
+                        "Kembali ke Halaman Penyewa",
+                        style: AppStyle.smallText.copyWith(
+                          color: AppColor.green,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      onTap: () {
+                        state.userType = UserType.User;
+                      },
+                    );
+                  else
+                    return SizedBox();
                 },
               ),
               SizedBox(width: 16),
@@ -127,17 +148,49 @@ class DashboardProfilPage extends StatelessWidget {
               Navigator.pushNamed(context, Routes.updatePassword);
             },
           ),
-          ListTile(
-            leading: Icon(Icons.directions_car_outlined),
-            visualDensity: VisualDensity.compact,
-            horizontalTitleGap: 0,
-            title: Text(
-              'Rental Mobil',
-              style: AppStyle.regular1Text,
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, Routes.rentalMobil);
-            },
+          Consumer<AppProvider>(
+            builder: (context, state, _) => state.isUser
+                ? ListTile(
+                    leading: Icon(Icons.directions_car_outlined),
+                    visualDensity: VisualDensity.compact,
+                    horizontalTitleGap: 0,
+                    title: Text(
+                      'Rental Mobil',
+                      style: AppStyle.regular1Text,
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.rentalMobil);
+                    },
+                  )
+                : SizedBox(),
+          ),
+          Consumer<AppProvider>(
+            builder: (context, state, _) => state.isOwner
+                ? ListTile(
+                    leading: Icon(Icons.rate_review_outlined),
+                    visualDensity: VisualDensity.compact,
+                    horizontalTitleGap: 0,
+                    title: Text(
+                      'Penilaian dan Ulasan',
+                      style: AppStyle.regular1Text,
+                    ),
+                    onTap: () {},
+                  )
+                : SizedBox(),
+          ),
+          Consumer<AppProvider>(
+            builder: (context, state, _) => state.isOwner
+                ? ListTile(
+                    leading: Icon(Icons.person_pin_outlined),
+                    visualDensity: VisualDensity.compact,
+                    horizontalTitleGap: 0,
+                    title: Text(
+                      'SopirKu',
+                      style: AppStyle.regular1Text,
+                    ),
+                    onTap: () {},
+                  )
+                : SizedBox(),
           ),
           ListTile(
             leading: Icon(Icons.account_balance_wallet_outlined),
