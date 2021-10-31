@@ -50,15 +50,15 @@ class _TrackCarPageState extends State<TrackCarPage> {
     );
   }
 
-  Future<void> updateLocation(int tick) async {
+  Future<void> updateLocation() async {
     final GoogleMapController controller = await _controller.future;
 
     // Simulate change location
     Map<String, double> coordinate = await Future.delayed(
-      Duration(seconds: 1),
+      Duration(milliseconds: 500),
       () => {
-        "latitude": -7.9680376 + tick * 0.0005,
-        "longitude": 112.5937865 + tick * 0.0005,
+        "latitude": _latitude + 0.00005,
+        "longitude": _longitude + 0.00005,
       },
     );
     _latitude = coordinate['latitude']!;
@@ -95,6 +95,12 @@ class _TrackCarPageState extends State<TrackCarPage> {
         ].join(", ");
       });
     }
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    _controller.complete(controller);
+    timer = Timer.periodic(
+        Duration(seconds: 1), (timer) => updateLocation());
   }
 
   @override
@@ -205,11 +211,5 @@ class _TrackCarPageState extends State<TrackCarPage> {
         ],
       ),
     );
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    _controller.complete(controller);
-    timer = Timer.periodic(
-        Duration(seconds: 2), (timer) => updateLocation(timer.tick));
   }
 }
