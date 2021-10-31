@@ -14,16 +14,13 @@ class TrackCarPage extends StatefulWidget {
 }
 
 class _TrackCarPageState extends State<TrackCarPage> {
+  Marker? _marker;
   late Timer timer;
+
   Completer<GoogleMapController> _controller = Completer();
   CameraPosition _position = CameraPosition(
     target: LatLng(-7.9680376, 112.5937865),
     zoom: 15,
-  );
-  Marker _marker = Marker(
-    markerId: MarkerId("car"),
-    position: LatLng(-7.9680376, 112.5937865),
-    infoWindow: InfoWindow(title: "Mobil"),
   );
   double _latitude = -7.9680376;
   double _longitude = 112.5937865;
@@ -32,9 +29,29 @@ class _TrackCarPageState extends State<TrackCarPage> {
   bool follow = true;
 
   @override
+  void initState() {
+    setupMarker();
+    super.initState();
+  }
+
+  @override
   void dispose() {
-    super.dispose();
     timer.cancel();
+    super.dispose();
+  }
+
+  void setupMarker() async {
+    _marker = Marker(
+      markerId: MarkerId("car"),
+      position: LatLng(-7.9680376, 112.5937865),
+      infoWindow: InfoWindow(title: "Mobil"),
+      icon: await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(size: Size(12, 12)),
+        "assets/images/car_icon.png",
+      ),
+    );
+
+    setState(() {});
   }
 
   Future<void> toCurrentLocation() async {
@@ -66,9 +83,12 @@ class _TrackCarPageState extends State<TrackCarPage> {
 
     await toAddress(_latitude, _longitude);
 
-    setState(() {
-      _marker = _marker.copyWith(positionParam: LatLng(_latitude, _longitude));
-    });
+    if (_marker != null) {
+      setState(() {
+        _marker =
+            _marker!.copyWith(positionParam: LatLng(_latitude, _longitude));
+      });
+    }
 
     if (follow) {
       await toCurrentLocation();
@@ -99,8 +119,7 @@ class _TrackCarPageState extends State<TrackCarPage> {
 
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
-    timer = Timer.periodic(
-        Duration(seconds: 1), (timer) => updateLocation());
+    timer = Timer.periodic(Duration(seconds: 1), (timer) => updateLocation());
   }
 
   @override
@@ -144,7 +163,7 @@ class _TrackCarPageState extends State<TrackCarPage> {
                             style: AppStyle.regular2Text,
                           ),
                           Spacer(),
-                          Icon(Icons.search),
+                          Icon(Icons.history, color: Colors.black, size: 16),
                         ],
                       ),
                       onPressed: () {},
@@ -161,25 +180,24 @@ class _TrackCarPageState extends State<TrackCarPage> {
             right: 0,
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        toCurrentLocation();
-                        setState(() {
-                          follow = !follow;
-                        });
-                      },
-                      child: Icon(follow
-                          ? Icons.my_location
-                          : Icons.location_searching),
-                      backgroundColor: AppColor.green,
-                      mini: true,
+                if (!follow)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          toCurrentLocation();
+                          setState(() {
+                            follow = true;
+                          });
+                        },
+                        child: Icon(Icons.my_location),
+                        backgroundColor: AppColor.green,
+                        mini: true,
+                      ),
                     ),
                   ),
-                ),
                 Material(
                   elevation: 5,
                   borderRadius: BorderRadius.only(
