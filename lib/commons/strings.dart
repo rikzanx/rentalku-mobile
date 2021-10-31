@@ -1,4 +1,6 @@
 class AppString {
+  AppString._();
+
   static String infoTransfer =
       "RentalKu akan melakukan transfer. Setelah menyelesaikan transaksi, mohon menunggu hingga status transfer berhasil.";
   static String titleKodeUnik =
