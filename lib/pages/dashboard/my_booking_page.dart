@@ -21,7 +21,7 @@ class DashboardMyBookingPage extends StatelessWidget {
           AppBar(
             title: Text(
               "PesananKu",
-              style: AppStyle.title3Text.copyWith(
+              style: AppStyle.title1Text.copyWith(
                 color: AppColor.green,
                 fontWeight: FontWeight.w600,
               ),
@@ -30,7 +30,7 @@ class DashboardMyBookingPage extends StatelessWidget {
             backgroundColor: Colors.white,
             elevation: 0,
           ),
-          SizedBox(height: 48),
+          SizedBox(height: 24),
           Row(
             children: [
               Expanded(

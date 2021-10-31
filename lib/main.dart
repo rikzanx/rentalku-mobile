@@ -74,9 +74,7 @@ class MyApp extends StatelessWidget {
             ),
             appBarTheme: AppBarTheme(
               backgroundColor: AppColor.green,
-              titleTextStyle: AppStyle.regular1Text.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+              titleTextStyle: AppStyle.title1Text,
               titleSpacing: 0,
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
