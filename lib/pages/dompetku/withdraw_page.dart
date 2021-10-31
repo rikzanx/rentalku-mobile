@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/providers/withdraw_provider.dart';
-import 'package:rentalku/widgets/amount_card_widget.dart';
 import 'package:rentalku/widgets/balance_widget.dart';
 import 'package:rentalku/widgets/payment_method_option.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';

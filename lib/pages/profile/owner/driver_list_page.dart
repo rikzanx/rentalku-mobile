@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 
