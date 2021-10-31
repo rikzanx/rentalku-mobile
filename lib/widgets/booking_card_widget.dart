@@ -6,18 +6,20 @@ import 'package:rentalku/models/booking.dart';
 
 class BookingCardWidget extends StatelessWidget {
   final Booking booking;
-  final void Function()? onTap;
-  final String actionText;
-  final IconData actionIcon;
+  final IconData? actionIcon;
+  final String? actionText;
+  final bool enableAction;
   final void Function()? actionOnTap;
+  final void Function()? onTap;
 
   const BookingCardWidget({
     Key? key,
     required this.booking,
-    this.onTap,
-    required this.actionText,
-    required this.actionIcon,
+    this.actionIcon,
     this.actionOnTap,
+    this.actionText,
+    this.enableAction = true,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -68,33 +70,34 @@ class BookingCardWidget extends StatelessWidget {
                       booking.withDriver ? "Dengan Supir" : "Tanpa Supir",
                       style: AppStyle.smallText,
                     ),
-                    SizedBox(height: 5),
-                    Material(
-                      color: AppColor.yellow,
-                      borderRadius: BorderRadius.circular(5),
-                      clipBehavior: Clip.hardEdge,
-                      child: InkWell(
-                        onTap: actionOnTap,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 4,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(actionIcon, size: 12, color: Colors.white),
-                              SizedBox(width: 3),
-                              Text(
-                                actionText,
-                                style: AppStyle.smallText.copyWith(
-                                  color: Colors.white,
+                    if (actionOnTap != null) SizedBox(height: 5),
+                    if (actionOnTap != null)
+                      Material(
+                        color: AppColor.yellow,
+                        borderRadius: BorderRadius.circular(5),
+                        clipBehavior: Clip.hardEdge,
+                        child: InkWell(
+                          onTap: actionOnTap,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 4,
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(actionIcon, size: 12, color: Colors.white),
+                                SizedBox(width: 3),
+                                Text(
+                                  actionText!,
+                                  style: AppStyle.smallText.copyWith(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    )
+                      )
                   ],
                 ),
               ),

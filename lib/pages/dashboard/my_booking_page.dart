@@ -5,6 +5,7 @@ import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/booking.dart';
+import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
 import 'package:rentalku/widgets/booking_card_widget.dart';
 
@@ -134,16 +135,24 @@ class DashboardMyBookingPage extends StatelessWidget {
                     dashboard.bookings.length,
                     (index) => Padding(
                       padding: EdgeInsets.symmetric(vertical: 6),
-                      child: BookingCardWidget(
-                        booking: dashboard.bookings.elementAt(index),
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.detailBooking);
-                        },
-                        actionIcon: Icons.star,
-                        actionText: 'Beri Nilai',
-                        actionOnTap: () {
-                          Navigator.pushNamed(context, Routes.addReviewPage);
-                        },
+                      child: Consumer<AppProvider>(
+                        builder: (context, state, _) => BookingCardWidget(
+                          booking: dashboard.bookings.elementAt(index),
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.detailBooking);
+                          },
+                          actionIcon: state.isUser ? Icons.star : Icons.phone,
+                          actionText:
+                              state.isUser ? "Beri Nilai" : "Hubungi Pemesan",
+                          actionOnTap: () {
+                            if (state.isUser) {
+                              Navigator.pushNamed(
+                                  context, Routes.addReviewPage);
+                            } else {
+                              Navigator.pushNamed(context, Routes.viewChat);
+                            }
+                          },
+                        ),
                       ),
                     ),
                   ),
