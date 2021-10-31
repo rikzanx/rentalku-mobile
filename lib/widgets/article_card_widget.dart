@@ -6,7 +6,10 @@ import 'package:rentalku/models/article.dart';
 class ArticleCardWidget extends StatelessWidget {
   final Article article;
 
-  const ArticleCardWidget({Key? key, required this.article}) : super(key: key);
+  const ArticleCardWidget({
+    Key? key,
+    required this.article,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

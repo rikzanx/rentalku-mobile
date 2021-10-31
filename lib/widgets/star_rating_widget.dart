@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:rentalku/commons/colors.dart';
 
 class StarRating extends StatelessWidget {
-  final int starCount;
   final double rating;
-  final void Function(double)? onRatingChanged;
   final double size;
+  final int starCount;
+  final void Function(double)? onRatingChanged;
 
   StarRating({
-    this.starCount = 5,
+    this.onRatingChanged,
     this.rating = .0,
     this.size = 32,
-    this.onRatingChanged,
+    this.starCount = 5,
   });
 
   Widget buildStar(BuildContext context, int index) {

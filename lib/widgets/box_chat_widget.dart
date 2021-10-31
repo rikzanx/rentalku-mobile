@@ -7,8 +7,8 @@ class BoxChatWidget extends StatelessWidget {
 
   const BoxChatWidget({
     Key? key,
-    required this.text,
     required this.isSender,
+    required this.text,
   }) : super(key: key);
 
   @override

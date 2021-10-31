@@ -10,8 +10,8 @@ class FilterWidget extends StatelessWidget {
   const FilterWidget({
     Key? key,
     required this.label,
-    required this.selected,
     required this.onTap,
+    required this.selected,
   }) : super(key: key);
 
   @override

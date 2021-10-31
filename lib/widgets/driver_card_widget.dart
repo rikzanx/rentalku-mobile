@@ -8,8 +8,8 @@ class DriverCardWidget extends StatelessWidget {
 
   const DriverCardWidget({
     Key? key,
-    required this.selected,
     required this.onTap,
+    required this.selected,
   }) : super(key: key);
 
   @override

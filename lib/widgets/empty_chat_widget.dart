@@ -4,7 +4,10 @@ import 'package:rentalku/commons/styles.dart';
 class EmptyChatWidget extends StatelessWidget {
   final Future Function() onRefresh;
 
-  const EmptyChatWidget({Key? key, required this.onRefresh}) : super(key: key);
+  const EmptyChatWidget({
+    Key? key,
+    required this.onRefresh,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

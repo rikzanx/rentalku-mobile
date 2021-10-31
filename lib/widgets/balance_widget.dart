@@ -4,17 +4,17 @@ import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/styles.dart';
 
 class BalanceWidget extends StatelessWidget {
-  final int balance;
-  final bool enableAction;
-  final String actionName;
   final EdgeInsets? padding;
+  final String actionName;
+  final bool enableAction;
+  final int balance;
   final void Function()? onPressed;
 
   const BalanceWidget({
     Key? key,
+    this.actionName = "Top Up",
     this.balance = 0,
     this.enableAction = true,
-    this.actionName = "Top Up",
     this.padding,
     this.onPressed,
   }) : super(key: key);

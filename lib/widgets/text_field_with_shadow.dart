@@ -3,37 +3,37 @@ import 'package:flutter/services.dart';
 import 'package:rentalku/commons/styles.dart';
 
 class TextFieldWithShadow extends StatelessWidget {
+  final Color labelColor;
+  final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
   final String? hintText;
   final String? labelText;
+  final String? prefixText;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
-  final double height;
-  final bool obscureText;
-  final Color labelColor;
-  final String? prefixText;
-  final List<TextInputFormatter>? inputFormatters;
-  final void Function(String)? onChanged;
-  final void Function()? onTap;
   final bool enabled;
+  final bool obscureText;
+  final double height;
+  final void Function()? onTap;
+  final void Function(String)? onChanged;
 
   const TextFieldWithShadow({
     Key? key,
     this.controller,
+    this.enabled = true,
     this.height = 49,
     this.hintText,
-    this.keyboardType,
-    this.labelText,
-    this.textInputAction,
-    this.validator,
-    this.obscureText = false,
-    this.labelColor = Colors.white,
-    this.prefixText,
     this.inputFormatters,
+    this.keyboardType,
+    this.labelColor = Colors.white,
+    this.labelText,
+    this.obscureText = false,
     this.onChanged,
     this.onTap,
-    this.enabled = true,
+    this.prefixText,
+    this.textInputAction,
+    this.validator,
   }) : super(key: key);
 
   @override

@@ -4,8 +4,8 @@ import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/styles.dart';
 
 class AmountCardWidget extends StatelessWidget {
-  final int amount;
   final bool isSelected;
+  final int amount;
   final void Function()? onTap;
 
   const AmountCardWidget({

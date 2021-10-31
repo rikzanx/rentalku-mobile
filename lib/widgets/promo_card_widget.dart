@@ -4,7 +4,11 @@ class PromoCardWidget extends StatelessWidget {
   final String url;
   final void Function()? onTap;
 
-  const PromoCardWidget({Key? key, required this.url, this.onTap}) : super(key: key);
+  const PromoCardWidget({
+    Key? key,
+    required this.url,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

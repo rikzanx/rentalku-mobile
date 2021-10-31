@@ -10,8 +10,8 @@ class RentalMobilCardWidget extends StatelessWidget {
 
   const RentalMobilCardWidget({
     Key? key,
-    required this.rentalMobil,
     required this.onTap,
+    required this.rentalMobil,
   }) : super(key: key);
 
   @override

@@ -6,8 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rentalku/commons/styles.dart';
 
 class TextFieldUploadWithShadow extends StatelessWidget {
-  ValueNotifier<File?> _image = ValueNotifier(null);
   TextEditingController _defaultController = TextEditingController();
+  ValueNotifier<File?> _image = ValueNotifier(null);
   final Color labelColor;
   final Icon prefixIcon;
   final List<TextInputFormatter>? inputFormatters;
@@ -35,12 +35,12 @@ class TextFieldUploadWithShadow extends StatelessWidget {
     this.labelText,
     this.obscureText = false,
     this.onChanged,
+    this.onFileChanged,
     this.onTap,
     this.prefixIcon = const Icon(Icons.image),
     this.prefixText,
     this.textInputAction,
     this.validator,
-    this.onFileChanged,
   }) : super(key: key);
 
   @override
