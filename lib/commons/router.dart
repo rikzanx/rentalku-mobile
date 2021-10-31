@@ -5,6 +5,7 @@ import 'package:rentalku/pages/auth/login_page.dart';
 import 'package:rentalku/pages/auth/register_page.dart';
 import 'package:rentalku/pages/bookings/add_review_page.dart';
 import 'package:rentalku/pages/bookings/detail_booking_page.dart';
+import 'package:rentalku/pages/bookings/track_car_page.dart';
 import 'package:rentalku/pages/chats/list_chat_page.dart';
 import 'package:rentalku/pages/chats/view_chat_page.dart';
 import 'package:rentalku/pages/profile/owner/add_driver_page.dart';
@@ -77,6 +78,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.article:
       return MaterialPageRoute(builder: (_) => ArticlePage());
     // pemilik mobil
+    case Routes.trackCar:
+      return MaterialPageRoute(builder: (_) => TrackCarPage());
     case Routes.upgradeToOwner:
       return MaterialPageRoute(builder: (_) => UpgradeOwnerCarPage());
     case Routes.withdraw:

@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
+import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/booking.dart';
+import 'package:rentalku/providers/app_provider.dart';
 
 class DetailBookingPage extends StatelessWidget {
   const DetailBookingPage({Key? key}) : super(key: key);
@@ -99,31 +102,75 @@ class DetailBookingPage extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 24),
-                      Material(
-                        elevation: 1,
-                        borderRadius: BorderRadius.circular(5),
-                        clipBehavior: Clip.hardEdge,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 6,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                "CAR RENT - Rentalku",
-                                style: AppStyle.smallText.copyWith(
-                                  fontWeight: FontWeight.w700,
+                      Consumer<AppProvider>(
+                        builder: (context, state, _) => Row(
+                          children: [
+                            Expanded(
+                              child: Material(
+                                elevation: 1,
+                                borderRadius: BorderRadius.circular(5),
+                                clipBehavior: Clip.hardEdge,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 6,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Text(
+                                        "CAR RENT - Rentalku",
+                                        style: AppStyle.smallText.copyWith(
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      Text(
+                                          booking.withDriver
+                                              ? "Dengan Sopir"
+                                              : "Tanpa Sopir",
+                                          style: AppStyle.smallText),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              Text(
-                                  booking.withDriver
-                                      ? "Dengan Sopir"
-                                      : "Tanpa Sopir",
-                                  style: AppStyle.smallText),
-                            ],
-                          ),
+                            ),
+                            if (state.isOwner) SizedBox(width: 6),
+                            if (state.isOwner)
+                              Expanded(
+                                child: Material(
+                                  elevation: 1,
+                                  borderRadius: BorderRadius.circular(5),
+                                  clipBehavior: Clip.hardEdge,
+                                  color: AppColor.yellow,
+                                  child: InkWell(
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 10,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.location_pin, size: 20),
+                                          Expanded(
+                                            child: Text(
+                                              "Lihat Lokasi Mobil",
+                                              style: AppStyle.regular2Text
+                                                  .copyWith(
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.pushNamed(context, Routes.trackCar);
+                                    },
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
                       ),
                       SizedBox(height: 10),
