@@ -33,4 +33,6 @@ class Routes {
   static const String addReviewPage = '/bookings/add-reviews';
 
   static const String upgradeToOwner = 'upgrade-to-owner';
+  static const String driverList = 'owner/drivers';
+  static const String addDriver = 'owner/drivers/add';
 }

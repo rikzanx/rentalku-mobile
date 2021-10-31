@@ -305,7 +305,7 @@ class OrderRentalMobilPage extends StatelessWidget {
                         keyboardType: TextInputType.phone,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Kolom nama lengkap wajib diisi';
+                            return 'Kolom nomor telepon wajib diisi';
                           }
                           return null;
                         },
@@ -319,7 +319,7 @@ class OrderRentalMobilPage extends StatelessWidget {
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Kolom nama lengkap wajib diisi';
+                            return 'Kolom NIK wajib diisi';
                           }
                           return null;
                         },

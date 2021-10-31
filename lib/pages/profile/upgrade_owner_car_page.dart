@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/commons/types.dart';
+import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/widgets/text_field_upload_with_shadow_widget.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';
 
@@ -107,14 +110,18 @@ class UpgradeOwnerCarPage extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 16),
-                          ElevatedButton(
-                            onPressed: () {
-                              // TODO: Remove this
-                              if (_formKey.currentState!.validate()) {
-                                // process here
-                              }
-                            },
-                            child: Text("Daftar & Jadi Pemilik Mobil"),
+                          Consumer<AppProvider>(
+                            builder: (context, state, _) => ElevatedButton(
+                              onPressed: () {
+                                state.userType = UserType.Owner;
+                                Navigator.pop(context);
+                                // TODO: Remove this
+                                if (_formKey.currentState!.validate()) {
+                                  // process here
+                                }
+                              },
+                              child: Text("Daftar & Jadi Pemilik Mobil"),
+                            ),
                           ),
                         ],
                       ),

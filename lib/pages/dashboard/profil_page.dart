@@ -174,7 +174,9 @@ class DashboardProfilPage extends StatelessWidget {
                       'Penilaian dan Ulasan',
                       style: AppStyle.regular1Text,
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.reviewOwner);
+                    },
                   )
                 : SizedBox(),
           ),
@@ -188,7 +190,9 @@ class DashboardProfilPage extends StatelessWidget {
                       'SopirKu',
                       style: AppStyle.regular1Text,
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.driverList);
+                    },
                   )
                 : SizedBox(),
           ),
