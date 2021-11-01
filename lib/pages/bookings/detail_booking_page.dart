@@ -45,296 +45,295 @@ class DetailBookingPage extends StatelessWidget {
         ),
         elevation: 2,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: Material(
-                elevation: 3,
-                borderRadius: BorderRadius.circular(10),
-                clipBehavior: Clip.hardEdge,
-                child: Padding(
-                  padding: EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Image.network(booking.imageURL),
+      body: ListView(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Material(
+              elevation: 3,
+              borderRadius: BorderRadius.circular(10),
+              clipBehavior: Clip.hardEdge,
+              child: Padding(
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Image.network(booking.imageURL),
+                        ),
+                        SizedBox(width: 8),
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                booking.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.clip,
+                                style: AppStyle.regular1Text.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              Text(
+                                booking.description,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppStyle.regular1Text.copyWith(
+                                  color: Colors.grey[500],
+                                ),
+                              ),
+                              Text(
+                                "${booking.totalDays} hari",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppStyle.smallText.copyWith(
+                                  color: Colors.grey[500],
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(width: 8),
-                          Expanded(
-                            flex: 2,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  booking.name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.clip,
-                                  style: AppStyle.regular1Text.copyWith(
-                                    fontWeight: FontWeight.w700,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 24),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Material(
+                            elevation: 1,
+                            borderRadius: BorderRadius.circular(5),
+                            clipBehavior: Clip.hardEdge,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Text(
+                                    "CAR RENT - Rentalku",
+                                    style: AppStyle.smallText.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  booking.description,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: AppStyle.regular1Text.copyWith(
-                                    color: Colors.grey[500],
-                                  ),
-                                ),
-                                Text(
-                                  "${booking.totalDays} hari",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: AppStyle.smallText.copyWith(
-                                    color: Colors.grey[500],
-                                  ),
-                                ),
-                              ],
+                                  Text(
+                                      booking.withDriver
+                                          ? "Dengan Sopir"
+                                          : "Tanpa Sopir",
+                                      style: AppStyle.smallText),
+                                ],
+                              ),
                             ),
                           ),
-                        ],
+                        ),
+                        Consumer<AppProvider>(
+                          builder: (context, state, _) =>
+                              state.isOwner ? SizedBox(width: 6) : SizedBox(),
+                        ),
+                        Consumer<AppProvider>(
+                          builder: (context, state, _) => state.isOwner
+                              ? Expanded(
+                                  child: Material(
+                                    elevation: 1,
+                                    borderRadius: BorderRadius.circular(5),
+                                    clipBehavior: Clip.hardEdge,
+                                    color: AppColor.yellow,
+                                    child: InkWell(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 10,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.location_pin, size: 20),
+                                            Expanded(
+                                              child: Text(
+                                                "Lihat Lokasi Mobil",
+                                                style: AppStyle.regular2Text
+                                                    .copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, Routes.trackCar);
+                                      },
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Text("Alamat", style: AppStyle.smallText),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: AppColor.green,
                       ),
-                      SizedBox(height: 24),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Material(
-                              elevation: 1,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      child: Text(
+                        booking.address,
+                        style: AppStyle.smallText.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text("Tanggal", style: AppStyle.smallText),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: AppColor.green,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      child: Text(
+                        "${DateFormat("d MMMM yyyy", "id_ID").format(booking.startDate)} - ${DateFormat("d MMMM yyyy", "id_ID").format(booking.endDate)}",
+                        style: AppStyle.smallText.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text("Sopir", style: AppStyle.smallText),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              clipBehavior: Clip.hardEdge,
+                              color: AppColor.green,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            child: Text(
+                              "Asep",
+                              style: AppStyle.smallText.copyWith(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        Expanded(
+                          flex: 1,
+                          child: Material(
+                            borderRadius: BorderRadius.circular(5),
+                            color: AppColor.yellow,
+                            clipBehavior: Clip.hardEdge,
+                            child: InkWell(
+                              onTap: () {},
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 12,
                                   vertical: 6,
                                 ),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Text(
-                                      "CAR RENT - Rentalku",
-                                      style: AppStyle.smallText.copyWith(
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                    Text(
-                                        booking.withDriver
-                                            ? "Dengan Sopir"
-                                            : "Tanpa Sopir",
-                                        style: AppStyle.smallText),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Consumer<AppProvider>(
-                            builder: (context, state, _) =>
-                                state.isOwner ? SizedBox(width: 6) : SizedBox(),
-                          ),
-                          Consumer<AppProvider>(
-                            builder: (context, state, _) => state.isOwner
-                                ? Expanded(
-                                    child: Material(
-                                      elevation: 1,
-                                      borderRadius: BorderRadius.circular(5),
-                                      clipBehavior: Clip.hardEdge,
-                                      color: AppColor.yellow,
-                                      child: InkWell(
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 12,
-                                            vertical: 10,
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.location_pin,
-                                                  size: 20),
-                                              Expanded(
-                                                child: Text(
-                                                  "Lihat Lokasi Mobil",
-                                                  style: AppStyle.regular2Text
-                                                      .copyWith(
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          Navigator.pushNamed(
-                                              context, Routes.trackCar);
-                                        },
-                                      ),
-                                    ),
-                                  )
-                                : SizedBox(),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Text("Alamat", style: AppStyle.smallText),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: AppColor.green,
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        child: Text(
-                          booking.address,
-                          style: AppStyle.smallText.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text("Tanggal", style: AppStyle.smallText),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: AppColor.green,
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        child: Text(
-                          "${DateFormat("d MMMM yyyy", "id_ID").format(booking.startDate)} - ${DateFormat("d MMMM yyyy", "id_ID").format(booking.endDate)}",
-                          style: AppStyle.smallText.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text("Sopir", style: AppStyle.smallText),
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: AppColor.green,
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 6,
-                              ),
-                              child: Text(
-                                "Asep",
-                                style: AppStyle.smallText.copyWith(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 6),
-                          Expanded(
-                            flex: 1,
-                            child: Material(
-                              borderRadius: BorderRadius.circular(5),
-                              color: AppColor.yellow,
-                              clipBehavior: Clip.hardEdge,
-                              child: InkWell(
-                                onTap: () {},
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 6,
-                                  ),
-                                  child: Text(
-                                    "Hubungi",
-                                    textAlign: TextAlign.center,
-                                    style: AppStyle.smallText.copyWith(
-                                      color: Colors.white,
-                                    ),
+                                child: Text(
+                                  "Hubungi",
+                                  textAlign: TextAlign.center,
+                                  style: AppStyle.smallText.copyWith(
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Text("Total", style: AppStyle.smallText),
-                      Material(
-                        elevation: 1,
-                        borderRadius: BorderRadius.circular(5),
-                        clipBehavior: Clip.hardEdge,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 6,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                "${Helper.toIDR(booking.price)} x ${booking.totalDays} Hari",
-                                style: AppStyle.smallText.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Text("Total", style: AppStyle.smallText),
+                    Material(
+                      elevation: 1,
+                      borderRadius: BorderRadius.circular(5),
+                      clipBehavior: Clip.hardEdge,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              "${Helper.toIDR(booking.price)} x ${booking.totalDays} Hari",
+                              style: AppStyle.smallText.copyWith(
+                                fontWeight: FontWeight.w700,
                               ),
-                              Text("Total ${Helper.toIDR(booking.totalPrice)}",
-                                  style: AppStyle.smallText),
-                            ],
-                          ),
+                            ),
+                            Text("Total ${Helper.toIDR(booking.totalPrice)}",
+                                style: AppStyle.smallText),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            Divider(
-              thickness: 6,
-              color: Color(0xFFE0E0E0),
-            ),
-            SizedBox(height: 16),
-            Text("Data Diri Pemesan", style: AppStyle.title3Text),
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: Material(
-                elevation: 3,
-                borderRadius: BorderRadius.circular(10),
-                clipBehavior: Clip.hardEdge,
-                child: Padding(
-                  padding: EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        "Muhammad",
-                        style: AppStyle.regular1Text.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+          ),
+          Divider(
+            thickness: 6,
+            color: Color(0xFFE0E0E0),
+          ),
+          SizedBox(height: 16),
+          Align(
+            alignment: Alignment.center,
+            child: Text("Data Diri Pemesan", style: AppStyle.title3Text),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Material(
+              elevation: 3,
+              borderRadius: BorderRadius.circular(10),
+              clipBehavior: Clip.hardEdge,
+              child: Padding(
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      "Muhammad",
+                      style: AppStyle.regular1Text.copyWith(
+                        fontWeight: FontWeight.w600,
                       ),
-                      Text(
-                        "082335812487",
-                        style: AppStyle.regular1Text.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                    ),
+                    Text(
+                      "082335812487",
+                      style: AppStyle.regular1Text.copyWith(
+                        fontWeight: FontWeight.w600,
                       ),
-                      Text(
-                        "Jl. Anjasmoro No. 2, Waru, Sidoarjo",
-                        style: AppStyle.smallText,
-                      ),
-                    ],
-                  ),
+                    ),
+                    Text(
+                      "Jl. Anjasmoro No. 2, Waru, Sidoarjo",
+                      style: AppStyle.smallText,
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

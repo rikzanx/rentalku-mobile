@@ -29,57 +29,54 @@ class UpdatePasswordPage extends StatelessWidget {
         ),
         elevation: 2,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFieldWithShadow(
-                labelText: "Ketik password anda",
-                hintText: "password",
-                obscureText: true,
-                labelColor: Colors.black,
-                textInputAction: TextInputAction.next,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Kolom password wajib diisi';
-                  } else if (value.length < 6) {
-                    return 'Panjang password minimal 6 karakter';
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          children: [
+            TextFieldWithShadow(
+              labelText: "Ketik password anda",
+              hintText: "password",
+              obscureText: true,
+              labelColor: Colors.black,
+              textInputAction: TextInputAction.next,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kolom password wajib diisi';
+                } else if (value.length < 6) {
+                  return 'Panjang password minimal 6 karakter';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 16),
+            TextFieldWithShadow(
+              labelText: "Ketik ulang password anda",
+              hintText: "password",
+              obscureText: true,
+              labelColor: Colors.black,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kolom password wajib diisi';
+                } else if (value.length < 6) {
+                  return 'Panjang password minimal 6 karakter';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 16),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    // process here
                   }
-                  return null;
                 },
+                child: Text("Simpan perubahan"),
               ),
-              SizedBox(height: 16),
-              TextFieldWithShadow(
-                labelText: "Ketik ulang password anda",
-                hintText: "password",
-                obscureText: true,
-                labelColor: Colors.black,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Kolom password wajib diisi';
-                  } else if (value.length < 6) {
-                    return 'Panjang password minimal 6 karakter';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // process here
-                    }
-                  },
-                  child: Text("Simpan perubahan"),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

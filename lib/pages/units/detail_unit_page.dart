@@ -44,276 +44,273 @@ class DetailUnitPage extends StatelessWidget {
         ),
         elevation: 2,
       ),
-      body: SingleChildScrollView(
+      body: ListView(
         padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Material(
-              borderRadius: BorderRadius.circular(10),
-              clipBehavior: Clip.hardEdge,
-              elevation: 3,
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Image.network(
-                      unit.imageURL,
-                      height: MediaQuery.of(context).size.width * 0.25,
+        children: [
+          Material(
+            borderRadius: BorderRadius.circular(10),
+            clipBehavior: Clip.hardEdge,
+            elevation: 3,
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Image.network(
+                    unit.imageURL,
+                    height: MediaQuery.of(context).size.width * 0.25,
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    unit.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.clip,
+                    style: AppStyle.regular1Text.copyWith(
+                      fontWeight: FontWeight.w700,
                     ),
-                    SizedBox(height: 16),
-                    Text(
-                      unit.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.clip,
-                      style: AppStyle.regular1Text.copyWith(
-                        fontWeight: FontWeight.w700,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    unit.description,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppStyle.regular1Text,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    Helper.toIDR(unit.price) + "/Hari",
+                    style: AppStyle.smallText.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppColor.yellow,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Text(
+                        "Review",
+                        style: AppStyle.regular2Text.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      unit.description,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppStyle.regular1Text,
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      Helper.toIDR(unit.price) + "/Hari",
-                      style: AppStyle.smallText.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: AppColor.yellow,
+                      SizedBox(width: 10),
+                      Text(
+                        "${unit.rating}/5",
+                        style: AppStyle.regular2Text,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 16),
-                    Row(
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      StarRating(rating: unit.rating, size: 20),
+                      SizedBox(width: 10),
+                      InkWell(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
+                          child: Text(
+                            "Lihat semua ulasan",
+                            style: AppStyle.smallText.copyWith(
+                              color: AppColor.green,
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.reviewProduct);
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16),
+                  InkWell(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Review",
-                          style: AppStyle.regular2Text.copyWith(
+                          "Lihat Penilaian Pemilik Mobil",
+                          style: AppStyle.regular1Text.copyWith(
+                            color: AppColor.green,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         SizedBox(width: 10),
-                        Text(
-                          "${unit.rating}/5",
-                          style: AppStyle.regular2Text,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        StarRating(rating: unit.rating, size: 20),
-                        SizedBox(width: 10),
-                        InkWell(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
-                            child: Text(
-                              "Lihat semua ulasan",
-                              style: AppStyle.smallText.copyWith(
-                                color: AppColor.green,
-                              ),
-                            ),
+                        Ink(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColor.green.withOpacity(0.5),
                           ),
-                          onTap: () {
-                            Navigator.pushNamed(context, Routes.reviewProduct);
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    InkWell(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Lihat Penilaian Pemilik Mobil",
-                            style: AppStyle.regular1Text.copyWith(
-                              color: AppColor.green,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          Ink(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColor.green.withOpacity(0.5),
-                            ),
-                            child: Icon(
-                              Icons.chevron_right,
-                              size: 20,
-                              color: AppColor.green,
-                            ),
-                          ),
-                        ],
-                      ),
-                      onTap: () {
-                        Navigator.pushNamed(context, Routes.reviewOwner);
-                      },
-                    ),
-                    SizedBox(height: 16),
-                    Divider(thickness: 2, color: Colors.grey[500]),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.people,
-                                color: AppColor.green,
-                              ),
-                              Text(
-                                "6 Penumpang",
-                                style: AppStyle.smallText.copyWith(
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.person,
-                                color: AppColor.green,
-                              ),
-                              Text(
-                                "Tanpa Sopir",
-                                style: AppStyle.smallText.copyWith(
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.directions_car,
-                                color: AppColor.green,
-                              ),
-                              Text(
-                                "Tahun 2018",
-                                style: AppStyle.smallText.copyWith(
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
+                          child: Icon(
+                            Icons.chevron_right,
+                            size: 20,
+                            color: AppColor.green,
                           ),
                         ),
                       ],
                     ),
-                    Divider(thickness: 2, color: Colors.grey[500]),
-                    SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Icon(Icons.directions_car,
-                            size: 20, color: AppColor.green),
-                        SizedBox(width: 5),
-                        Text(
-                          "Transmisi",
-                          style: AppStyle.regular2Text,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.directions_car,
-                            size: 20, color: AppColor.green),
-                        SizedBox(width: 5),
-                        Text(
-                          "Mesin 1998cc",
-                          style: AppStyle.regular2Text,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.directions_car,
-                            size: 20, color: AppColor.green),
-                        SizedBox(width: 5),
-                        Text(
-                          "6 Penumpang",
-                          style: AppStyle.regular2Text,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.directions_car,
-                            size: 20, color: AppColor.green),
-                        SizedBox(width: 5),
-                        Text(
-                          "Warna Silver",
-                          style: AppStyle.regular2Text,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.directions_car,
-                            size: 20, color: AppColor.green),
-                        SizedBox(width: 5),
-                        Text(
-                          "Tahun 2021",
-                          style: AppStyle.regular2Text,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 16),
-            Consumer<AppProvider>(
-              builder: (context, state, _) {
-                if (state.isUser)
-                  return ElevatedButton(
-                    child: Text("Lanjut ke Pemesanan"),
-                    onPressed: () {
-                      Navigator.pushNamed(context, Routes.orderUnit);
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.reviewOwner);
                     },
-                  );
-                else if(state.isOwner) {
-                  return Row(
+                  ),
+                  SizedBox(height: 16),
+                  Divider(thickness: 2, color: Colors.grey[500]),
+                  Row(
                     children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, Routes.editUnit);
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
+                      Expanded(
+                        child: Column(
                           children: [
                             Icon(
-                              Icons.edit,
-                              size: 16,
+                              Icons.people,
                               color: AppColor.green,
                             ),
-                            SizedBox(width: 5),
                             Text(
-                              "Edit",
-                              style: AppStyle.regular1Text.copyWith(
-                                color: AppColor.green,
+                              "6 Penumpang",
+                              style: AppStyle.smallText.copyWith(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: AppColor.green,
+                            ),
+                            Text(
+                              "Tanpa Sopir",
+                              style: AppStyle.smallText.copyWith(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.directions_car,
+                              color: AppColor.green,
+                            ),
+                            Text(
+                              "Tahun 2018",
+                              style: AppStyle.smallText.copyWith(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
                         ),
                       ),
                     ],
-                  );
-                } else
-                  return SizedBox();
-              },
+                  ),
+                  Divider(thickness: 2, color: Colors.grey[500]),
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Icon(Icons.directions_car,
+                          size: 20, color: AppColor.green),
+                      SizedBox(width: 5),
+                      Text(
+                        "Transmisi",
+                        style: AppStyle.regular2Text,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.directions_car,
+                          size: 20, color: AppColor.green),
+                      SizedBox(width: 5),
+                      Text(
+                        "Mesin 1998cc",
+                        style: AppStyle.regular2Text,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.directions_car,
+                          size: 20, color: AppColor.green),
+                      SizedBox(width: 5),
+                      Text(
+                        "6 Penumpang",
+                        style: AppStyle.regular2Text,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.directions_car,
+                          size: 20, color: AppColor.green),
+                      SizedBox(width: 5),
+                      Text(
+                        "Warna Silver",
+                        style: AppStyle.regular2Text,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.directions_car,
+                          size: 20, color: AppColor.green),
+                      SizedBox(width: 5),
+                      Text(
+                        "Tahun 2021",
+                        style: AppStyle.regular2Text,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+          SizedBox(height: 16),
+          Consumer<AppProvider>(
+            builder: (context, state, _) {
+              if (state.isUser)
+                return ElevatedButton(
+                  child: Text("Lanjut ke Pemesanan"),
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.orderUnit);
+                  },
+                );
+              else if (state.isOwner) {
+                return Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.editUnit);
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            size: 16,
+                            color: AppColor.green,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            "Edit",
+                            style: AppStyle.regular1Text.copyWith(
+                              color: AppColor.green,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              } else
+                return SizedBox();
+            },
+          ),
+        ],
       ),
     );
   }

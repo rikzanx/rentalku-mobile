@@ -23,14 +23,14 @@ class ChatProvider extends ChangeNotifier {
     ),
   );
   List<Chat> get chats => _chats;
-  set chats(List<Chat> chats){
+  set chats(List<Chat> chats) {
     _chats = chats;
     notifyListeners();
   }
 
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
-  set selectedIndex(int selectedIndex){
+  set selectedIndex(int selectedIndex) {
     _selectedIndex = selectedIndex;
     notifyListeners();
   }

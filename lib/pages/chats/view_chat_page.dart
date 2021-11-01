@@ -58,16 +58,13 @@ class ViewChatPage extends StatelessWidget {
             return Column(
               children: [
                 Expanded(
-                  child: SingleChildScrollView(
+                  child: ListView(
                     reverse: true,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: List.generate(
-                        chats.length,
-                        (index) => BoxChatWidget(
-                          text: chats[index].text,
-                          isSender: chats[index].isSender,
-                        ),
+                    children: List.generate(
+                      chats.length,
+                      (index) => BoxChatWidget(
+                        text: chats[index].text,
+                        isSender: chats[index].isSender,
                       ),
                     ),
                   ),

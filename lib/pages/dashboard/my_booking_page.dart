@@ -13,154 +13,151 @@ class DashboardMyBookingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return ListView(
       padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
-      child: Column(
-        children: [
-          AppBar(
-            title: Text(
-              "PesananKu",
-              style: AppStyle.title1Text.copyWith(
+      children: [
+        AppBar(
+          title: Text(
+            "PesananKu",
+            style: AppStyle.title1Text.copyWith(
+              color: AppColor.green,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        SizedBox(height: 24),
+        Row(
+          children: [
+            Expanded(
+              child: Material(
                 color: AppColor.green,
-                fontWeight: FontWeight.w600,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                ),
+                clipBehavior: Clip.hardEdge,
+                child: Consumer<DashboardProvider>(
+                  builder: (context, dashboard, _) => InkWell(
+                    child: Text(
+                      "Sedang di pesan",
+                      textAlign: TextAlign.center,
+                      style: AppStyle.regular1Text.copyWith(
+                        color: dashboard.myBookingIndex == 0
+                            ? AppColor.yellow
+                            : Colors.white,
+                      ),
+                    ),
+                    onTap: () {
+                      dashboard.myBookingIndex = 0;
+                      dashboard.bookings = [];
+                    },
+                  ),
+                ),
               ),
             ),
-            centerTitle: true,
-            backgroundColor: Colors.white,
-            elevation: 0,
-          ),
-          SizedBox(height: 24),
-          Row(
-            children: [
-              Expanded(
-                child: Material(
-                  color: AppColor.green,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                  ),
-                  clipBehavior: Clip.hardEdge,
-                  child: Consumer<DashboardProvider>(
-                    builder: (context, dashboard, _) => InkWell(
-                      child: Text(
-                        "Sedang di pesan",
-                        textAlign: TextAlign.center,
-                        style: AppStyle.regular1Text.copyWith(
-                          color: dashboard.myBookingIndex == 0
-                              ? AppColor.yellow
-                              : Colors.white,
-                        ),
+            SizedBox(width: 2),
+            Expanded(
+              child: Material(
+                color: AppColor.green,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+                clipBehavior: Clip.hardEdge,
+                child: Consumer<DashboardProvider>(
+                  builder: (context, dashboard, _) => InkWell(
+                    child: Text(
+                      "Selesai",
+                      textAlign: TextAlign.center,
+                      style: AppStyle.regular1Text.copyWith(
+                        color: dashboard.myBookingIndex == 1
+                            ? AppColor.yellow
+                            : Colors.white,
                       ),
-                      onTap: () {
-                        dashboard.myBookingIndex = 0;
-                        dashboard.bookings = [];
-                      },
                     ),
+                    onTap: () {
+                      dashboard.myBookingIndex = 1;
+                      dashboard.bookings = List.generate(
+                        4,
+                        (index) => Booking(
+                          id: 1,
+                          name: "Toyota Innova Reborn",
+                          description: "Compact MPV",
+                          withDriver: true,
+                          price: 500000,
+                          imageURL: "https://i.imgur.com/vtUhSMq.png",
+                          startDate: DateTime.now(),
+                          endDate: DateTime.now().add(Duration(days: 2)),
+                          address: "Jl. Anjasmoro No. 2, Waru, Sidoarjo",
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
-              SizedBox(width: 2),
-              Expanded(
-                child: Material(
-                  color: AppColor.green,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
+            ),
+          ],
+        ),
+        SizedBox(height: 16),
+        Consumer<DashboardProvider>(
+          builder: (context, dashboard, _) {
+            if (dashboard.bookings.isEmpty) {
+              return Column(
+                children: [
+                  SizedBox(height: 48),
+                  Image.asset(
+                    "assets/images/empty_order.png",
+                    width: MediaQuery.of(context).size.width * 0.65,
                   ),
-                  clipBehavior: Clip.hardEdge,
-                  child: Consumer<DashboardProvider>(
-                    builder: (context, dashboard, _) => InkWell(
-                      child: Text(
-                        "Selesai",
-                        textAlign: TextAlign.center,
-                        style: AppStyle.regular1Text.copyWith(
-                          color: dashboard.myBookingIndex == 1
-                              ? AppColor.yellow
-                              : Colors.white,
-                        ),
+                  SizedBox(height: 16),
+                  Text(
+                    "Belum ada pesanan",
+                    style: AppStyle.smallText.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    "Ayo buruan pesan sekarang",
+                    style: AppStyle.smallText.copyWith(
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return Column(
+                children: List.generate(
+                  dashboard.bookings.length,
+                  (index) => Padding(
+                    padding: EdgeInsets.symmetric(vertical: 6),
+                    child: Consumer<AppProvider>(
+                      builder: (context, state, _) => BookingCardWidget(
+                        booking: dashboard.bookings.elementAt(index),
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.detailBooking);
+                        },
+                        actionIcon: state.isUser ? Icons.star : Icons.phone,
+                        actionText:
+                            state.isUser ? "Beri Nilai" : "Hubungi Pemesan",
+                        actionOnTap: () {
+                          if (state.isUser) {
+                            Navigator.pushNamed(context, Routes.addReviewPage);
+                          } else {
+                            Navigator.pushNamed(context, Routes.viewChat);
+                          }
+                        },
                       ),
-                      onTap: () {
-                        dashboard.myBookingIndex = 1;
-                        dashboard.bookings = List.generate(
-                          4,
-                          (index) => Booking(
-                            id: 1,
-                            name: "Toyota Innova Reborn",
-                            description: "Compact MPV",
-                            withDriver: true,
-                            price: 500000,
-                            imageURL: "https://i.imgur.com/vtUhSMq.png",
-                            startDate: DateTime.now(),
-                            endDate: DateTime.now().add(Duration(days: 2)),
-                            address: "Jl. Anjasmoro No. 2, Waru, Sidoarjo",
-                          ),
-                        );
-                      },
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 16),
-          Consumer<DashboardProvider>(
-            builder: (context, dashboard, _) {
-              if (dashboard.bookings.isEmpty) {
-                return Column(
-                  children: [
-                    SizedBox(height: 48),
-                    Image.asset(
-                      "assets/images/empty_order.png",
-                      width: MediaQuery.of(context).size.width * 0.65,
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      "Belum ada pesanan",
-                      style: AppStyle.smallText.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Text(
-                      "Ayo buruan pesan sekarang",
-                      style: AppStyle.smallText.copyWith(
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                return Column(
-                  children: List.generate(
-                    dashboard.bookings.length,
-                    (index) => Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: Consumer<AppProvider>(
-                        builder: (context, state, _) => BookingCardWidget(
-                          booking: dashboard.bookings.elementAt(index),
-                          onTap: () {
-                            Navigator.pushNamed(context, Routes.detailBooking);
-                          },
-                          actionIcon: state.isUser ? Icons.star : Icons.phone,
-                          actionText:
-                              state.isUser ? "Beri Nilai" : "Hubungi Pemesan",
-                          actionOnTap: () {
-                            if (state.isUser) {
-                              Navigator.pushNamed(
-                                  context, Routes.addReviewPage);
-                            } else {
-                              Navigator.pushNamed(context, Routes.viewChat);
-                            }
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              }
-            },
-          ),
-        ],
-      ),
+              );
+            }
+          },
+        ),
+      ],
     );
   }
 }

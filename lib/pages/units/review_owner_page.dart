@@ -31,46 +31,43 @@ class ReviewOwnerPage extends StatelessWidget {
         ),
         elevation: 2,
       ),
-      body: SingleChildScrollView(
+      body: ListView(
         padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Center(child: StarRating(rating: 4)),
-            SizedBox(height: 5),
-            Text(
-              "Rata-Rata Penilaian : 4.2",
-              style: AppStyle.smallText,
-              textAlign: TextAlign.center,
+        children: [
+          Center(child: StarRating(rating: 4)),
+          SizedBox(height: 5),
+          Text(
+            "Rata-Rata Penilaian : 4.2",
+            style: AppStyle.smallText,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 16),
+          Text(
+            "Ulasan Pelanggan",
+            style: AppStyle.regular1Text.copyWith(
+              fontWeight: FontWeight.w600,
             ),
-            SizedBox(height: 16),
-            Text(
-              "Ulasan Pelanggan",
-              style: AppStyle.regular1Text.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            ...List.generate(
-              4,
-              (index) => Padding(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: ReviewCardWidget(
-                  review: Review(
-                    id: 1,
-                    name: "Ahmad Ujang",
-                    imageURL: "https://lorempixel.com/200/200/people/",
-                    rating: 4,
-                    text:
-                        "pelayanannya driver nya sabar cara mengemudikan sangat hati",
-                    dateTime: DateTime.now().subtract(
-                      Duration(days: Random().nextInt(10)),
-                    ),
+          ),
+          ...List.generate(
+            4,
+            (index) => Padding(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              child: ReviewCardWidget(
+                review: Review(
+                  id: 1,
+                  name: "Ahmad Ujang",
+                  imageURL: "https://lorempixel.com/200/200/people/",
+                  rating: 4,
+                  text:
+                      "pelayanannya driver nya sabar cara mengemudikan sangat hati",
+                  dateTime: DateTime.now().subtract(
+                    Duration(days: Random().nextInt(10)),
                   ),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

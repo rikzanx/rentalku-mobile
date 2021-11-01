@@ -101,7 +101,7 @@ class TextFieldUploadWithShadow extends StatelessWidget {
     if (img != null) {
       _image.value = File(img.path);
       (controller ?? _defaultController).text = img.name;
-      if(onFileChanged != null) onFileChanged!(_image.value!);
+      if (onFileChanged != null) onFileChanged!(_image.value!);
     }
   }
 

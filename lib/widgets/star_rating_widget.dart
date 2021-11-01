@@ -39,8 +39,9 @@ class StarRating extends StatelessWidget {
       padding: EdgeInsets.only(left: index == 0 ? 0 : size / 4),
       child: InkResponse(
         radius: 24,
-        onTap:
-            onRatingChanged != null ? () => onRatingChanged!(index + 1.0) : null,
+        onTap: onRatingChanged != null
+            ? () => onRatingChanged!(index + 1.0)
+            : null,
         child: icon,
       ),
     );

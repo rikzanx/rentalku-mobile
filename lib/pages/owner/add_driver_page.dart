@@ -32,104 +32,101 @@ class AddDriverPage extends StatelessWidget {
         ),
         elevation: 2,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                "Isi Data Diri Sopir",
-                style: AppStyle.title3Text,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 16),
-              TextFieldWithShadow(
-                labelText: "Ketik nama lengkap",
-                hintText: "Nama Lengkap",
-                labelColor: Colors.black,
-                textInputAction: TextInputAction.next,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Kolom nama lengkap wajib diisi';
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          children: [
+            Text(
+              "Isi Data Diri Sopir",
+              style: AppStyle.title3Text,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 16),
+            TextFieldWithShadow(
+              labelText: "Ketik nama lengkap",
+              hintText: "Nama Lengkap",
+              labelColor: Colors.black,
+              textInputAction: TextInputAction.next,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kolom nama lengkap wajib diisi';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 16),
+            TextFieldWithShadow(
+              labelText: "Ketik username",
+              hintText: "username",
+              labelColor: Colors.black,
+              textInputAction: TextInputAction.next,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kolom username wajib diisi';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 16),
+            TextFieldWithShadow(
+              labelText: "Ketik password",
+              hintText: "password",
+              labelColor: Colors.black,
+              textInputAction: TextInputAction.next,
+              obscureText: true,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kolom password wajib diisi';
+                } else if (value.length < 6) {
+                  return 'Panjang password minimal 6 karakter';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 16),
+            TextFieldUploadWithShadow(
+              labelText: "Upload Foto KTP",
+              hintText: "Upload",
+              labelColor: Colors.black,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kolom upload KTP wajib diisi';
+                }
+                return null;
+              },
+              onFileChanged: (File file) {
+                debugPrint(file.path);
+              },
+            ),
+            SizedBox(height: 16),
+            TextFieldUploadWithShadow(
+              labelText: "Upload Foto SIM A",
+              hintText: "Upload",
+              labelColor: Colors.black,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kolom upload SIM A wajib diisi';
+                }
+                return null;
+              },
+              onFileChanged: (File file) {
+                debugPrint(file.path);
+              },
+            ),
+            SizedBox(height: 16),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    // process here
                   }
-                  return null;
                 },
+                child: Text("Tambahkan"),
               ),
-              SizedBox(height: 16),
-              TextFieldWithShadow(
-                labelText: "Ketik username",
-                hintText: "username",
-                labelColor: Colors.black,
-                textInputAction: TextInputAction.next,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Kolom username wajib diisi';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFieldWithShadow(
-                labelText: "Ketik password",
-                hintText: "password",
-                labelColor: Colors.black,
-                textInputAction: TextInputAction.next,
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Kolom password wajib diisi';
-                  } else if (value.length < 6) {
-                    return 'Panjang password minimal 6 karakter';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              TextFieldUploadWithShadow(
-                labelText: "Upload Foto KTP",
-                hintText: "Upload",
-                labelColor: Colors.black,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Kolom upload KTP wajib diisi';
-                  }
-                  return null;
-                },
-                onFileChanged: (File file) {
-                  debugPrint(file.path);
-                },
-              ),
-              SizedBox(height: 16),
-              TextFieldUploadWithShadow(
-                labelText: "Upload Foto SIM A",
-                hintText: "Upload",
-                labelColor: Colors.black,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Kolom upload SIM A wajib diisi';
-                  }
-                  return null;
-                },
-                onFileChanged: (File file) {
-                  debugPrint(file.path);
-                },
-              ),
-              SizedBox(height: 16),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // process here
-                    }
-                  },
-                  child: Text("Tambahkan"),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

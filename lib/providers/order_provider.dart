@@ -36,9 +36,10 @@ class OrderProvider extends ChangeNotifier {
   }
 
   File? _image;
-  set image(File? image){
+  set image(File? image) {
     _image = image;
     notifyListeners();
   }
+
   File? get image => _image;
 }

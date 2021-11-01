@@ -69,8 +69,7 @@ class EditUnitPage extends StatelessWidget {
                 SizedBox(height: 16),
                 TextFieldWithShadow(
                   controller: TextEditingController(
-                    text:
-                    Provider.of<FormUnitProvider>(context, listen: false)
+                    text: Provider.of<FormUnitProvider>(context, listen: false)
                         .name,
                   ),
                   labelText: "Nama Unit",
@@ -84,8 +83,8 @@ class EditUnitPage extends StatelessWidget {
                     return null;
                   },
                   onChanged: (value) {
-                    Provider.of<FormUnitProvider>(context, listen: false)
-                        .name = value;
+                    Provider.of<FormUnitProvider>(context, listen: false).name =
+                        value;
                   },
                 ),
                 SizedBox(height: 16),
@@ -240,7 +239,8 @@ class EditUnitPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, Routes.editUnitComplete);
+                      Navigator.pushReplacementNamed(
+                          context, Routes.editUnitComplete);
                       if (_formKey.currentState!.validate()) {
                         // process here
                       }

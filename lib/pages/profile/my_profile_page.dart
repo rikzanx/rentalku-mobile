@@ -33,145 +33,148 @@ class MyProfilePage extends StatelessWidget {
         ),
         elevation: 2,
       ),
-      body: SingleChildScrollView(
+      body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 24),
-            Stack(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width * 0.125,
-                  ),
-                  child: Material(
-                    elevation: 3,
-                    color: AppColor.lightGreen,
-                    borderRadius: BorderRadius.circular(10),
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(16, 60, 16, 16),
-                      child: Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Nama",
-                                style: AppStyle.regular2Text,
-                              ),
-                              Text(
-                                "Alamat",
-                                style: AppStyle.regular2Text,
-                              ),
-                              Text(
-                                "TTL",
-                                style: AppStyle.regular2Text,
-                              ),
-                              Text(
-                                "No. Telp",
-                                style: AppStyle.regular2Text,
-                              ),
-                            ],
-                          ),
-                          SizedBox(width: 20),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                ": Muhammad",
-                                style: AppStyle.regular2Text,
-                              ),
-                              Text(
-                                ": Jl. Golf 6, Gunungsari, Surabaya",
-                                style: AppStyle.regular2Text,
-                              ),
-                              Text(
-                                ": 12 September 2000",
-                                style: AppStyle.regular2Text,
-                              ),
-                              Text(
-                                ": 082335812487",
-                                style: AppStyle.regular2Text,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+        children: [
+          SizedBox(height: 24),
+          Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.125,
                 ),
-                Center(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    height: MediaQuery.of(context).size.width * 0.25,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        MediaQuery.of(context).size.width * 0.125,
-                      ),
-                      border: Border.all(color: Colors.white, width: 5),
-                    ),
-                    child: ValueListenableBuilder<File?>(
-                      valueListenable: _image,
-                      builder: (context, value, _) => value == null ? CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://lorempixel.com/200/200/people/"),
-                        radius: MediaQuery.of(context).size.width * 0.125,
-                      ) : CircleAvatar(
-                        backgroundImage: FileImage(value),
-                        radius: MediaQuery.of(context).size.width * 0.125,
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: MediaQuery.of(context).size.width * 0.125 + 12,
-                  left: MediaQuery.of(context).size.width * 0.5,
-                  child: Material(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    clipBehavior: Clip.hardEdge,
-                    child: InkWell(
-                      child: Padding(
-                        padding: EdgeInsets.all(4),
-                        child: Icon(
-                          Icons.camera_alt,
-                          color: AppColor.green,
+                child: Material(
+                  elevation: 3,
+                  color: AppColor.lightGreen,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16, 60, 16, 16),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Nama",
+                              style: AppStyle.regular2Text,
+                            ),
+                            Text(
+                              "Alamat",
+                              style: AppStyle.regular2Text,
+                            ),
+                            Text(
+                              "TTL",
+                              style: AppStyle.regular2Text,
+                            ),
+                            Text(
+                              "No. Telp",
+                              style: AppStyle.regular2Text,
+                            ),
+                          ],
                         ),
-                      ),
-                      onTap: () {
-                        myAlert(context);
-                      },
+                        SizedBox(width: 20),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              ": Muhammad",
+                              style: AppStyle.regular2Text,
+                            ),
+                            Text(
+                              ": Jl. Golf 6, Gunungsari, Surabaya",
+                              style: AppStyle.regular2Text,
+                            ),
+                            Text(
+                              ": 12 September 2000",
+                              style: AppStyle.regular2Text,
+                            ),
+                            Text(
+                              ": 082335812487",
+                              style: AppStyle.regular2Text,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ),
-            SizedBox(height: 4),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.editProfile);
-              },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.edit,
-                    size: 16,
-                    color: AppColor.green,
+              ),
+              Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.25,
+                  height: MediaQuery.of(context).size.width * 0.25,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      MediaQuery.of(context).size.width * 0.125,
+                    ),
+                    border: Border.all(color: Colors.white, width: 5),
                   ),
-                  SizedBox(width: 5),
-                  Text(
-                    "Edit",
-                    style: AppStyle.regular1Text.copyWith(
+                  child: ValueListenableBuilder<File?>(
+                    valueListenable: _image,
+                    builder: (context, value, _) => value == null
+                        ? CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                "https://lorempixel.com/200/200/people/"),
+                            radius: MediaQuery.of(context).size.width * 0.125,
+                          )
+                        : CircleAvatar(
+                            backgroundImage: FileImage(value),
+                            radius: MediaQuery.of(context).size.width * 0.125,
+                          ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: MediaQuery.of(context).size.width * 0.125 + 12,
+                left: MediaQuery.of(context).size.width * 0.5,
+                child: Material(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  clipBehavior: Clip.hardEdge,
+                  child: InkWell(
+                    child: Padding(
+                      padding: EdgeInsets.all(4),
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: AppColor.green,
+                      ),
+                    ),
+                    onTap: () {
+                      myAlert(context);
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 4),
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.editProfile);
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.edit,
+                      size: 16,
                       color: AppColor.green,
                     ),
-                  ),
-                ],
+                    SizedBox(width: 5),
+                    Text(
+                      "Edit",
+                      style: AppStyle.regular1Text.copyWith(
+                        color: AppColor.green,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -29,93 +29,90 @@ class EditProfilePage extends StatelessWidget {
         ),
         elevation: 2,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFieldWithShadow(
-                labelText: "Ketik nama lengkap anda",
-                hintText: "Nama Lengkap",
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          children: [
+            TextFieldWithShadow(
+              labelText: "Ketik nama lengkap anda",
+              hintText: "Nama Lengkap",
+              labelColor: Colors.black,
+              textInputAction: TextInputAction.next,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kolom nama lengkap wajib diisi';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 16),
+            TextFieldWithShadow(
+              labelText: "Ketik alamat anda",
+              hintText: "Alamat",
+              labelColor: Colors.black,
+              textInputAction: TextInputAction.next,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kolom alamat wajib diisi';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 16),
+            GestureDetector(
+              onTap: () {
+                showDatePicker(
+                  context: context,
+                  initialDate: DateTime(DateTime.now().year - 17),
+                  firstDate: DateTime(DateTime.now().year - 100),
+                  lastDate: DateTime(DateTime.now().year - 17),
+                ).then((DateTime? value) {
+                  debugPrint(value.toString());
+                });
+              },
+              child: TextFieldWithShadow(
+                labelText: "Ketik tanggal lahir anda",
+                hintText: "Tanggal lahir",
+                keyboardType: TextInputType.datetime,
                 labelColor: Colors.black,
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Kolom nama lengkap wajib diisi';
+                    return 'Kolom tanggal lahir wajib diisi';
                   }
                   return null;
                 },
+                enabled: false,
               ),
-              SizedBox(height: 16),
-              TextFieldWithShadow(
-                labelText: "Ketik alamat anda",
-                hintText: "Alamat",
-                labelColor: Colors.black,
-                textInputAction: TextInputAction.next,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Kolom alamat wajib diisi';
+            ),
+            SizedBox(height: 16),
+            TextFieldWithShadow(
+              labelText: "Ketik nomor hp anda",
+              hintText: "No. Handphone",
+              keyboardType: TextInputType.phone,
+              labelColor: Colors.black,
+              textInputAction: TextInputAction.done,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kolom nomor hp wajib diisi';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 16),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    // process here
                   }
-                  return null;
                 },
+                child: Text("Simpan perubahan"),
               ),
-              SizedBox(height: 16),
-              GestureDetector(
-                onTap: () {
-                  showDatePicker(
-                    context: context,
-                    initialDate: DateTime(DateTime.now().year - 17),
-                    firstDate: DateTime(DateTime.now().year - 100),
-                    lastDate: DateTime(DateTime.now().year - 17),
-                  ).then((DateTime? value){
-                    debugPrint(value.toString());
-                  });
-                },
-                child: TextFieldWithShadow(
-                  labelText: "Ketik tanggal lahir anda",
-                  hintText: "Tanggal lahir",
-                  keyboardType: TextInputType.datetime,
-                  labelColor: Colors.black,
-                  textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Kolom tanggal lahir wajib diisi';
-                    }
-                    return null;
-                  },
-                  enabled: false,
-                ),
-              ),
-              SizedBox(height: 16),
-              TextFieldWithShadow(
-                labelText: "Ketik nomor hp anda",
-                hintText: "No. Handphone",
-                keyboardType: TextInputType.phone,
-                labelColor: Colors.black,
-                textInputAction: TextInputAction.done,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Kolom nomor hp wajib diisi';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 16),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // process here
-                    }
-                  },
-                  child: Text("Simpan perubahan"),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -13,56 +13,65 @@ class DashboardHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 48),
-          Padding(
+    return ListView(
+      children: [
+        AppBar(
+          title: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Image.asset("assets/images/rentalku.png", height: 16),
           ),
-          SizedBox(height: 8),
-          Consumer<AppProvider>(
-            builder: (context, app, _) => app.isUser
-                ? UserInfo(context)
-                : app.isOwner
-                    ? OwnerInfo(context)
-                    : Container(),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          actions: [
+            IconButton(
+              splashRadius: 24,
+              icon: Image.asset('assets/images/chat_icon.png', height: 24),
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.chats);
+              },
+            )
+          ],
+        ),
+        SizedBox(height: 24),
+        Consumer<AppProvider>(
+          builder: (context, app, _) => app.isUser
+              ? UserInfo(context)
+              : app.isOwner
+                  ? OwnerInfo(context)
+                  : Container(),
+        ),
+        SizedBox(height: 12),
+        Container(
+          height: 6,
+          color: AppColor.grey,
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: Text(
+            "Artikel",
+            style: AppStyle.regular1Text.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          SizedBox(height: 12),
-          Container(
-            height: 6,
-            color: AppColor.grey,
-          ),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Text(
-              "Artikel",
-              style: AppStyle.regular1Text.copyWith(
-                fontWeight: FontWeight.bold,
+        ),
+        ...List.generate(
+          3,
+          (index) => Padding(
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 10),
+            child: ArticleCardWidget(
+              article: Article(
+                id: 1,
+                title: "Enam Teknik Mencuci Mobil yang Benar, Jangan Asal!",
+                category: "Otomotif",
+                imageURL: "https://i.imgur.com/9waAALi.jpg",
+                webURL: "http://id.wikipedia.org/wiki/Rantai_blok",
               ),
             ),
           ),
-          ...List.generate(
-            3,
-            (index) => Padding(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 10),
-              child: ArticleCardWidget(
-                article: Article(
-                  id: 1,
-                  title: "Enam Teknik Mencuci Mobil yang Benar, Jangan Asal!",
-                  category: "Otomotif",
-                  imageURL: "https://i.imgur.com/9waAALi.jpg",
-                  webURL: "http://id.wikipedia.org/wiki/Rantai_blok",
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 6),
-        ],
-      ),
+        ),
+        SizedBox(height: 6),
+      ],
     );
   }
 

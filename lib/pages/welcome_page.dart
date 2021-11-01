@@ -88,8 +88,7 @@ class HomePage extends StatelessWidget {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.pushNamed(
-                                  context, Routes.register);
+                              Navigator.pushNamed(context, Routes.register);
                             },
                         ),
                       ],

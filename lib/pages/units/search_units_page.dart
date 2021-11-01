@@ -94,131 +94,128 @@ class SearchUnitsPage extends StatelessWidget {
   }
 
   Widget ModalSheetBar(BuildContext context) {
-    return SingleChildScrollView(
+    return ListView(
       padding: EdgeInsets.fromLTRB(16, 32, 16, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text("Pilihan Kota", style: AppStyle.regular2Text),
-          SizedBox(height: 2),
-          Consumer<SearchUnitsProvider>(
-            builder: (context, state, _) => GridView.count(
-              crossAxisCount: 3,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              childAspectRatio: 3,
-              children: List.generate(
-                state.selectableCity.length,
-                (index) => FilterWidget(
-                  label: state.selectableCity[index],
-                  selected: state.cities.contains(state.selectableCity[index]),
-                  onTap: (status) {
-                    if (status) {
-                      state.cities.add(state.selectableCity[index]);
-                    } else {
-                      state.cities.remove(state.selectableCity[index]);
-                    }
-                    state.notifyListeners();
-                  },
-                ),
+      children: [
+        Text("Pilihan Kota", style: AppStyle.regular2Text),
+        SizedBox(height: 2),
+        Consumer<SearchUnitsProvider>(
+          builder: (context, state, _) => GridView.count(
+            crossAxisCount: 3,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            childAspectRatio: 3,
+            children: List.generate(
+              state.selectableCity.length,
+              (index) => FilterWidget(
+                label: state.selectableCity[index],
+                selected: state.cities.contains(state.selectableCity[index]),
+                onTap: (status) {
+                  if (status) {
+                    state.cities.add(state.selectableCity[index]);
+                  } else {
+                    state.cities.remove(state.selectableCity[index]);
+                  }
+                  state.notifyListeners();
+                },
               ),
             ),
           ),
-          SizedBox(height: 8),
-          Text("Urutkan menurut", style: AppStyle.regular2Text),
-          SizedBox(height: 2),
-          Consumer<SearchUnitsProvider>(
-            builder: (context, state, _) => GridView.count(
-              crossAxisCount: 3,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              childAspectRatio: 3,
-              children: List.generate(
-                state.selectableSort.length,
-                (index) => FilterWidget(
-                  label: state.selectableSort[index],
-                  selected: state.sort == state.selectableSort[index],
-                  onTap: (status) {
-                    if (status) {
-                      state.sort = state.selectableSort[index];
-                    } else {
-                      state.sort = state.selectableSort[index];
-                    }
-                    state.notifyListeners();
-                  },
-                ),
+        ),
+        SizedBox(height: 8),
+        Text("Urutkan menurut", style: AppStyle.regular2Text),
+        SizedBox(height: 2),
+        Consumer<SearchUnitsProvider>(
+          builder: (context, state, _) => GridView.count(
+            crossAxisCount: 3,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            childAspectRatio: 3,
+            children: List.generate(
+              state.selectableSort.length,
+              (index) => FilterWidget(
+                label: state.selectableSort[index],
+                selected: state.sort == state.selectableSort[index],
+                onTap: (status) {
+                  if (status) {
+                    state.sort = state.selectableSort[index];
+                  } else {
+                    state.sort = state.selectableSort[index];
+                  }
+                  state.notifyListeners();
+                },
               ),
             ),
           ),
-          SizedBox(height: 8),
-          Text("Kapasitas penumpang", style: AppStyle.regular2Text),
-          SizedBox(height: 2),
-          Consumer<SearchUnitsProvider>(
-            builder: (context, state, _) => GridView.count(
-              crossAxisCount: 3,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              childAspectRatio: 3,
-              children: List.generate(
-                state.selectableCapacity.length,
-                (index) => FilterWidget(
-                  label: state.selectableCapacity[index],
-                  selected:
-                      state.capacity.contains(state.selectableCapacity[index]),
-                  onTap: (status) {
-                    if (status) {
-                      state.capacity.add(state.selectableCapacity[index]);
-                    } else {
-                      state.capacity.remove(state.selectableCapacity[index]);
-                    }
-                    state.notifyListeners();
-                  },
-                ),
+        ),
+        SizedBox(height: 8),
+        Text("Kapasitas penumpang", style: AppStyle.regular2Text),
+        SizedBox(height: 2),
+        Consumer<SearchUnitsProvider>(
+          builder: (context, state, _) => GridView.count(
+            crossAxisCount: 3,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            childAspectRatio: 3,
+            children: List.generate(
+              state.selectableCapacity.length,
+              (index) => FilterWidget(
+                label: state.selectableCapacity[index],
+                selected:
+                    state.capacity.contains(state.selectableCapacity[index]),
+                onTap: (status) {
+                  if (status) {
+                    state.capacity.add(state.selectableCapacity[index]);
+                  } else {
+                    state.capacity.remove(state.selectableCapacity[index]);
+                  }
+                  state.notifyListeners();
+                },
               ),
             ),
           ),
-          SizedBox(height: 8),
-          Text("Jenis mobil", style: AppStyle.regular2Text),
-          SizedBox(height: 2),
-          Consumer<SearchUnitsProvider>(
-            builder: (context, state, _) => GridView.count(
-              crossAxisCount: 3,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              childAspectRatio: 3,
-              children: List.generate(
-                state.selectableCarType.length,
-                (index) => FilterWidget(
-                  label: state.selectableCarType[index],
-                  selected:
-                      state.carType.contains(state.selectableCarType[index]),
-                  onTap: (status) {
-                    if (status) {
-                      state.carType.add(state.selectableCarType[index]);
-                    } else {
-                      state.carType.remove(state.selectableCarType[index]);
-                    }
-                    state.notifyListeners();
-                  },
-                ),
+        ),
+        SizedBox(height: 8),
+        Text("Jenis mobil", style: AppStyle.regular2Text),
+        SizedBox(height: 2),
+        Consumer<SearchUnitsProvider>(
+          builder: (context, state, _) => GridView.count(
+            crossAxisCount: 3,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            childAspectRatio: 3,
+            children: List.generate(
+              state.selectableCarType.length,
+              (index) => FilterWidget(
+                label: state.selectableCarType[index],
+                selected:
+                    state.carType.contains(state.selectableCarType[index]),
+                onTap: (status) {
+                  if (status) {
+                    state.carType.add(state.selectableCarType[index]);
+                  } else {
+                    state.carType.remove(state.selectableCarType[index]);
+                  }
+                  state.notifyListeners();
+                },
               ),
             ),
           ),
-          SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text("Cari"),
-          ),
-        ],
-      ),
+        ),
+        SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: () {},
+          child: Text("Cari"),
+        ),
+      ],
     );
   }
 }
