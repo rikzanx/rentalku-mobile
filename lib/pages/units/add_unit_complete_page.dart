@@ -46,7 +46,7 @@ class AddUnitCompletePage extends StatelessWidget {
                     .jumpToPage(0);
                 Navigator.popUntil(context, (route) => route.isFirst);
               },
-              child: Text("Lihat Sekarang"),
+              child: Text("Kembali ke Halaman Utama"),
             ),
           ],
         ),

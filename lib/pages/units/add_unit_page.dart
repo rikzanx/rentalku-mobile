@@ -240,7 +240,7 @@ class AddUnitPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushReplacementNamed(
-                          context, Routes.editUnitComplete);
+                          context, Routes.addUnitComplete);
                       if (_formKey.currentState!.validate()) {
                         // process here
                       }
