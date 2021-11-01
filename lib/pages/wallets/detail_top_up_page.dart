@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
+import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/strings.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/payment_method.dart';
@@ -375,7 +376,11 @@ class DetailTopUpPage extends StatelessWidget {
                                         color: Colors.green[900],
                                       ),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.pushReplacementNamed(
+                                          context, Routes.withdrawComplete);
+                                    },
                                   ),
                                 ],
                               );
@@ -533,7 +538,7 @@ class DetailTopUpPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: List.generate(
                         tutorial.value.length,
-                            (index) => Row(
+                        (index) => Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(

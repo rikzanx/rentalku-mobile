@@ -32,7 +32,7 @@ class ListChatPage extends StatelessWidget {
       ),
       body: Consumer<ChatProvider>(
         builder: (context, state, _) {
-          if (!state.chats.isEmpty) {
+          if (state.chats.isEmpty) {
             return EmptyChatWidget(
               onRefresh: () async {},
             );

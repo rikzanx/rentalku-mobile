@@ -43,14 +43,13 @@ class WithdrawCompletePage extends StatelessWidget {
               style: AppStyle.regular1Text,
             ),
             SizedBox(height: 24),
-            Consumer<DashboardProvider>(
-              builder: (context, state, _) => ElevatedButton(
-                onPressed: () {
-                  state.jumpToPage(0);
-                  Navigator.popUntil(context, (route) => route.isFirst);
-                },
-                child: Text("Kembali Ke Halaman Utama"),
-              ),
+            ElevatedButton(
+              onPressed: () {
+                Provider.of<DashboardProvider>(context, listen: false)
+                    .jumpToPage(0);
+                Navigator.popUntil(context, (route) => route.isFirst);
+              },
+              child: Text("Kembali Ke Halaman Utama"),
             ),
           ],
         ),

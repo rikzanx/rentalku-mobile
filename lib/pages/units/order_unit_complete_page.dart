@@ -49,14 +49,13 @@ class OrderUnitCompletePage extends StatelessWidget {
               style: AppStyle.regular1Text,
             ),
             SizedBox(height: 24),
-            Consumer<DashboardProvider>(
-              builder: (context, state, _) => ElevatedButton(
-                onPressed: () {
-                  state.jumpToPage(1);
-                  Navigator.pop(context);
-                },
-                child: Text("Lihat Sekarang"),
-              ),
+            ElevatedButton(
+              onPressed: () {
+                Provider.of<DashboardProvider>(context, listen: false)
+                    .jumpToPage(1);
+                Navigator.pop(context);
+              },
+              child: Text("Lihat Sekarang"),
             ),
           ],
         ),

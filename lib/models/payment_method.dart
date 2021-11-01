@@ -18,6 +18,9 @@ class PaymentMethod extends Equatable {
     this.accountNumber = "12345678",
   });
 
+  bool get isBank => this.paymentMethodType == PaymentMethodType.BankAccount;
+  bool get isWallet => this.paymentMethodType == PaymentMethodType.EWallet;
+
   @override
   List<Object?> get props => [name];
 

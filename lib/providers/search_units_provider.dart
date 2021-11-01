@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class UnitProvider extends ChangeNotifier {
+class SearchUnitsProvider extends ChangeNotifier {
   List<String> _selectableCity = [
     "Surabaya",
     "Yogyakarta",

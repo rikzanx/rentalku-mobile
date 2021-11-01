@@ -1,11 +1,35 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:rentalku/models/payment_method.dart';
 
 class WithdrawProvider extends ChangeNotifier {
+  final formKey = GlobalKey<FormState>();
+  final CurrencyTextInputFormatter formatter = CurrencyTextInputFormatter(
+    locale: 'id',
+    decimalDigits: 0,
+    symbol: "Rp. ",
+  );
+  final TextEditingController amountController = TextEditingController();
+  final TextEditingController accountNumberController = TextEditingController();
+
   int _amount = 0;
   int get amount => _amount;
   set amount(int amount) {
     _amount = amount;
+
+    String _newValue = formatter.format(amount.toString());
+    amountController.value = TextEditingValue(
+      text: _newValue,
+      selection: TextSelection.fromPosition(
+        TextPosition(offset: _newValue.length),
+      ),
+    );
+
+    notifyListeners();
+  }
+
+  void syncAmount() {
+    _amount = formatter.getUnformattedValue().toInt();
     notifyListeners();
   }
 
@@ -30,7 +54,9 @@ class WithdrawProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<PaymentMethod> get selectablePaymentMethod => PaymentMethod.list;
+  List<PaymentMethod> get selectableBankPaymentMethod =>
+      PaymentMethod.list.where((element) => element.isBank).toList();
 
-  bool get complete => _amount >= 50000 && _paymentMethod != null && _accountNumber.length > 0;
+  bool get complete =>
+      _amount >= 50000 && _paymentMethod != null && _accountNumber.isNotEmpty;
 }

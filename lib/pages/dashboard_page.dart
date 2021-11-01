@@ -14,16 +14,18 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Consumer<DashboardProvider>(
-        builder: (context, state, children) => PageView(
-          controller: state.controller,
-          children: const [
-            DashboardHomePage(),
-            DashboardMyBookingPage(),
-            DashboardProfilPage(),
-          ],
-          onPageChanged: (index) => state.bottomNavIndex = index,
-        ),
+      body: PageView(
+        controller:
+            Provider.of<DashboardProvider>(context, listen: false).controller,
+        children: const [
+          DashboardHomePage(),
+          DashboardMyBookingPage(),
+          DashboardProfilPage(),
+        ],
+        onPageChanged: (index) {
+          Provider.of<DashboardProvider>(context, listen: false)
+              .bottomNavIndex = index;
+        },
       ),
       bottomNavigationBar: Consumer<DashboardProvider>(
         builder: (context, state, _) => BottomNavigationBar(

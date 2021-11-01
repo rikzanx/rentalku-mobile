@@ -109,20 +109,18 @@ class UpgradeOwnerCarPage extends StatelessWidget {
                               debugPrint(file.path);
                             },
                           ),
-                          SizedBox(height: 16),
-                          Consumer<AppProvider>(
-                            builder: (context, state, _) => ElevatedButton(
-                              onPressed: () {
-                                state.userType = UserType.Owner;
-                                Navigator.pop(context);
-                                // TODO: Remove this
-                                if (_formKey.currentState!.validate()) {
-                                  // process here
-                                }
-                              },
-                              child: Text("Daftar & Jadi Pemilik Mobil"),
-                            ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Provider.of<AppProvider>(context, listen: false).userType = UserType.Owner;
+                              Navigator.pop(context);
+                              // TODO: Remove this
+                              if (_formKey.currentState!.validate()) {
+                                // process here
+                              }
+                            },
+                            child: Text("Daftar & Jadi Pemilik Mobil"),
                           ),
+                          SizedBox(height: 16),
                         ],
                       ),
                     ),

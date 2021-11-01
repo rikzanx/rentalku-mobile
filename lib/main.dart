@@ -10,8 +10,6 @@ import 'package:rentalku/pages/undefined_page.dart';
 import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/providers/chat_provider.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
-import 'package:rentalku/providers/form_unit_provider.dart';
-import 'package:rentalku/providers/rental_mobil_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 void main() {
@@ -23,7 +21,6 @@ void main() {
         ChangeNotifierProvider(create: (context) => AppProvider()),
         ChangeNotifierProvider(create: (context) => DashboardProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),
-        ChangeNotifierProvider(create: (context) => UnitProvider()),
       ],
       child: MyApp(),
     ),
