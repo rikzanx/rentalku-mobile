@@ -301,7 +301,9 @@ class DashboardHomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.myUnits);
+                    },
                   ),
                 ),
               ),
@@ -352,7 +354,9 @@ class DashboardHomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.addUnit);
+                    },
                   ),
                 ),
               ),

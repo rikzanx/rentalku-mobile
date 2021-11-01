@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rentalku/commons/types.dart';
+import 'package:rentalku/commons/constants.dart';
 
 class AppProvider extends ChangeNotifier {
   bool _isFirstTimeHomePageLoads = true;

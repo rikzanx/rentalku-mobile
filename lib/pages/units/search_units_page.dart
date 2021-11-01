@@ -3,13 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
-import 'package:rentalku/models/rental_mobil.dart';
+import 'package:rentalku/models/unit.dart';
 import 'package:rentalku/providers/rental_mobil_provider.dart';
 import 'package:rentalku/widgets/filter_widget.dart';
 import 'package:rentalku/widgets/rental_mobil_card_widget.dart';
 
-class RentalMobilPage extends StatelessWidget {
-  const RentalMobilPage({Key? key}) : super(key: key);
+class SearchUnitsPage extends StatelessWidget {
+  const SearchUnitsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,8 @@ class RentalMobilPage extends StatelessWidget {
         itemCount: 10,
         itemBuilder: (context, index) => Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RentalMobilCardWidget(
-            rentalMobil: RentalMobil(
+          child: UnitCardWidget(
+            unit: Unit(
               id: 1,
               name: "Toyota Avanza",
               description: "Mini MPV",
@@ -52,13 +52,13 @@ class RentalMobilPage extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(
                 context,
-                Routes.rentalMobilDetail,
+                Routes.detailUnit,
               );
             },
           ),
         ),
       ),
-      floatingActionButton: Consumer<RentalMobilProvider>(
+      floatingActionButton: Consumer<UnitProvider>(
         builder: (context, state, _) => FloatingActionButton(
           child: Icon(Icons.filter_alt),
           mini: true,
@@ -89,7 +89,7 @@ class RentalMobilPage extends StatelessWidget {
         children: [
           Text("Pilihan Kota", style: AppStyle.regular2Text),
           SizedBox(height: 2),
-          Consumer<RentalMobilProvider>(
+          Consumer<UnitProvider>(
             builder: (context, state, _) => GridView.count(
               crossAxisCount: 3,
               crossAxisSpacing: 8,
@@ -117,7 +117,7 @@ class RentalMobilPage extends StatelessWidget {
           SizedBox(height: 8),
           Text("Urutkan menurut", style: AppStyle.regular2Text),
           SizedBox(height: 2),
-          Consumer<RentalMobilProvider>(
+          Consumer<UnitProvider>(
             builder: (context, state, _) => GridView.count(
               crossAxisCount: 3,
               crossAxisSpacing: 8,
@@ -145,7 +145,7 @@ class RentalMobilPage extends StatelessWidget {
           SizedBox(height: 8),
           Text("Kapasitas penumpang", style: AppStyle.regular2Text),
           SizedBox(height: 2),
-          Consumer<RentalMobilProvider>(
+          Consumer<UnitProvider>(
             builder: (context, state, _) => GridView.count(
               crossAxisCount: 3,
               crossAxisSpacing: 8,
@@ -174,7 +174,7 @@ class RentalMobilPage extends StatelessWidget {
           SizedBox(height: 8),
           Text("Jenis mobil", style: AppStyle.regular2Text),
           SizedBox(height: 2),
-          Consumer<RentalMobilProvider>(
+          Consumer<UnitProvider>(
             builder: (context, state, _) => GridView.count(
               crossAxisCount: 3,
               crossAxisSpacing: 8,

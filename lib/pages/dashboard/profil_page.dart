@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
-import 'package:rentalku/commons/types.dart';
 import 'package:rentalku/providers/app_provider.dart';
 
 class DashboardProfilPage extends StatelessWidget {
@@ -159,7 +159,7 @@ class DashboardProfilPage extends StatelessWidget {
                       style: AppStyle.regular1Text,
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, Routes.rentalMobil);
+                      Navigator.pushNamed(context, Routes.searchUnits);
                     },
                   )
                 : SizedBox(),
@@ -205,7 +205,7 @@ class DashboardProfilPage extends StatelessWidget {
               style: AppStyle.regular1Text,
             ),
             onTap: () {
-              Navigator.pushNamed(context, Routes.dompetku);
+              Navigator.pushNamed(context, Routes.wallet);
             },
           ),
           ListTile(

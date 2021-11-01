@@ -9,6 +9,7 @@ class TextFieldWithShadow extends StatelessWidget {
   final String? hintText;
   final String? labelText;
   final String? prefixText;
+  final String? suffixText;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
@@ -32,6 +33,7 @@ class TextFieldWithShadow extends StatelessWidget {
     this.onChanged,
     this.onTap,
     this.prefixText,
+    this.suffixText,
     this.textInputAction,
     this.validator,
   }) : super(key: key);
@@ -70,6 +72,8 @@ class TextFieldWithShadow extends StatelessWidget {
                 hintText: hintText,
                 prefixText: prefixText,
                 prefixStyle: AppStyle.regular1Text,
+                suffixText: suffixText,
+                suffixStyle: AppStyle.regular1Text,
               ),
               inputFormatters: inputFormatters,
               keyboardType: keyboardType,

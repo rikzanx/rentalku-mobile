@@ -57,7 +57,7 @@ class ArticleCardWidget extends StatelessWidget {
           ],
         ),
         onTap: () {
-          Navigator.pushNamed(context, Routes.article);
+          Navigator.pushNamed(context, Routes.viewArticle);
         },
       ),
     );

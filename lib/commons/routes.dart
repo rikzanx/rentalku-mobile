@@ -1,38 +1,53 @@
 class Routes {
   Routes._();
 
+  /* Home */
   static const String home = '/';
+
+  /* Auth */
   static const String login = '/login';
   static const String register = '/register';
-  static const String dashboard = '/dashboard';
-
-  static const String myProfile = '/profile';
-  static const String editProfile = '/profile/edit';
   static const String updatePassword = '/update-password';
 
-  static const String rentalMobil = '/rental-mobil';
-  static const String rentalMobilDetail = '/rental-mobil/detail';
-  static const String reviewProduct = '/rental-mobil/detail/review-product';
-  static const String reviewOwner = '/rental-mobil/detail/review-owner';
-  static const String rentalMobilOrder = '/rental-mobil/detail/order';
-  static const String pickLocation = '/rental-mobil/detail/order/location';
-  static const String orderComplete = '/rental-mobil/detail/order/complete';
+  /* Dashboard */
+  static const String dashboard = '/dashboard';
+  static const String viewArticle = '/article/view';
 
-  static const String chats = '/chats';
-  static const String viewChat = '/chats/view';
+  /* Profile */
+  static const String myProfile = '/profile';
+  static const String editProfile = '/profile/edit';
 
-  static const String article = '/article';
+  /* Wallet */
+  static const String wallet = '/wallet';
+  static const String topUp = '/wallet/top-up';
+  static const String detailTopUp = '/wallet/top-up/detail';
+  static const String withdraw = '/wallet/withdraw';
+  static const String withdrawComplete = '/wallet/withdraw/complete';
 
-  static const String dompetku = '/dompetku';
-  static const String topUp = '/dompetku/top-up';
-  static const String withdraw = '/dompetku/withdraw';
-  static const String withdrawComplete = '/dompetku/withdraw/complete';
-  static const String detailTopUp = '/dompetku/detail-top-up/';
+  /* Units */
+  static const String searchUnits = '/units/search';
+  static const String myUnits = '/units/my';
+  static const String detailUnit = '/units/detail';
+  static const String addUnit = '/units/detail/add';
+  static const String addUnitComplete = '/units/detail/add/complete';
+  static const String editUnit = '/units/detail/edit';
+  static const String editUnitComplete = '/units/detail/edit/complete';
+  static const String reviewProduct = '/units/detail/review-product';
+  static const String reviewOwner = '/units/detail/review-owner';
+  static const String orderUnit = '/units/detail/order';
+  static const String pickLocation = '/units/detail/order/location';
+  static const String orderUnitComplete = '/units/detail/order/complete';
 
+  /* Bookings */
   static const String detailBooking = '/bookings/detail';
   static const String addReviewPage = '/bookings/add-reviews';
   static const String trackCar = '/bookings/detail/track';
 
+  /* Chats */
+  static const String chats = '/chats';
+  static const String viewChat = '/chats/view';
+
+  /* Owner */
   static const String upgradeToOwner = '/upgrade-to-owner';
   static const String driverList = '/owner/drivers';
   static const String addDriver = '/owner/drivers/add';

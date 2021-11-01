@@ -10,12 +10,24 @@ import 'package:rentalku/pages/undefined_page.dart';
 import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/providers/chat_provider.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
+import 'package:rentalku/providers/form_unit_provider.dart';
 import 'package:rentalku/providers/rental_mobil_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 void main() {
   timeago.setLocaleMessages('id', timeago.IdMessages());
-  runApp(MyApp());
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AppProvider()),
+        ChangeNotifierProvider(create: (context) => DashboardProvider()),
+        ChangeNotifierProvider(create: (context) => ChatProvider()),
+        ChangeNotifierProvider(create: (context) => UnitProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -25,80 +37,71 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(360, 640),
-      builder: () => MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => AppProvider()),
-          ChangeNotifierProvider(create: (context) => DashboardProvider()),
-          ChangeNotifierProvider(create: (context) => ChatProvider()),
-          ChangeNotifierProvider(create: (context) => RentalMobilProvider()),
+      builder: () => MaterialApp(
+        title: 'Provider and Routes',
+        initialRoute: Routes.home,
+        onGenerateRoute: router.generateRoute,
+        onUnknownRoute: (settings) => MaterialPageRoute(
+          builder: (context) => UndefinedPage(
+            name: settings.name.toString(),
+          ),
+        ),
+        localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+        supportedLocales: [
+          const Locale('id'),
         ],
-        child: MaterialApp(
-          title: 'Provider and Routes',
-          initialRoute: Routes.home,
-          onGenerateRoute: router.generateRoute,
-          onUnknownRoute: (settings) => MaterialPageRoute(
-            builder: (context) => UndefinedPage(
-              name: settings.name.toString(),
+        theme: ThemeData(
+          primaryColor: AppColor.green,
+          inputDecorationTheme: InputDecorationTheme(
+            isDense: true,
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            fillColor: Colors.white,
+            filled: true,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
+            hintStyle: AppStyle.regular1Text.copyWith(
+              color: Color(0xFF696969),
+            ),
+            errorStyle: AppStyle.regular2Text.copyWith(
+              color: Colors.redAccent,
             ),
           ),
-          localizationsDelegates: [GlobalMaterialLocalizations.delegate],
-          supportedLocales: [
-            const Locale('id'),
-          ],
-          theme: ThemeData(
-            primaryColor: AppColor.green,
-            inputDecorationTheme: InputDecorationTheme(
-              isDense: true,
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              fillColor: Colors.white,
-              filled: true,
-              border: OutlineInputBorder(
+          appBarTheme: AppBarTheme(
+            backgroundColor: AppColor.green,
+            titleTextStyle: AppStyle.title1Text,
+            titleSpacing: 0,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              primary: AppColor.yellow,
+              onPrimary: Colors.white,
+              elevation: 3,
+              padding: EdgeInsets.all(12),
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide.none,
               ),
-              enabledBorder: OutlineInputBorder(
+              textStyle: AppStyle.title2Text,
+            ),
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+              primary: AppColor.green,
+              side: BorderSide(width: 2, color: AppColor.green),
+              padding: EdgeInsets.all(12),
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide.none,
               ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide.none,
-              ),
-              hintStyle: AppStyle.regular1Text.copyWith(
-                color: Color(0xFF696969),
-              ),
-              errorStyle: AppStyle.regular2Text.copyWith(
-                color: Colors.redAccent,
-              ),
-            ),
-            appBarTheme: AppBarTheme(
-              backgroundColor: AppColor.green,
-              titleTextStyle: AppStyle.title1Text,
-              titleSpacing: 0,
-            ),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(
-                primary: AppColor.yellow,
-                onPrimary: Colors.white,
-                elevation: 3,
-                padding: EdgeInsets.all(12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                textStyle: AppStyle.title2Text,
-              ),
-            ),
-            outlinedButtonTheme: OutlinedButtonThemeData(
-              style: OutlinedButton.styleFrom(
-                primary: AppColor.green,
-                side: BorderSide(width: 2, color: AppColor.green),
-                padding: EdgeInsets.all(12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                textStyle: AppStyle.title2Text,
-              ),
+              textStyle: AppStyle.title2Text,
             ),
           ),
         ),

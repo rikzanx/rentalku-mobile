@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/styles.dart';
-import 'package:rentalku/models/rental_mobil.dart';
+import 'package:rentalku/models/unit.dart';
 
-class RentalMobilCardWidget extends StatelessWidget {
-  final RentalMobil rentalMobil;
+class UnitCardWidget extends StatelessWidget {
+  final Unit unit;
   final void Function()? onTap;
 
-  const RentalMobilCardWidget({
+  const UnitCardWidget({
     Key? key,
     required this.onTap,
-    required this.rentalMobil,
+    required this.unit,
   }) : super(key: key);
 
   @override
@@ -28,7 +28,7 @@ class RentalMobilCardWidget extends StatelessWidget {
             children: [
               Expanded(
                 flex: 3,
-                child: Image.network(rentalMobil.imageURL),
+                child: Image.network(unit.imageURL),
               ),
               SizedBox(width: 8),
               Expanded(
@@ -37,7 +37,7 @@ class RentalMobilCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      rentalMobil.name,
+                      unit.name,
                       maxLines: 1,
                       overflow: TextOverflow.clip,
                       style: AppStyle.regular1Text.copyWith(
@@ -45,13 +45,13 @@ class RentalMobilCardWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      rentalMobil.description,
+                      unit.description,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppStyle.regular1Text,
                     ),
                     Text(
-                      rentalMobil.withDriver ? "Dengan Supir" : "Tanpa Supir",
+                      unit.withDriver ? "Dengan Supir" : "Tanpa Supir",
                       style: AppStyle.smallText,
                     ),
                     Text(
@@ -61,7 +61,7 @@ class RentalMobilCardWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      Helper.toIDR(rentalMobil.price) + "/Hari",
+                      Helper.toIDR(unit.price) + "/Hari",
                       style: AppStyle.smallText.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColor.yellow,
@@ -80,7 +80,7 @@ class RentalMobilCardWidget extends StatelessWidget {
                       Icon(Icons.star, size: 12, color: AppColor.yellow),
                       SizedBox(width: 2),
                       Text(
-                        rentalMobil.rating.toString(),
+                        unit.rating.toString(),
                         style: AppStyle.smallText,
                       ),
                     ],
@@ -91,7 +91,7 @@ class RentalMobilCardWidget extends StatelessWidget {
                       Icon(Icons.people, size: 12, color: AppColor.green),
                       SizedBox(width: 2),
                       Text(
-                        rentalMobil.capacity.toString(),
+                        unit.capacity.toString(),
                         style: AppStyle.smallText,
                       )
                     ],

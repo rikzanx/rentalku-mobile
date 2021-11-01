@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
 
-class OrderCompletePage extends StatelessWidget {
-  const OrderCompletePage({Key? key}) : super(key: key);
+class OrderUnitCompletePage extends StatelessWidget {
+  const OrderUnitCompletePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

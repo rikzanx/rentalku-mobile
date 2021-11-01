@@ -85,12 +85,12 @@ class AddDriverPage extends StatelessWidget {
                   }
                   return null;
                 },
-              ),SizedBox(height: 16),
+              ),
+              SizedBox(height: 16),
               TextFieldUploadWithShadow(
                 labelText: "Upload Foto KTP",
                 hintText: "Upload",
                 labelColor: Colors.black,
-                textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Kolom upload KTP wajib diisi';
@@ -100,12 +100,12 @@ class AddDriverPage extends StatelessWidget {
                 onFileChanged: (File file) {
                   debugPrint(file.path);
                 },
-              ),SizedBox(height: 16),
+              ),
+              SizedBox(height: 16),
               TextFieldUploadWithShadow(
                 labelText: "Upload Foto SIM A",
                 hintText: "Upload",
                 labelColor: Colors.black,
-                textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Kolom upload SIM A wajib diisi';

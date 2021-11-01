@@ -7,7 +7,7 @@ import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
-import 'package:rentalku/models/rental_mobil.dart';
+import 'package:rentalku/models/unit.dart';
 import 'package:rentalku/providers/order_provider.dart';
 import 'package:rentalku/widgets/balance_widget.dart';
 import 'package:rentalku/widgets/driver_card_widget.dart';
@@ -16,12 +16,12 @@ import 'package:rentalku/widgets/text_field_with_shadow.dart';
 
 final _formKey = GlobalKey<FormState>();
 
-class OrderRentalMobilPage extends StatelessWidget {
-  const OrderRentalMobilPage({Key? key}) : super(key: key);
+class OrderUnitPage extends StatelessWidget {
+  const OrderUnitPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    RentalMobil rentalMobil = RentalMobil(
+    Unit unit = Unit(
       id: 1,
       name: "Toyota Avanza",
       description: "Mini MPV",
@@ -72,7 +72,7 @@ class OrderRentalMobilPage extends StatelessWidget {
                           children: [
                             Expanded(
                               flex: 1,
-                              child: Image.network(rentalMobil.imageURL),
+                              child: Image.network(unit.imageURL),
                             ),
                             SizedBox(width: 8),
                             Expanded(
@@ -81,7 +81,7 @@ class OrderRentalMobilPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    rentalMobil.name,
+                                    unit.name,
                                     maxLines: 1,
                                     overflow: TextOverflow.clip,
                                     style: AppStyle.regular1Text.copyWith(
@@ -89,7 +89,7 @@ class OrderRentalMobilPage extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    rentalMobil.description,
+                                    unit.description,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: AppStyle.regular1Text.copyWith(
@@ -131,7 +131,7 @@ class OrderRentalMobilPage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                    rentalMobil.withDriver
+                                    unit.withDriver
                                         ? "Dengan Sopir"
                                         : "Tanpa Sopir",
                                     style: AppStyle.smallText),
@@ -249,7 +249,7 @@ class OrderRentalMobilPage extends StatelessWidget {
                               children: [
                                 Consumer<OrderProvider>(
                                   builder: (context, state, _) => Text(
-                                    "${Helper.toIDR(rentalMobil.price)} x ${state.days} Hari",
+                                    "${Helper.toIDR(unit.price)} x ${state.days} Hari",
                                     style: AppStyle.smallText.copyWith(
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -257,7 +257,7 @@ class OrderRentalMobilPage extends StatelessWidget {
                                 ),
                                 Consumer<OrderProvider>(
                                   builder: (context, state, _) => Text(
-                                      "Total ${Helper.toIDR(rentalMobil.price * state.days)}",
+                                      "Total ${Helper.toIDR(unit.price * state.days)}",
                                       style: AppStyle.smallText),
                                 ),
                               ],
@@ -364,7 +364,7 @@ class OrderRentalMobilPage extends StatelessWidget {
                 onPressed: () {
                   // TODO: Remove this
                   Navigator.popUntil(context, (route) => route.isFirst);
-                  Navigator.pushNamed(context, Routes.orderComplete);
+                  Navigator.pushNamed(context, Routes.orderUnitComplete);
 
                   if (_formKey.currentState!.validate()) {
                     // process here

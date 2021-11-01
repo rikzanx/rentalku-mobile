@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
-import 'package:rentalku/models/rental_mobil.dart';
+import 'package:rentalku/models/unit.dart';
+import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/widgets/star_rating_widget.dart';
 
-class DetailRentalMobilPage extends StatelessWidget {
-  const DetailRentalMobilPage({Key? key}) : super(key: key);
+class DetailUnitPage extends StatelessWidget {
+  const DetailUnitPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    RentalMobil rentalMobil = RentalMobil(
+    Unit unit = Unit(
       id: 1,
       name: "Toyota Avanza",
       description: "Mini MPV",
@@ -57,12 +59,12 @@ class DetailRentalMobilPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Image.network(
-                      rentalMobil.imageURL,
+                      unit.imageURL,
                       height: MediaQuery.of(context).size.width * 0.25,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      rentalMobil.name,
+                      unit.name,
                       maxLines: 1,
                       overflow: TextOverflow.clip,
                       style: AppStyle.regular1Text.copyWith(
@@ -71,14 +73,14 @@ class DetailRentalMobilPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      rentalMobil.description,
+                      unit.description,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppStyle.regular1Text,
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      Helper.toIDR(rentalMobil.price) + "/Hari",
+                      Helper.toIDR(unit.price) + "/Hari",
                       style: AppStyle.smallText.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColor.yellow,
@@ -96,14 +98,14 @@ class DetailRentalMobilPage extends StatelessWidget {
                         ),
                         SizedBox(width: 10),
                         Text(
-                          "${rentalMobil.rating}/5",
+                          "${unit.rating}/5",
                           style: AppStyle.regular2Text,
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        StarRating(rating: rentalMobil.rating, size: 20),
+                        StarRating(rating: unit.rating, size: 20),
                         SizedBox(width: 10),
                         InkWell(
                           child: Padding(
@@ -270,10 +272,44 @@ class DetailRentalMobilPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
-            ElevatedButton(
-              child: Text("Lanjut ke Pemesanan"),
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.rentalMobilOrder);
+            Consumer<AppProvider>(
+              builder: (context, state, _) {
+                if (state.isUser)
+                  return ElevatedButton(
+                    child: Text("Lanjut ke Pemesanan"),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.orderUnit);
+                    },
+                  );
+                else if(state.isOwner) {
+                  return Row(
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.editUnit);
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.edit,
+                              size: 16,
+                              color: AppColor.green,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              "Edit",
+                              style: AppStyle.regular1Text.copyWith(
+                                color: AppColor.green,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                } else
+                  return SizedBox();
               },
             ),
           ],

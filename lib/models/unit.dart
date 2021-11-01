@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class RentalMobil extends Equatable {
+class Unit extends Equatable {
   final int id;
   final String name;
   final String description;
@@ -10,7 +10,7 @@ class RentalMobil extends Equatable {
   final int capacity;
   final String imageURL;
 
-  RentalMobil({
+  Unit({
     required this.id,
     required this.name,
     this.description = "",

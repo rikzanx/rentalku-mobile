@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class RentalMobilProvider extends ChangeNotifier {
+class UnitProvider extends ChangeNotifier {
   List<String> _selectableCity = [
     "Surabaya",
     "Yogyakarta",

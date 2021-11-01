@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:rentalku/commons/types.dart';
+import 'package:rentalku/commons/constants.dart';
 
 class PaymentMethod extends Equatable {
   final String name;
