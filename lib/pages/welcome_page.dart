@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/constants.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/providers/app_provider.dart';
@@ -115,6 +117,30 @@ class HomePage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
+          SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Ink(
+                child: TextButton(
+                  child: Text("Debug User"),
+                  onPressed: () {
+                    Provider.of<AppProvider>(context, listen: false).userType = UserType.User;
+                    Navigator.pushReplacementNamed(context, Routes.dashboard);
+                  },
+                ),
+              ),
+              SizedBox(width: 16),
+              TextButton(
+                child: Text("Debug Owner"),
+                onPressed: () {
+                  Provider.of<AppProvider>(context, listen: false).userType = UserType.Owner;
+                  Navigator.pushReplacementNamed(context, Routes.dashboard);
+                },
+              ),
+            ],
+          ),
+          SizedBox(height: 16),
           Spacer(),
         ],
       ),
