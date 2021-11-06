@@ -15,7 +15,7 @@ class SearchUnitsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SearchUnitsProvider(),
-      child: Scaffold(
+      builder: (context, _) => Scaffold(
         appBar: AppBar(
           leading: IconButton(
             splashRadius: 24,
@@ -35,59 +35,55 @@ class SearchUnitsPage extends StatelessWidget {
           ),
           elevation: 2,
         ),
-        body: Builder(
-          builder: (context) => ListView.builder(
-            padding: EdgeInsets.only(top: 16, bottom: 16),
-            itemCount: 10,
-            itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: UnitCardWidget(
-                unit: Unit(
-                  id: 1,
-                  name: "Toyota Avanza",
-                  description: "Mini MPV",
-                  withDriver: true,
-                  imageURL: 'https://i.imgur.com/vtUhSMq.png',
-                  price: 280000,
-                  rating: 4.2,
-                  capacity: 6,
-                ),
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.detailUnit,
-                  );
-                },
+        body: ListView.builder(
+          padding: EdgeInsets.only(top: 16, bottom: 16),
+          itemCount: 10,
+          itemBuilder: (context, index) => Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: UnitCardWidget(
+              unit: Unit(
+                id: 1,
+                name: "Toyota Avanza",
+                description: "Mini MPV",
+                withDriver: true,
+                imageURL: 'https://i.imgur.com/vtUhSMq.png',
+                price: 280000,
+                rating: 4.2,
+                capacity: 6,
               ),
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  Routes.detailUnit,
+                );
+              },
             ),
           ),
         ),
-        floatingActionButton: Builder(
-          builder: (context) => FloatingActionButton(
-            child: Icon(Icons.filter_alt),
-            mini: true,
-            backgroundColor: AppColor.green,
-            onPressed: () {
-              var parentState =
-                  Provider.of<SearchUnitsProvider>(context, listen: false);
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.filter_alt),
+          mini: true,
+          backgroundColor: AppColor.green,
+          onPressed: () {
+            var parentState =
+                Provider.of<SearchUnitsProvider>(context, listen: false);
 
-              showModalBottomSheet(
-                context: context,
-                clipBehavior: Clip.hardEdge,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(50),
-                  ),
+            showModalBottomSheet(
+              context: context,
+              clipBehavior: Clip.hardEdge,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
                 ),
-                builder: (context) =>
-                    ChangeNotifierProvider<SearchUnitsProvider>.value(
-                  value: parentState,
-                  child: ModalSheetBar(context),
-                ),
-              );
-            },
-          ),
+              ),
+              builder: (context) =>
+                  ChangeNotifierProvider<SearchUnitsProvider>.value(
+                value: parentState,
+                child: ModalSheetBar(context),
+              ),
+            );
+          },
         ),
       ),
     );
