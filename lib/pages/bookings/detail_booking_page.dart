@@ -173,6 +173,42 @@ class DetailBookingPage extends StatelessWidget {
                                 )
                               : SizedBox(),
                         ),
+                        Consumer<AppProvider>(
+                          builder: (context, state, _) =>
+                              state.isDriver ? SizedBox(width: 6) : SizedBox(),
+                        ),
+                        Consumer<AppProvider>(
+                          builder: (context, state, _) => state.isDriver
+                              ? Expanded(
+                                  child: Material(
+                                    elevation: 1,
+                                    borderRadius: BorderRadius.circular(5),
+                                    clipBehavior: Clip.hardEdge,
+                                    color: AppColor.yellow,
+                                    child: InkWell(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 10,
+                                        ),
+                                        child: Text(
+                                          "Hubungi Pemilik",
+                                          style: AppStyle.regular2Text.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, Routes.viewChat);
+                                      },
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(),
+                        ),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -234,58 +270,78 @@ class DetailBookingPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(width: 6),
-                        Expanded(
-                          flex: 1,
-                          child: Material(
-                            borderRadius: BorderRadius.circular(5),
-                            color: AppColor.yellow,
-                            clipBehavior: Clip.hardEdge,
-                            child: InkWell(
-                              onTap: () {},
+                        Consumer<AppProvider>(
+                          builder: (context, state, _) =>
+                              state.isDriver ? SizedBox() : SizedBox(width: 6),
+                        ),
+                        Consumer<AppProvider>(
+                          builder: (context, state, _) => state.isDriver
+                              ? SizedBox()
+                              : Expanded(
+                                  flex: 1,
+                                  child: Material(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: AppColor.yellow,
+                                    clipBehavior: Clip.hardEdge,
+                                    child: InkWell(
+                                      onTap: () {},
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 6,
+                                        ),
+                                        child: Text(
+                                          "Hubungi",
+                                          textAlign: TextAlign.center,
+                                          style: AppStyle.smallText.copyWith(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                        ),
+                      ],
+                    ),
+                    Consumer<AppProvider>(
+                      builder: (context, state, _) =>
+                          state.isDriver ? SizedBox() : SizedBox(height: 10),
+                    ),
+                    Consumer<AppProvider>(
+                      builder: (context, state, _) => state.isDriver
+                          ? SizedBox()
+                          : Text("Total", style: AppStyle.smallText),
+                    ),
+                    Consumer<AppProvider>(
+                      builder: (context, state, _) => state.isDriver
+                          ? SizedBox()
+                          : Material(
+                              elevation: 1,
+                              borderRadius: BorderRadius.circular(5),
+                              clipBehavior: Clip.hardEdge,
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 12,
                                   vertical: 6,
                                 ),
-                                child: Text(
-                                  "Hubungi",
-                                  textAlign: TextAlign.center,
-                                  style: AppStyle.smallText.copyWith(
-                                    color: Colors.white,
-                                  ),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Text(
+                                      "${Helper.toIDR(booking.price)} x ${booking.totalDays} Hari",
+                                      style: AppStyle.smallText.copyWith(
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    Text(
+                                        "Total ${Helper.toIDR(booking.totalPrice)}",
+                                        style: AppStyle.smallText),
+                                  ],
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Text("Total", style: AppStyle.smallText),
-                    Material(
-                      elevation: 1,
-                      borderRadius: BorderRadius.circular(5),
-                      clipBehavior: Clip.hardEdge,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              "${Helper.toIDR(booking.price)} x ${booking.totalDays} Hari",
-                              style: AppStyle.smallText.copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Text("Total ${Helper.toIDR(booking.totalPrice)}",
-                                style: AppStyle.smallText),
-                          ],
-                        ),
-                      ),
                     ),
                   ],
                 ),

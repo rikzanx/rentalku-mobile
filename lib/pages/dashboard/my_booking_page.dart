@@ -140,8 +140,11 @@ class DashboardMyBookingPage extends StatelessWidget {
                           Navigator.pushNamed(context, Routes.detailBooking);
                         },
                         actionIcon: state.isUser ? Icons.star : Icons.phone,
-                        actionText:
-                            state.isUser ? "Beri Nilai" : "Hubungi Pemesan",
+                        actionText: state.isUser
+                            ? "Beri Nilai"
+                            : state.isOwner
+                                ? "Hubungi Pemesan"
+                                : "Hubungi Penyewa",
                         actionOnTap: () {
                           if (state.isUser) {
                             Navigator.pushNamed(context, Routes.addReviewPage);

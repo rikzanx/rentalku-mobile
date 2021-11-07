@@ -138,6 +138,14 @@ class HomePage extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, Routes.dashboard);
                 },
               ),
+              SizedBox(width: 16),
+              TextButton(
+                child: Text("Debug Sopir"),
+                onPressed: () {
+                  Provider.of<AppProvider>(context, listen: false).userType = UserType.Driver;
+                  Navigator.pushReplacementNamed(context, Routes.dashboard);
+                },
+              ),
             ],
           ),
           SizedBox(height: 16),

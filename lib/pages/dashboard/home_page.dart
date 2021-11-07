@@ -38,7 +38,7 @@ class DashboardHomePage extends StatelessWidget {
               ? UserInfo(context)
               : app.isOwner
                   ? OwnerInfo(context)
-                  : Container(),
+                  : DriverInfo(context),
         ),
         SizedBox(height: 12),
         Container(
@@ -371,6 +371,88 @@ class DashboardHomePage extends StatelessWidget {
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget DriverInfo(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Nama User
+              Expanded(
+                flex: 45,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Halo,",
+                      style: AppStyle.regular1Text,
+                    ),
+                    Text(
+                      "Muhammad",
+                      maxLines: 1,
+                      overflow: TextOverflow.clip,
+                      style: AppStyle.regular1Text.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 12),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: AppColor.green,
+            ),
+            child: Text(
+              "Saya Sopir",
+              style: AppStyle.smallText.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          SizedBox(height: 12),
+          InkWell(
+            borderRadius: BorderRadius.circular(10),
+            child: Ink(
+              padding: EdgeInsets.all(12),
+              width: MediaQuery.of(context).size.width - 32,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: NetworkImage(
+                      "https://unsplash.com/photos/H7yW_lVGJuI/download?force=true&w=640"),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                    AppColor.green.withOpacity(0.5),
+                    BlendMode.srcOver,
+                  ),
+                ),
+              ),
+              child: Text(
+                "Penilaian dan Ulasan",
+                style: AppStyle.regular2Text.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, Routes.reviewDriver);
+            },
+          )
         ],
       ),
     );

@@ -34,6 +34,7 @@ class Routes {
   static const String editUnitComplete = '/units/detail/edit/complete';
   static const String reviewProduct = '/units/detail/review-product';
   static const String reviewOwner = '/units/detail/review-owner';
+  static const String reviewDriver = '/units/detail/review-driver';
   static const String orderUnit = '/units/detail/order';
   static const String pickLocation = '/units/detail/order/location';
   static const String orderUnitComplete = '/units/detail/order/complete';

@@ -25,6 +25,7 @@ import 'package:rentalku/pages/units/my_units_page.dart';
 import 'package:rentalku/pages/units/order_unit_complete_page.dart';
 import 'package:rentalku/pages/units/order_unit_page.dart';
 import 'package:rentalku/pages/units/pick_location_page.dart';
+import 'package:rentalku/pages/units/review_driver_page.dart';
 import 'package:rentalku/pages/units/review_owner_page.dart';
 import 'package:rentalku/pages/units/review_product_page.dart';
 import 'package:rentalku/pages/units/search_units_page.dart';
@@ -93,6 +94,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => ReviewProductPage());
     case Routes.reviewOwner:
       return MaterialPageRoute(builder: (_) => ReviewOwnerPage());
+    case Routes.reviewDriver:
+      return MaterialPageRoute(builder: (_) => ReviewDriverPage());
     case Routes.orderUnit:
       return MaterialPageRoute(builder: (_) => OrderUnitPage());
     case Routes.pickLocation:

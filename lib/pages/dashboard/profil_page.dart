@@ -104,28 +104,27 @@ class DashboardProfilPage extends StatelessWidget {
         SizedBox(height: 16),
         Row(
           children: [
-            SizedBox(width: 16),
-            Material(
-              borderRadius: BorderRadius.circular(10),
-              color: AppColor.green,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                child: Consumer<AppProvider>(
-                  builder: (context, state, _) => Text(
-                    state.isUser
-                        ? "Saya Penyewa"
-                        : state.isOwner
-                            ? "Saya Pemilik Mobil"
-                            : "Saya Sopir",
-                    style: AppStyle.smallText.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              margin: EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: AppColor.green,
+              ),
+              child: Consumer<AppProvider>(
+                builder: (context, state, _) => Text(
+                  state.isUser
+                      ? "Saya Penyewa"
+                      : state.isOwner
+                      ? "Saya Pemilik Mobil"
+                      : "Saya Sopir",
+                  style: AppStyle.smallText.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
             ),
-            SizedBox(width: 16),
           ],
         ),
         SizedBox(height: 16),
