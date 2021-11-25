@@ -7,6 +7,7 @@ class TextFieldWithShadow extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
   final String? hintText;
+  final String? initialValue;
   final String? labelText;
   final String? prefixText;
   final String? suffixText;
@@ -25,6 +26,7 @@ class TextFieldWithShadow extends StatelessWidget {
     this.enabled = true,
     this.height = 49,
     this.hintText,
+    this.initialValue,
     this.inputFormatters,
     this.keyboardType,
     this.labelColor = Colors.white,
@@ -67,6 +69,7 @@ class TextFieldWithShadow extends StatelessWidget {
             ),
             TextFormField(
               controller: controller,
+              initialValue: initialValue,
               obscureText: obscureText,
               decoration: InputDecoration(
                 hintText: hintText,
