@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:rentalku/network_utils/api.dart';
 
-final _formKey = GlobalKey<FormState>();
-
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+    String email = "";
+    String password = "";
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -72,6 +75,7 @@ class LoginPage extends StatelessWidget {
                             }
                             return null;
                           },
+                          onChanged: (value) => email = value,
                         ),
                         SizedBox(height: 16),
                         TextFieldWithShadow(
@@ -86,23 +90,22 @@ class LoginPage extends StatelessWidget {
                             }
                             return null;
                           },
+                          onChanged: (value) => password = value,
                         ),
                         SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () {
-                            // TODO: Remove this
-                            // Navigator.popUntil(
-                            //     context, (route) => route.isFirst);
-                            // Navigator.pushReplacementNamed(
-                            //     context, Routes.dashboard);
-
                             if (_formKey.currentState!.validate()) {
-                              // process here
-                              // TODO: Remove this
-                              Navigator.popUntil(
-                                  context, (route) => route.isFirst);
-                              Navigator.pushReplacementNamed(
-                                  context, Routes.dashboard);
+                              Provider.of<AppProvider>(context, listen: false)
+                                  .login(email, password)
+                                  .then((_) {
+                                Navigator.popUntil(
+                                    context, (route) => route.isFirst);
+                                Navigator.pushReplacementNamed(
+                                    context, Routes.dashboard);
+                              }).catchError((msg) {
+                                Fluttertoast.showToast(msg: msg.toString());
+                              });
                             }
                           },
                           child: Text("Masuk"),
