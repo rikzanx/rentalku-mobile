@@ -20,11 +20,12 @@ class AuthServices {
       if (response.statusCode == HttpStatus.ok) {
         final Map<String, dynamic> json = jsonDecode(response.body);
 
-        return ApiResponse<User>(true, data: User.fromJson(json['content']));
+        return ApiResponse<User>(true, data: User.fromJson(json));
       } else {
         return ApiResponse(false, message: defaultErrorText);
       }
     } catch ($e) {
+      print($e);
       return ApiResponse(false, message: defaultErrorText);
     }
   }

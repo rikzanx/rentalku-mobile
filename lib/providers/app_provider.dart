@@ -7,18 +7,6 @@ import 'package:rentalku/services/auth_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppProvider extends ChangeNotifier {
-  bool _isFirstTimeHomePageLoads = true;
-
-  void initializeProvider() {
-    isFirstTimeHomePageLoads = false;
-  }
-
-  bool get isFirstTimeHomePageLoads => _isFirstTimeHomePageLoads;
-  set isFirstTimeHomePageLoads(bool isFirstTimeHomePageLoads) {
-    this._isFirstTimeHomePageLoads = isFirstTimeHomePageLoads;
-    notifyListeners();
-  }
-
   User? _user;
   User? get user => _user;
   set user(User? user) {

@@ -11,11 +11,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppProvider _appProvider = Provider.of<AppProvider>(context);
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      _appProvider.initializeProvider();
-    });
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
