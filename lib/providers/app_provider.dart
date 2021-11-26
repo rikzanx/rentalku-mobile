@@ -30,6 +30,20 @@ class AppProvider extends ChangeNotifier {
   bool get isOwner => _user != null && _user!.userType == UserType.Owner;
   bool get isDriver => _user != null && _user!.userType == UserType.Driver;
 
+  Future<bool> auth() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? accessToken = prefs.getString("accessToken");
+
+    if (accessToken == null) return false;
+
+    ApiResponse<User> response = await AuthServices.getUser(accessToken);
+
+    if (!response.status) return false;
+
+    _user = response.data;
+    return true;
+  }
+
   Future login(String email, String password) async {
     ApiResponse<String> res1 = await AuthServices.signIn(email, password);
 
