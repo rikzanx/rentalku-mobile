@@ -4,6 +4,9 @@ import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'package:rentalku/network_utils/api.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -88,13 +91,18 @@ class LoginPage extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {
                             // TODO: Remove this
-                            Navigator.popUntil(
-                                context, (route) => route.isFirst);
-                            Navigator.pushReplacementNamed(
-                                context, Routes.dashboard);
+                            // Navigator.popUntil(
+                            //     context, (route) => route.isFirst);
+                            // Navigator.pushReplacementNamed(
+                            //     context, Routes.dashboard);
 
                             if (_formKey.currentState!.validate()) {
                               // process here
+                              // TODO: Remove this
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
+                              Navigator.pushReplacementNamed(
+                                  context, Routes.dashboard);
                             }
                           },
                           child: Text("Masuk"),
