@@ -249,7 +249,14 @@ class DashboardProfilPage extends StatelessWidget {
                           color: Colors.redAccent,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Provider.of<AppProvider>(context, listen: false)
+                            .logout()
+                            .then((_) {
+                          Navigator.popUntil(context, (route) => route.isFirst);
+                          Navigator.pushReplacementNamed(context, Routes.home);
+                        });
+                      },
                     ),
                   ],
                 );

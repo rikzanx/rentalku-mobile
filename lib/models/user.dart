@@ -43,7 +43,7 @@ class User extends Equatable {
       name: json['name'],
       userType: json['userType'] == 'user' ? UserType.User : UserType.User,
       email: json['email'],
-      emailVerifiedAt: json['email_verified_at'],
+      emailVerifiedAt: json['email_verified_at'] == null ? null : DateTime.tryParse(json['email_verified_at']),
       imageURL: json['image_link'],
       nik: json['nik'],
       ktpURL: json['foto_ktp'],

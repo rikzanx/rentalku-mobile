@@ -46,4 +46,11 @@ class AppProvider extends ChangeNotifier {
 
     _user = res2.data;
   }
+
+  Future logout() async {
+    ApiResponse response = await AuthServices.signOut();
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("accessToken");
+  }
 }

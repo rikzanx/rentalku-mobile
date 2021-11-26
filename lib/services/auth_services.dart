@@ -25,7 +25,6 @@ class AuthServices {
         return ApiResponse(false, message: defaultErrorText);
       }
     } catch ($e) {
-      print($e);
       return ApiResponse(false, message: defaultErrorText);
     }
   }
@@ -51,5 +50,14 @@ class AuthServices {
     } catch ($e) {
       return ApiResponse(false, message: defaultErrorText);
     }
+  }
+
+  static Future signOut() async {
+    await http.get(
+      apiURL.resolve('auth/logout'),
+      headers: await Helper.headerToken(),
+    );
+
+    return ApiResponse(true);
   }
 }
