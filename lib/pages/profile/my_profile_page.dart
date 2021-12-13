@@ -1,10 +1,13 @@
 import 'dart:io';
+// import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/providers/app_provider.dart';
 
 ValueNotifier<File?> _image = ValueNotifier(null);
 
@@ -73,27 +76,32 @@ class MyProfilePage extends StatelessWidget {
                           ],
                         ),
                         SizedBox(width: 20),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              ": Muhammad",
-                              style: AppStyle.regular2Text,
-                            ),
-                            Text(
-                              ": Jl. Golf 6, Gunungsari, Surabaya",
-                              style: AppStyle.regular2Text,
-                            ),
-                            Text(
-                              ": 12 September 2000",
-                              style: AppStyle.regular2Text,
-                            ),
-                            Text(
-                              ": 082335812487",
-                              style: AppStyle.regular2Text,
-                            ),
-                          ],
+                        Consumer<AppProvider>(
+                          builder:(context,app,_){
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  ":"+app.user!.name,
+                                  style: AppStyle.regular2Text,
+                                ),
+                                Text(
+                                  ":"+app.user!.address.toString(),
+                                  style: AppStyle.regular2Text,
+                                ),
+                                Text(
+                                  ":"+app.user!.address.toString(),
+                                  style: AppStyle.regular2Text,
+                                ),
+                                Text(
+                                  ":"+app.user!.phone.toString(),
+                                  style: AppStyle.regular2Text,
+                                ),
+                              ],
+                            );
+                          },
                         ),
+                        
                       ],
                     ),
                   ),
