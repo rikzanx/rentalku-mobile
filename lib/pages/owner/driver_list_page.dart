@@ -47,7 +47,7 @@ class DriverListPage extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           backgroundImage: NetworkImage(
-                              "https://lorempixel.com/200/200/people/"),
+                              "https://dummyimage.com/200x200/000/fff&text=foto+user"),
                           radius: 24,
                         ),
                         SizedBox(width: 16),

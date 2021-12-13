@@ -56,7 +56,7 @@ class ReviewDriverPage extends StatelessWidget {
                 review: Review(
                   id: 1,
                   name: "Ahmad Ujang",
-                  imageURL: "https://lorempixel.com/200/200/people/",
+                  imageURL: "https://dummyimage.com/200x200/000/fff&text=foto+profil",
                   rating: 4,
                   text:
                       "pelayanannya driver nya sabar cara mengemudikan sangat hati",

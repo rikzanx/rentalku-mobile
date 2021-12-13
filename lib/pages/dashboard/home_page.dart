@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
@@ -7,6 +9,8 @@ import 'package:rentalku/models/article.dart';
 import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/widgets/article_card_widget.dart';
 import 'package:rentalku/widgets/balance_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer';
 
 class DashboardHomePage extends StatelessWidget {
   const DashboardHomePage({Key? key}) : super(key: key);
@@ -34,11 +38,7 @@ class DashboardHomePage extends StatelessWidget {
         ),
         SizedBox(height: 24),
         Consumer<AppProvider>(
-          builder: (context, app, _) => app.isUser
-              ? UserInfo(context)
-              : app.isOwner
-                  ? OwnerInfo(context)
-                  : DriverInfo(context),
+          builder: (context, app, _) => app.isUser ? UserInfo(context) : app.isOwner? OwnerInfo(context) : DriverInfo(context),
         ),
         SizedBox(height: 12),
         Container(
@@ -93,13 +93,17 @@ class DashboardHomePage extends StatelessWidget {
                       "Halo,",
                       style: AppStyle.regular1Text,
                     ),
-                    Text(
-                      "Muhammad",
-                      maxLines: 1,
-                      overflow: TextOverflow.clip,
-                      style: AppStyle.regular1Text.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+                    Consumer<AppProvider>(
+                      builder: (context, app, _){
+                        return Text(
+                            app.user!.name.toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
+                            style: AppStyle.regular1Text.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          );
+                      },
                     ),
                   ],
                 ),
@@ -107,12 +111,16 @@ class DashboardHomePage extends StatelessWidget {
               // Saldo
               Expanded(
                 flex: 55,
-                child: BalanceWidget(
-                  balance: 500000,
-                  onPressed: () {
-                    Navigator.pushNamed(context, Routes.topUp);
-                  },
-                ),
+                child: Consumer<AppProvider>(
+                    builder:(context, app, _){
+                      return BalanceWidget(
+                            balance: app.dompet!.saldo,
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.topUp);
+                            },
+                          );
+                    },
+                  ),
               ),
             ],
           ),
@@ -456,5 +464,12 @@ class DashboardHomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future _getNameUser() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userPref = prefs.getString('user');
+    Map<String,dynamic> userMap = jsonDecode(userPref!) as Map<String,dynamic>;
+    return userMap['name'];
   }
 }

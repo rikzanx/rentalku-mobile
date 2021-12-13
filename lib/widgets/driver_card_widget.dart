@@ -28,7 +28,7 @@ class DriverCardWidget extends StatelessWidget {
               shape: CircleBorder(),
               child: CircleAvatar(
                 backgroundImage:
-                    NetworkImage("https://lorempixel.com/200/200/people/"),
+                    NetworkImage("https://dummyimage.com/200x200/000/fff&text=foto+profil"),
                 radius: 20,
               ),
             ),

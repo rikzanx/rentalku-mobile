@@ -25,5 +25,6 @@ final Map<bool, String> carDriverTypes = {
 final String defaultErrorText = "Terjadi kesalahan. Coba lagi nanti";
 
 /* URI */
-Uri apiURL = Uri.parse("https://quiet-stream-85697.herokuapp.com/public/api/");
+Uri apiURL = Uri.parse("http://quiet-stream-85697.herokuapp.com/public/api/");
+String assetURL = "http://quiet-stream-85697.herokuapp.com/public/";
 Map<String, String> acceptJson = {HttpHeaders.acceptHeader: "application/json"};

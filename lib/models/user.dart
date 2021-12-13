@@ -41,7 +41,7 @@ class User extends Equatable {
     return User(
       id: json['id'],
       name: json['name'],
-      userType: json['userType'] == 'user' ? UserType.User : UserType.User,
+      userType: json['role'] == 'pengemudi' ? UserType.Driver : (json['role'] == 'user' ? UserType.User : UserType.Owner),
       email: json['email'],
       emailVerifiedAt: json['email_verified_at'] == null ? null : DateTime.tryParse(json['email_verified_at']),
       imageURL: json['image_link'],

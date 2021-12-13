@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/providers/app_provider.dart';
@@ -37,10 +38,13 @@ class DashboardProfilPage extends StatelessWidget {
         Row(
           children: [
             SizedBox(width: 16),
-            CircleAvatar(
-              backgroundImage:
-                  NetworkImage("https://lorempixel.com/200/200/people/"),
-              radius: 24,
+            Consumer<AppProvider>(
+              builder:(context,app,_){
+                return CircleAvatar(
+                          backgroundImage:NetworkImage(assetURL+app.user!.imageURL),
+                          radius: 24,
+                        );
+              },
             ),
             SizedBox(width: 16),
             Expanded(
@@ -51,13 +55,17 @@ class DashboardProfilPage extends StatelessWidget {
                     "Halo,",
                     style: AppStyle.regular1Text,
                   ),
-                  Text(
-                    "Muhammad",
-                    maxLines: 1,
-                    overflow: TextOverflow.clip,
-                    style: AppStyle.regular1Text.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
+                  Consumer<AppProvider>(
+                    builder: (context,app,_){
+                      return Text(
+                            app.user!.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
+                            style: AppStyle.regular1Text.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          );
+                    },
                   ),
                 ],
               ),
@@ -125,6 +133,27 @@ class DashboardProfilPage extends StatelessWidget {
           ],
         ),
         SizedBox(height: 16),
+        Container(
+          child: new ListTile(
+            leading: Icon(Icons.person_outline),
+            horizontalTitleGap: 0,
+            visualDensity: VisualDensity.compact,
+            title: Text(
+              'I have border',
+              style: AppStyle.regular1Text
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, Routes.myProfile);
+            },
+          ),
+          decoration:
+            new BoxDecoration(
+                border: new Border(
+                    bottom: new BorderSide(),
+                    top: new BorderSide()
+                )
+            )
+        ),
         ListTile(
           leading: Icon(Icons.person_outline),
           horizontalTitleGap: 0,
@@ -136,6 +165,7 @@ class DashboardProfilPage extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(context, Routes.myProfile);
           },
+          
         ),
         ListTile(
           leading: Icon(Icons.lock_outline),

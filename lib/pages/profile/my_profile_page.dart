@@ -114,7 +114,7 @@ class MyProfilePage extends StatelessWidget {
                     builder: (context, value, _) => value == null
                         ? CircleAvatar(
                             backgroundImage: NetworkImage(
-                                "https://lorempixel.com/200/200/people/"),
+                                "https://dummyimage.com/200x200/000/fff&text=foto+profil"),
                             radius: MediaQuery.of(context).size.width * 0.125,
                           )
                         : CircleAvatar(

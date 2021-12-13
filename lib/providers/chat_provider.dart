@@ -10,7 +10,7 @@ class ChatProvider extends ChangeNotifier {
       id: 1,
       name: "Asep",
       role: "Sopir",
-      imageURL: "https://lorempixel.com/200/200/people/",
+    imageURL: "https://dummyimage.com/200x200/000/fff&text=foto+profil",
       list: List.generate(
         Random().nextInt(5) + 5,
         (index) => ChatMessage(

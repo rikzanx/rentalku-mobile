@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';
+import 'package:rentalku/providers/app_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'package:rentalku/network_utils/api.dart';
 
-final _formKey = GlobalKey<FormState>();
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+    String name = "";
+    String email = "";
+    String password = "";
+    String password2 = "";
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -66,6 +77,7 @@ class RegisterPage extends StatelessWidget {
                             }
                             return null;
                           },
+                          onChanged: (value) => name = value,
                         ),
                         SizedBox(height: 16),
                         TextFieldWithShadow(
@@ -79,6 +91,7 @@ class RegisterPage extends StatelessWidget {
                             }
                             return null;
                           },
+                          onChanged: (value) => email = value,
                         ),
                         SizedBox(height: 16),
                         TextFieldWithShadow(
@@ -93,6 +106,7 @@ class RegisterPage extends StatelessWidget {
                             }
                             return null;
                           },
+                          onChanged: (value) => password = value,
                         ),
                         SizedBox(height: 16),
                         TextFieldWithShadow(
@@ -104,9 +118,12 @@ class RegisterPage extends StatelessWidget {
                               return 'Kolom password wajib diisi';
                             } else if (value.length < 6) {
                               return 'Panjang password minimal 6 karakter';
+                            } else if (password != value){
+                              return 'Password Tidak sama';
                             }
                             return null;
                           },
+                          onChanged: (value) => password2 = value,
                         ),
                         SizedBox(height: 16),
                         ElevatedButton(
@@ -114,6 +131,17 @@ class RegisterPage extends StatelessWidget {
                             // TODO: Remove this
                             if (_formKey.currentState!.validate()) {
                               // process here
+                              showLoaderDialog(context);
+                              Provider.of<AppProvider>(context, listen: false)
+                                  .daftar(name,email, password)
+                                  .then((_) {
+                                Navigator.popUntil(
+                                    context, (route) => route.isFirst);
+                                Navigator.pushReplacementNamed(
+                                    context, Routes.dashboard);
+                              }).catchError((msg) {
+                                Fluttertoast.showToast(msg: msg.toString());
+                              });
                             }
                           },
                           child: Text("Daftar"),
@@ -128,6 +156,21 @@ class RegisterPage extends StatelessWidget {
           SizedBox(height: 20),
         ],
       ),
+    );
+  }
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          Container(margin: EdgeInsets.only(left: 7),child:Text("Loading..." )),
+        ],),
+    );
+    showDialog(barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
     );
   }
 }
