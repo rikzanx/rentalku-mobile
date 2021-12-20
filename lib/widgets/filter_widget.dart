@@ -35,6 +35,7 @@ class FilterWidget extends StatelessWidget {
           ),
         ),
         onTap: () {
+          print(label);
           onTap(!selected);
         },
       ),

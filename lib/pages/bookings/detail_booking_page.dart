@@ -2,28 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/booking.dart';
+import 'package:rentalku/models/unit.dart';
 import 'package:rentalku/providers/app_provider.dart';
+import 'package:rentalku/providers/dashboard_provider.dart';
 
 class DetailBookingPage extends StatelessWidget {
-  const DetailBookingPage({Key? key}) : super(key: key);
+  final Booking booking;
+  const DetailBookingPage({Key? key,required this.booking}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Booking booking = Booking(
-      id: 1,
-      name: "Toyota Innova Reborn",
-      description: "Compact MPV",
-      withDriver: true,
-      price: 500000,
-      imageURL: "https://i.imgur.com/vtUhSMq.png",
-      startDate: DateTime.now(),
-      endDate: DateTime.now().add(Duration(days: 2)),
-      address: "Jl. Anjasmoro No. 2, Waru, Sidoarjo",
-    );
 
     return Scaffold(
       appBar: AppBar(
@@ -62,7 +55,7 @@ class DetailBookingPage extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 1,
-                          child: Image.network(booking.imageURL),
+                          child: Image.network(assetURL+booking.unit.imageURL),
                         ),
                         SizedBox(width: 8),
                         Expanded(
@@ -79,7 +72,7 @@ class DetailBookingPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                booking.description,
+                                booking.unit.kategoriName,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: AppStyle.regular1Text.copyWith(
@@ -116,7 +109,7 @@ class DetailBookingPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Text(
-                                    "CAR RENT - Rentalku",
+                                    "CAR RENT - ${booking.pemilik.name}",
                                     style: AppStyle.smallText.copyWith(
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -166,7 +159,8 @@ class DetailBookingPage extends StatelessWidget {
                                       ),
                                       onTap: () {
                                         Navigator.pushNamed(
-                                            context, Routes.trackCar);
+                                            context, Routes.trackCar,
+                                            arguments: booking.unit);
                                       },
                                     ),
                                   ),
@@ -202,7 +196,7 @@ class DetailBookingPage extends StatelessWidget {
                                       ),
                                       onTap: () {
                                         Navigator.pushNamed(
-                                            context, Routes.viewChat);
+                                            context, Routes.chats);
                                       },
                                     ),
                                   ),
@@ -247,9 +241,9 @@ class DetailBookingPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Text("Sopir", style: AppStyle.smallText),
-                    Row(
+                    if(booking.withDriver)SizedBox(height: 10),
+                    if(booking.withDriver)Text("Sopir", style: AppStyle.smallText),
+                    if(booking.withDriver) Row(
                       children: [
                         Expanded(
                           flex: 2,
@@ -262,11 +256,21 @@ class DetailBookingPage extends StatelessWidget {
                               horizontal: 12,
                               vertical: 6,
                             ),
-                            child: Text(
-                              "Asep",
-                              style: AppStyle.smallText.copyWith(
-                                color: Colors.white,
-                              ),
+                            child: Consumer<DashboardProvider>(
+                              builder: (context,state,_) {
+                                if(state.homeState == HomeState.Loading){
+                                  return Center(child: CircularProgressIndicator(),);
+                                }
+                                if(state.homeState == HomeState.Error){
+                                  return Center(child:Text(defaultErrorText));
+                                }
+                                return Text(
+                                  state.pengemudi!.name,
+                                  style: AppStyle.smallText.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                );
+                              }
                             ),
                           ),
                         ),
@@ -284,7 +288,10 @@ class DetailBookingPage extends StatelessWidget {
                                     color: AppColor.yellow,
                                     clipBehavior: Clip.hardEdge,
                                     child: InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, Routes.chats);
+                                      },
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(
                                           horizontal: 12,
@@ -330,7 +337,7 @@ class DetailBookingPage extends StatelessWidget {
                                       CrossAxisAlignment.stretch,
                                   children: [
                                     Text(
-                                      "${Helper.toIDR(booking.price)} x ${booking.totalDays} Hari",
+                                      "${Helper.toIDR(booking.unit.price)} x ${booking.totalDays} Hari",
                                       style: AppStyle.smallText.copyWith(
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -369,19 +376,19 @@ class DetailBookingPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      "Muhammad",
+                      booking.name,
                       style: AppStyle.regular1Text.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
-                      "082335812487",
+                      booking.telp,
                       style: AppStyle.regular1Text.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
-                      "Jl. Anjasmoro No. 2, Waru, Sidoarjo",
+                      booking.address,
                       style: AppStyle.smallText,
                     ),
                   ],

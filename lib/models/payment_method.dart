@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:rentalku/commons/constants.dart';
 
 class PaymentMethod extends Equatable {
+  final int id;
   final String name;
   final String imageURL;
   final String shortName;
@@ -10,6 +11,7 @@ class PaymentMethod extends Equatable {
   final PaymentMethodType paymentMethodType;
 
   PaymentMethod({
+    required this.id,
     required this.name,
     required this.imageURL,
     required this.paymentMethodType,
@@ -22,39 +24,17 @@ class PaymentMethod extends Equatable {
   bool get isWallet => this.paymentMethodType == PaymentMethodType.EWallet;
 
   @override
-  List<Object?> get props => [name];
+  List<Object?> get props => [id];
 
-  static List<PaymentMethod> list = [
-    PaymentMethod(
-        name: "Bank Negara Indonesia",
-        imageURL: "bni.png",
-        shortName: "BNI",
-        accountName: "Alrizdo Adji Junior",
-        accountNumber: "0481689987",
-        paymentMethodType: PaymentMethodType.BankAccount),
-    PaymentMethod(
-        name: "Bank Central Asia",
-        imageURL: "bca.png",
-        paymentMethodType: PaymentMethodType.BankAccount),
-    PaymentMethod(
-        name: "Bank Rakyat Indonesia",
-        imageURL: "bri.png",
-        paymentMethodType: PaymentMethodType.BankAccount),
-    PaymentMethod(
-        name: "GoPay",
-        imageURL: "gopay.png",
-        paymentMethodType: PaymentMethodType.EWallet),
-    PaymentMethod(
-        name: "OVO",
-        imageURL: "ovo.png",
-        paymentMethodType: PaymentMethodType.EWallet),
-    PaymentMethod(
-        name: "Dana",
-        imageURL: "dana.png",
-        paymentMethodType: PaymentMethodType.EWallet),
-    PaymentMethod(
-        name: "ShopeePay",
-        imageURL: "shopeepay.png",
-        paymentMethodType: PaymentMethodType.EWallet),
-  ];
+  factory PaymentMethod.fromJson(Map<String, dynamic> json){
+    return PaymentMethod(
+      id: json['id'],
+      name: json['name'],
+      imageURL: json['image_link'],
+      shortName: json['singkatan'],
+      accountName: json['atas_nama'],
+      accountNumber: json['no_rek'],
+      paymentMethodType: (json['tipe'] == "e-wallet")?PaymentMethodType.EWallet:PaymentMethodType.BankAccount,
+    );
+  }
 }

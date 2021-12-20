@@ -46,8 +46,10 @@ class DashboardPage extends StatelessWidget {
                 'assets/images/home_icon_active.png',
                 height: 24,
               ),
-              label: "Home",
+              label: "Beranda",
             ),
+            
+            
             BottomNavigationBarItem(
               icon: Image.asset(
                 'assets/images/booking_icon.png',
@@ -59,6 +61,7 @@ class DashboardPage extends StatelessWidget {
               ),
               label: "PesananKu",
             ),
+
             BottomNavigationBarItem(
               icon: Image.asset(
                 'assets/images/profil_icon.png',

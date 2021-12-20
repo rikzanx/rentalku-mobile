@@ -27,37 +27,14 @@ class ArticleCardWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 image: DecorationImage(
                   image: NetworkImage(article.imageURL),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
-            SizedBox(height: 4),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                article.category,
-                style: AppStyle.smallText.copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFFA0A0A0),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                article.title,
-                style: AppStyle.regular1Text.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            SizedBox(height: 8),
           ],
         ),
         onTap: () {
-          Navigator.pushNamed(context, Routes.viewArticle);
+          
         },
       ),
     );

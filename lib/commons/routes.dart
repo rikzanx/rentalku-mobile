@@ -6,6 +6,7 @@ class Routes {
 
   /* Auth */
   static const String login = '/login';
+  static const String loginDriver = '/login/driver';
   static const String register = '/register';
   static const String updatePassword = '/update-password';
 
@@ -21,6 +22,7 @@ class Routes {
   static const String wallet = '/wallet';
   static const String topUp = '/wallet/top-up';
   static const String detailTopUp = '/wallet/top-up/detail';
+  static const String topupComplete = '/wallet/top-up/complete';
   static const String withdraw = '/wallet/withdraw';
   static const String withdrawComplete = '/wallet/withdraw/complete';
 
@@ -52,4 +54,6 @@ class Routes {
   static const String upgradeToOwner = '/upgrade-to-owner';
   static const String driverList = '/owner/drivers';
   static const String addDriver = '/owner/drivers/add';
+  static const String addDriverComplete = '/owner/drivers/add/complete';
+  static const String changeLocation = '/owner/change/location';
 }

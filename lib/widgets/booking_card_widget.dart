@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/booking.dart';
@@ -35,7 +36,7 @@ class BookingCardWidget extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                child: Image.network(booking.imageURL),
+                child: Image.network(assetURL+booking.unit.imageURL),
               ),
               SizedBox(width: 8),
               Expanded(
@@ -44,7 +45,7 @@ class BookingCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      booking.name,
+                      booking.unit.name,
                       maxLines: 1,
                       overflow: TextOverflow.clip,
                       style: AppStyle.regular1Text.copyWith(
@@ -52,7 +53,7 @@ class BookingCardWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      booking.description,
+                      booking.unit.kategoriName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppStyle.regular1Text.copyWith(
@@ -60,7 +61,7 @@ class BookingCardWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      Helper.toIDR(booking.price) + "/Hari",
+                      Helper.toIDR(booking.totalHarga) + "/ ${booking.durasi} Hari",
                       style: AppStyle.smallText.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColor.yellow,
@@ -70,8 +71,8 @@ class BookingCardWidget extends StatelessWidget {
                       booking.withDriver ? "Dengan Supir" : "Tanpa Supir",
                       style: AppStyle.smallText,
                     ),
-                    if (actionOnTap != null) SizedBox(height: 5),
-                    if (actionOnTap != null)
+                    if (enableAction) SizedBox(height: 5),
+                    if (enableAction)
                       Material(
                         color: AppColor.yellow,
                         borderRadius: BorderRadius.circular(5),

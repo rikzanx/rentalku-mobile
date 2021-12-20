@@ -1,22 +1,30 @@
 import 'package:equatable/equatable.dart';
+import 'package:rentalku/models/user.dart';
 
 class Chat extends Equatable {
   final int id;
-  final String name;
-  final String role;
-  final String imageURL;
+  final User pengirim;
+  final User penerima;
   final List<ChatMessage> list;
 
   Chat({
     required this.id,
-    required this.name,
-    required this.role,
-    required this.imageURL,
-    required this.list,
+    required this.pengirim,
+    required this.penerima,
+    required this.list
   });
 
   @override
   List<Object?> get props => [id];
+
+  factory Chat.fromJson(Map<String,dynamic> json,List<ChatMessage> list,int userId){
+    return Chat(
+      id: json['id'],
+      pengirim: (json['user_id'] == userId)?User.fromJson(json['user']) : User.fromJson(json['user_to']),
+      penerima: (json['user_id'] == userId)?User.fromJson(json['user_to']) : User.fromJson(json['user']),
+      list: list
+    );
+  }
 }
 
 class ChatMessage extends Equatable {
@@ -34,4 +42,13 @@ class ChatMessage extends Equatable {
 
   @override
   List<Object?> get props => [id];
+
+  factory ChatMessage.fromJson(Map<String,dynamic> json, int user_id){
+    return ChatMessage(
+      id: json['id'],
+      isSender: (json['user_id'] == user_id)? true : false,
+      text: json['message'],
+      dateTime: DateTime.parse(json['created_at'])
+    );
+  }
 }

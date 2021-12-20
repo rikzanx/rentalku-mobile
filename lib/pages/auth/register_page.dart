@@ -95,14 +95,14 @@ class RegisterPage extends StatelessWidget {
                         ),
                         SizedBox(height: 16),
                         TextFieldWithShadow(
-                          labelText: "Ketik password anda",
-                          hintText: "password",
+                          labelText: "Ketik kata sandi anda",
+                          hintText: "kata sandi",
                           obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Kolom password wajib diisi';
+                              return 'Kolom kata sandi wajib diisi';
                             } else if (value.length < 6) {
-                              return 'Panjang password minimal 6 karakter';
+                              return 'Panjang kata sandi minimal 6 karakter';
                             }
                             return null;
                           },
@@ -110,16 +110,16 @@ class RegisterPage extends StatelessWidget {
                         ),
                         SizedBox(height: 16),
                         TextFieldWithShadow(
-                          labelText: "Ketik ulang password anda",
-                          hintText: "password",
+                          labelText: "Ketik ulang kata sandi anda",
+                          hintText: "kata sandi",
                           obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Kolom password wajib diisi';
+                              return 'Kolom kata sandi wajib diisi';
                             } else if (value.length < 6) {
-                              return 'Panjang password minimal 6 karakter';
+                              return 'Panjang kata sandi minimal 6 karakter';
                             } else if (password != value){
-                              return 'Password Tidak sama';
+                              return 'kata sandi Tidak sama';
                             }
                             return null;
                           },
@@ -163,7 +163,7 @@ class RegisterPage extends StatelessWidget {
       content: new Row(
         children: [
           CircularProgressIndicator(),
-          Container(margin: EdgeInsets.only(left: 7),child:Text("Loading..." )),
+          Container(margin: EdgeInsets.only(left: 7),child:Text("Proses..." )),
         ],),
     );
     showDialog(barrierDismissible: false,

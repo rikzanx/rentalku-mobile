@@ -1,13 +1,20 @@
 import 'package:collapsible/collapsible.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/models/top_up.dart';
+import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/providers/top_up_provider.dart';
+import 'package:rentalku/services/api_response.dart';
 import 'package:rentalku/widgets/amount_card_widget.dart';
 import 'package:rentalku/widgets/payment_method_option.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';
+
+int jumlah = 0;
+
 
 class TopUpPage extends StatelessWidget {
   const TopUpPage({Key? key}) : super(key: key);
@@ -168,7 +175,7 @@ class TopUpPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "E-Wallet",
+                              "Dompet Digital",
                               style: AppStyle.regular1Text.copyWith(
                                 fontWeight: FontWeight.w600,
                               ),
@@ -215,7 +222,22 @@ class TopUpPage extends StatelessWidget {
                   onPressed: !state.complete
                       ? null
                       : () {
-                          Navigator.pushNamed(context, Routes.detailTopUp);
+                          showLoaderDialog(context);
+                          makeTopUp(context,state.paymentMethod!.id,state.amount).then(
+                            (value){
+                              if(value.status){
+                                Navigator.pop(context);
+                                Fluttertoast.showToast(msg: "Sukses Top up.");
+                                Navigator.pushNamed(context, Routes.detailTopUp,
+                                  arguments: value.data
+                                );
+                              }else{
+                                Navigator.pop(context);
+                                Fluttertoast.showToast(msg: "Gagal Top Up.");
+                              }
+                            },
+                          );
+              
                         },
                   child: Text("Bayar Sekarang"),
                 ),
@@ -224,6 +246,28 @@ class TopUpPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<ApiResponse<TopUp>> makeTopUp(BuildContext context,int rekeningId, int jumlah) async{
+    ApiResponse<TopUp> response = await Provider.of<TopUpProvider>(context,listen: false).makeTopUp(rekeningId,jumlah);
+
+    return response;
+  }
+
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          Container(margin: EdgeInsets.only(left: 7),child:Text("Proses..." )),
+        ],),
+    );
+    showDialog(barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
     );
   }
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rentalku/commons/routes.dart';
+import 'package:rentalku/models/booking.dart';
+import 'package:rentalku/models/top_up.dart';
+import 'package:rentalku/models/unit.dart';
 import 'package:rentalku/pages/article_page.dart';
 import 'package:rentalku/pages/auth/login_page.dart';
+import 'package:rentalku/pages/auth/login_page_driver.dart';
 import 'package:rentalku/pages/auth/register_page.dart';
 import 'package:rentalku/pages/bookings/add_review_page.dart';
 import 'package:rentalku/pages/bookings/detail_booking_page.dart';
@@ -16,8 +20,10 @@ import 'package:rentalku/pages/profile/my_profile_page.dart';
 import 'package:rentalku/pages/profile/update_password_page.dart';
 import 'package:rentalku/pages/profile/upgrade_owner_car_page.dart';
 import 'package:rentalku/pages/undefined_page.dart';
+import 'package:rentalku/pages/units/add_driver_complete_page.dart';
 import 'package:rentalku/pages/units/add_unit_complete_page.dart';
 import 'package:rentalku/pages/units/add_unit_page.dart';
+import 'package:rentalku/pages/units/change_location_owner_page.dart';
 import 'package:rentalku/pages/units/detail_unit_page.dart';
 import 'package:rentalku/pages/units/edit_unit_complete_page.dart';
 import 'package:rentalku/pages/units/edit_unit_page.dart';
@@ -32,12 +38,13 @@ import 'package:rentalku/pages/units/search_units_page.dart';
 import 'package:rentalku/pages/wallets/detail_top_up_page.dart';
 import 'package:rentalku/pages/wallets/dompetku_page.dart';
 import 'package:rentalku/pages/wallets/top_up_page.dart';
+import 'package:rentalku/pages/wallets/topup_complete_page.dart';
 import 'package:rentalku/pages/wallets/withdraw_complete_page.dart';
 import 'package:rentalku/pages/wallets/withdraw_page.dart';
 import 'package:rentalku/pages/welcome_page.dart';
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
-  final arguments = settings.arguments;
+  final args = settings.arguments;
   switch (settings.name) {
     /* Home */
     case Routes.home:
@@ -46,6 +53,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     /* Auth */
     case Routes.login:
       return MaterialPageRoute(builder: (_) => LoginPage());
+    case Routes.loginDriver:
+      return MaterialPageRoute(builder: (_) => LoginPageDriver());
     case Routes.register:
       return MaterialPageRoute(builder: (_) => RegisterPage());
     case Routes.updatePassword:
@@ -69,11 +78,15 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.topUp:
       return MaterialPageRoute(builder: (_) => TopUpPage());
     case Routes.detailTopUp:
-      return MaterialPageRoute(builder: (_) => DetailTopUpPage());
+      return MaterialPageRoute(builder: (_) => DetailTopUpPage(
+        topUp: args as TopUp,
+      ));
     case Routes.withdraw:
       return MaterialPageRoute(builder: (_) => WithdrawPage());
     case Routes.withdrawComplete:
       return MaterialPageRoute(builder: (_) => WithdrawCompletePage());
+    case Routes.topupComplete:
+      return MaterialPageRoute(builder: (_) => topupCompletePage());
 
     /* Units */
     case Routes.searchUnits:
@@ -81,13 +94,17 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.myUnits:
       return MaterialPageRoute(builder: (_) => MyUnitsPage());
     case Routes.detailUnit:
-      return MaterialPageRoute(builder: (_) => DetailUnitPage());
+      return MaterialPageRoute(builder: (_) => DetailUnitPage(
+        unit: args as Unit,
+      ));
     case Routes.addUnit:
       return MaterialPageRoute(builder: (_) => AddUnitPage());
     case Routes.addUnitComplete:
       return MaterialPageRoute(builder: (_) => AddUnitCompletePage());
     case Routes.editUnit:
-      return MaterialPageRoute(builder: (_) => EditUnitPage());
+      return MaterialPageRoute(builder: (_) => EditUnitPage(
+        unit: args as Unit
+      ));
     case Routes.editUnitComplete:
       return MaterialPageRoute(builder: (_) => EditUnitCompletePage());
     case Routes.reviewProduct:
@@ -105,11 +122,17 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
 
     /* Bookings */
     case Routes.detailBooking:
-      return MaterialPageRoute(builder: (_) => DetailBookingPage());
+      return MaterialPageRoute(builder: (_) => DetailBookingPage(
+        booking: args as Booking
+      ));
     case Routes.addReviewPage:
-      return MaterialPageRoute(builder: (_) => AddReviewPage());
+      return MaterialPageRoute(builder: (_) => AddReviewPage(
+        booking: args as Booking
+      ));
     case Routes.trackCar:
-      return MaterialPageRoute(builder: (_) => TrackCarPage());
+      return MaterialPageRoute(builder: (_) => TrackCarPage(
+        unit: args as Unit,
+      ));
 
     /* Chats */
     case Routes.chats:
@@ -124,6 +147,10 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => DriverListPage());
     case Routes.addDriver:
       return MaterialPageRoute(builder: (_) => AddDriverPage());
+    case Routes.addDriverComplete:
+      return MaterialPageRoute(builder: (_) => AddDriverCompletePage());
+    case Routes.changeLocation:
+      return MaterialPageRoute(builder: (_) => ChangeLocationOwnerPage());
   }
 
   return MaterialPageRoute(

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -79,14 +80,14 @@ class LoginPage extends StatelessWidget {
                         ),
                         SizedBox(height: 16),
                         TextFieldWithShadow(
-                          labelText: "Ketik password anda",
-                          hintText: "password",
+                          labelText: "Ketik kata sandi anda",
+                          hintText: "kata sandi",
                           obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Kolom password wajib diisi';
+                              return 'Kolom kata sandi wajib diisi';
                             } else if (value.length < 6) {
-                              return 'Panjang password minimal 6 karakter';
+                              return 'Panjang kata sandi minimal 6 karakter';
                             }
                             return null;
                           },
@@ -105,6 +106,7 @@ class LoginPage extends StatelessWidget {
                                 Navigator.pushReplacementNamed(
                                     context, Routes.dashboard);
                               }).catchError((msg) {
+                                Navigator.pop(context);
                                 Fluttertoast.showToast(msg: msg.toString());
                               });
                             }
@@ -119,6 +121,65 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
+          Center(child:RichText(
+              text: TextSpan(
+                style: AppStyle.regular2Text,
+                children: [
+                  TextSpan(
+                    text: "Belum punya akun? ",
+                    style: AppStyle.regular2Text.copyWith(
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
+                  ),
+                  TextSpan(
+                    text: "Daftar",
+                    style: AppStyle.regular2Text.copyWith(
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.yellow,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(
+                            context, Routes.register);
+                      },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Center(child:RichText(
+              text: TextSpan(
+                style: AppStyle.regular2Text,
+                children: [
+                  TextSpan(
+                    text: "Anda sopir? ",
+                    style: AppStyle.regular2Text.copyWith(
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
+                  ),
+                  TextSpan(
+                    text: "Masuk",
+                    style: AppStyle.regular2Text.copyWith(
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.yellow,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(
+                            context, Routes.loginDriver);
+                      },
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -128,7 +189,7 @@ class LoginPage extends StatelessWidget {
       content: new Row(
         children: [
           CircularProgressIndicator(),
-          Container(margin: EdgeInsets.only(left: 7),child:Text("Loading..." )),
+          Container(margin: EdgeInsets.only(left: 7),child:Text("Proses..." )),
         ],),
     );
     showDialog(barrierDismissible: false,

@@ -18,15 +18,15 @@ class _PickLocationPageState extends State<PickLocationPage> {
   Timer? _debounce;
   Completer<GoogleMapController> _controller = Completer();
   CameraPosition _position = CameraPosition(
-    target: LatLng(-7.9680376, 112.5937865),
+    target: LatLng(-7.2974336, 112.7448576),
     zoom: 15,
   );
   loc.Location _location = loc.Location();
   TextEditingController _searchTextController = TextEditingController(
-    text: "Alun-alun Tugu Kota Malang",
+    text: "Surabaya",
   );
-  double _latitude = -7.9680376;
-  double _longitude = 112.5937865;
+  double _latitude = -7.2974336;
+  double _longitude = 112.7448576;
 
   @override
   void dispose() {

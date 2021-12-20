@@ -11,6 +11,11 @@ import 'package:rentalku/pages/undefined_page.dart';
 import 'package:rentalku/providers/app_provider.dart';
 import 'package:rentalku/providers/chat_provider.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
+import 'package:rentalku/providers/form_unit_provider.dart';
+import 'package:rentalku/providers/order_provider.dart';
+import 'package:rentalku/providers/search_units_provider.dart';
+import 'package:rentalku/providers/ulasan_unit_provider.dart';
+import 'package:rentalku/providers/sopir_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 void main() {
@@ -22,6 +27,11 @@ void main() {
         ChangeNotifierProvider(create: (context) => AppProvider()),
         ChangeNotifierProvider(create: (context) => DashboardProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),
+        ChangeNotifierProvider(create: (context) => SearchUnitsProvider()),
+        ChangeNotifierProvider(create: (context) => UlasanUnitProvider()),
+        ChangeNotifierProvider(create: (context) => OrderProvider()),
+        ChangeNotifierProvider(create: (context) => FormUnitProvider()),
+        ChangeNotifierProvider(create: (context) => SopirProvider()),
       ],
       child: MyApp(),
     ),
@@ -36,7 +46,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: Size(360, 640),
       builder: () => MaterialApp(
-        title: 'Provider and Routes',
+        title: 'Rentalku',
         initialRoute: Routes.home,
         onGenerateRoute: router.generateRoute,
         onUnknownRoute: (settings) => MaterialPageRoute(

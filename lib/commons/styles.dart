@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rentalku/commons/colors.dart';
 
 class AppStyle {
   AppStyle._();
@@ -71,5 +72,25 @@ class AppStyle {
   static TextStyle tinyText = GoogleFonts.poppins(
     fontSize: ScreenUtil().setSp(8),
     color: Colors.black,
+  );
+
+  static TextStyle hargaProduk = GoogleFonts.poppins(
+    fontSize: ScreenUtil().setSp(8),
+    color: AppColor.yellow,
+  );
+
+  static TextStyle nameProduk = GoogleFonts.poppins(
+    fontSize: ScreenUtil().setSp(7),
+    color: Colors.black,
+  );
+
+  static TextStyle categoryText = GoogleFonts.poppins(
+    fontSize: ScreenUtil().setSp(6),
+    color: Colors.grey,
+  );
+
+  static TextStyle lainnyaText = GoogleFonts.poppins(
+    fontSize: ScreenUtil().setSp(10),
+    color: AppColor.green,
   );
 }

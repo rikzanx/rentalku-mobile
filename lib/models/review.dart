@@ -19,4 +19,15 @@ class Review extends Equatable {
 
   @override
   List<Object?> get props => [id];
+
+  factory Review.fromJson(Map<String, dynamic> json){
+    return Review(
+      id: json['id'],
+      name: json['user']['name'],
+      imageURL: json['user']['iamge_link'],
+      rating: double.parse(json['jumlah_bintang']),
+      text: json['review'],
+      dateTime: DateTime.parse(json['created_at'])
+    );
+  }
 }

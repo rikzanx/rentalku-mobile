@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/providers/chat_provider.dart';
@@ -10,6 +11,7 @@ class ListChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<ChatProvider>(context,listen: false).getChats();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -34,59 +36,73 @@ class ListChatPage extends StatelessWidget {
         builder: (context, state, _) {
           if (state.chats.isEmpty) {
             return EmptyChatWidget(
-              onRefresh: () async {},
+              onRefresh: () async {
+                state.getChats();
+              },
             );
           } else {
             return RefreshIndicator(
-              onRefresh: () async {},
+              onRefresh: () async {
+                state.getChats();
+              },
               child: ListView.separated(
                 padding: EdgeInsets.symmetric(vertical: 16),
-                itemBuilder: (context, index) => InkWell(
-                  onTap: () {
-                    state.selectedIndex = index;
-                    Navigator.pushNamed(context, Routes.viewChat);
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 16,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(state.chats[index].imageURL),
-                          radius: 24,
-                        ),
-                        SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${state.chats[index].name} - ${state.chats[index].role}",
-                                style: AppStyle.regular2Text.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.clip,
-                              ),
-                              Text(
-                                state.chats[index].list.last.text,
-                                style: AppStyle.regular2Text.copyWith(
-                                  fontStyle: FontStyle.italic,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
+                itemBuilder: (context, index){
+                  String role ="";
+                  if(state.chats[index].penerima.userType == UserType.User){
+                    role = "Penyewa";
+                  }else if(state.chats[index].penerima.userType == UserType.Owner){
+                    role = "Pemilik";
+                  }else{
+                    role = "Sopir";
+                  }
+                  return InkWell(
+                    onTap: () {
+                      state.selectedIndex = index;
+                      Navigator.pushNamed(context, Routes.viewChat);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 16,
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(assetURL+state.chats[index].penerima.imageURL),
+                            radius: 24,
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${state.chats[index].penerima.name} - ${role}",
+                                  style: AppStyle.regular2Text.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.clip,
+                                ),
+                                Text(
+                                  state.chats[index].list.first.text,
+                                  style: AppStyle.regular2Text.copyWith(
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
                 separatorBuilder: (context, index) => Divider(height: 1),
                 itemCount: state.chats.length,
               ),

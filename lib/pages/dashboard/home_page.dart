@@ -1,77 +1,108 @@
 import 'dart:convert';
 
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/constants.dart';
+import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/article.dart';
+import 'package:rentalku/models/slider_image.dart';
+import 'package:rentalku/models/unit.dart';
 import 'package:rentalku/providers/app_provider.dart';
+import 'package:rentalku/providers/dashboard_provider.dart';
+import 'package:rentalku/providers/form_unit_provider.dart';
+import 'package:rentalku/providers/search_units_provider.dart';
+import 'package:rentalku/providers/ulasan_unit_provider.dart';
+import 'package:rentalku/services/homepage_service.dart';
 import 'package:rentalku/widgets/article_card_widget.dart';
 import 'package:rentalku/widgets/balance_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 
+
 class DashboardHomePage extends StatelessWidget {
+  
   const DashboardHomePage({Key? key}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        AppBar(
-          title: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Image.asset("assets/images/rentalku.png", height: 16),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          actions: [
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset('assets/images/chat_icon.png', height: 24),
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.chats);
-              },
-            )
-          ],
-        ),
-        SizedBox(height: 24),
-        Consumer<AppProvider>(
-          builder: (context, app, _) => app.isUser ? UserInfo(context) : app.isOwner? OwnerInfo(context) : DriverInfo(context),
-        ),
-        SizedBox(height: 12),
-        Container(
-          height: 6,
-          color: AppColor.grey,
-        ),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          child: Text(
-            "Artikel",
-            style: AppStyle.regular1Text.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        ...List.generate(
-          3,
-          (index) => Padding(
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 10),
-            child: ArticleCardWidget(
-              article: Article(
-                id: 1,
-                title: "Enam Teknik Mencuci Mobil yang Benar, Jangan Asal!",
-                category: "Otomotif",
-                imageURL: "https://i.imgur.com/9waAALi.jpg",
-                webURL: "http://id.wikipedia.org/wiki/Rantai_blok",
+    return ChangeNotifierProvider(
+      create: (context) => DashboardProvider(),
+      builder: (context,_){
+        final model = Provider.of<AppProvider>(context,listen: false).getSaldo();
+        final model2 = Provider.of<DashboardProvider>(context,listen: false).getSliderImages();
+        final model3 = Provider.of<DashboardProvider>(context,listen: false).getMostUnits();
+        
+        return ListView(
+          children: [
+            AppBar(
+              title: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Image.asset("assets/images/rentalku.png", height: 16),
               ),
+              backgroundColor: Colors.white,
+              elevation: 0,
+              actions: [
+                IconButton(
+                  splashRadius: 24,
+                  icon: Image.asset('assets/images/chat_icon.png', height: 24),
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.chats);
+                  },
+                )
+              ],
             ),
-          ),
-        ),
-        SizedBox(height: 6),
-      ],
+            SizedBox(height: 24),
+            Consumer<AppProvider>(
+              builder: (context, app, _) => app.isUser ? UserInfo(context) : app.isOwner? OwnerInfo(context) : DriverInfo(context),
+            ),
+            SizedBox(height: 12),
+            Container(
+              height: 6,
+              color: AppColor.grey,
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              
+            ),
+            Consumer<DashboardProvider>(builder:(context,state,_){
+              if(state.homeState == HomeState.Loading){
+                return Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  child: CircularProgressIndicator(color: AppColor.green,),
+                );
+              }
+              if(state.homeState == HomeState.Error){
+                return Center(child: Text(defaultErrorText),);
+              }
+              return Column(
+                children:List.generate(
+                  state.sliderImages.length,
+                  (index) => Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 10),
+                    child: ArticleCardWidget(
+                      article: Article(
+                        id: 1,
+                        title: "Enam Teknik Mencuci Mobil yang Benar, Jangan Asal!",
+                        category: "Otomotif",
+                        imageURL: assetURL+state.sliderImages[index].imageURL,
+                        webURL: "http://id.wikipedia.org/wiki/Rantai_blok",
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }),
+            SizedBox(height: 6),
+          ],
+        );
+      },
     );
   }
 
@@ -111,16 +142,26 @@ class DashboardHomePage extends StatelessWidget {
               // Saldo
               Expanded(
                 flex: 55,
-                child: Consumer<AppProvider>(
-                    builder:(context, app, _){
-                      return BalanceWidget(
-                            balance: app.dompet!.saldo,
-                            onPressed: () {
-                              Navigator.pushNamed(context, Routes.topUp);
-                            },
-                          );
-                    },
-                  ),
+                child:
+                Consumer<AppProvider>(
+                  builder: (context,state,_){
+                    if(state.homeState == HomeState.Loading){
+                      return Center(
+                        child: CircularProgressIndicator(color: AppColor.green),
+                      );
+                    }
+                    if(state.homeState == HomeState.Error){
+                      return Center(child: Text(defaultErrorText),);
+                    }
+                    return BalanceWidget(
+                        balance: state.dompet!.saldo,
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.topUp);
+                        },
+                      );
+                  },
+                ),
+                
               ),
             ],
           ),
@@ -132,27 +173,40 @@ class DashboardHomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               child: Row(
                 children: [
-                  Expanded(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: "Cari di RentalKu",
-                        hintStyle: AppStyle.smallText.copyWith(
-                          color: Colors.black,
+                  Consumer<SearchUnitsProvider>(
+                    builder: (context,state,_){
+                      return Expanded(
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Cari di RentalKu",
+                            hintStyle: AppStyle.smallText.copyWith(
+                              color: Colors.black,
+                            ),
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            contentPadding: EdgeInsets.fromLTRB(8, 4, 4, 4),
+                          ),
+                          textInputAction: TextInputAction.search,
+                          onFieldSubmitted: (value){
+                            // print(value);
+                            state.query = value;
+                            state.carType = [];
+                            state.notifyListeners();
+                            state.search();
+                            Navigator.pushNamed(context, Routes.searchUnits);
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Kolom username wajib diisi';
+                            }
+                            return null;
+                          },
                         ),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.fromLTRB(8, 4, 4, 4),
-                      ),
-                      textInputAction: TextInputAction.search,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Kolom username wajib diisi';
-                        }
-                        return null;
-                      },
-                    ),
+                      );
+                    },
                   ),
+                      
                   Padding(
                     padding: EdgeInsets.fromLTRB(4, 4, 8, 4),
                     child: Icon(Icons.search, size: 16),
@@ -162,37 +216,160 @@ class DashboardHomePage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(
-              4,
-              (index) => Material(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
-                elevation: 1,
-                child: Container(
-                  width: (MediaQuery.of(context).size.width - 56) / 4,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(4, 12, 4, 4),
-                      child: Column(
-                        children: [
-                          Image.network("https://i.imgur.com/vtUhSMq.png"),
-                          SizedBox(height: 4),
-                          Text("Lihat serupa", style: AppStyle.tinyText),
-                        ],
+          Consumer<DashboardProvider>(builder:(context,state,_){
+              if(state.homeState == HomeState.Loading){
+                return Center(child: CircularProgressIndicator(color: AppColor.green,),);
+              }
+              if(state.homeState == HomeState.Error){
+                return Center(child: Text(defaultErrorText),);
+              }
+              return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: 
+                            List.generate(
+                            state.mostUnits.length,
+                            (index) => Container(
+                              padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
+                              child: Material(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              elevation: 2,
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                width: (MediaQuery.of(context).size.width - 56) / 2.5,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 4),
+                                    child: Column(
+                                      children: [
+                                        Material(
+                                          elevation: 4,
+                                          borderRadius: BorderRadius.circular(10),
+                                          child: Container(
+                                            width: (MediaQuery.of(context).size.width - 56) / 2.5,
+                                            height: (MediaQuery.of(context).size.width - 56) / 5,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                image: NetworkImage(assetURL+state.mostUnits[index].imageURL),
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: 4),
+                                        Container(
+                                          padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(state.mostUnits[index].kategoriName, style: AppStyle.categoryText),
+                                                    Text(state.mostUnits[index].name, style: AppStyle.nameProduk),
+                                                  ],
+                                                ),
+                                              ),
+                                              Text(Helper.toIDR(state.mostUnits[index].price), style: AppStyle.hargaProduk),
+                                            ],),
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Icon(Icons.star, size: 7, color: AppColor.yellow),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                state.mostUnits[index].rating.toString(),
+                                                style: AppStyle.nameProduk,
+                                              ),
+                                              SizedBox(width: 2),
+                                              Icon(Icons.people, size: 12, color: AppColor.green),
+                                              SizedBox(width: 2),
+                                              Text(
+                                                state.mostUnits[index].capacity.toString(),
+                                                style: AppStyle.nameProduk,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.detailUnit,
+                                      arguments: state.mostUnits[index]
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            ),
+                            ),
+                          ),
                       ),
-                    ),
-                    onTap: () {},
-                  ),
-                ),
-              ),
-            ),
-          ),
+                      Consumer<SearchUnitsProvider>(
+                        builder: (context,state,_){
+                          return Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                                child: Material(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  elevation: 2,
+                                  child: Container(
+                                    child: InkWell(
+                                      child: Padding(
+                                              padding: EdgeInsets.fromLTRB(2, 10, 2, 10),
+                                              child: Column(
+                                                children: [
+                                                  IconButton(
+                                                    splashRadius: 24,
+                                                    icon: Icon(Icons.chevron_right,color: AppColor.green,),
+                                                    onPressed: () {
+                                                      // Navigator.pop(context);
+                                                      state.query = "";
+                                                      state.carType = [];
+                                                      state.notifyListeners();
+                                                      state.search();
+                                                      Navigator.pushNamed(context, Routes.searchUnits);
+                                                    },
+                                                  ),
+                                                  Text(
+                                                    "Lihat Lainnya",
+                                                    style: AppStyle.lainnyaText,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                ),
+                            );
+                        },
+                      ),
+                       
+                    ]
+                  );
+              
+            }),
+          
+          
         ],
       ),
     );
@@ -216,13 +393,17 @@ class DashboardHomePage extends StatelessWidget {
                       "Halo,",
                       style: AppStyle.regular1Text,
                     ),
-                    Text(
-                      "Muhammad",
-                      maxLines: 1,
-                      overflow: TextOverflow.clip,
-                      style: AppStyle.regular1Text.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+                    Consumer<AppProvider>(
+                      builder: (context, app, _){
+                        return Text(
+                            app.user!.name.toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
+                            style: AppStyle.regular1Text.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          );
+                      },
                     ),
                   ],
                 ),
@@ -230,11 +411,23 @@ class DashboardHomePage extends StatelessWidget {
               // Saldo
               Expanded(
                 flex: 55,
-                child: BalanceWidget(
-                  balance: 500000,
-                  actionName: "Tarik",
-                  onPressed: () {
-                    Navigator.pushNamed(context, Routes.withdraw);
+                child: Consumer<AppProvider>(
+                  builder: (context,state,_){
+                    if(state.homeState == HomeState.Loading){
+                      return Center(
+                        child: CircularProgressIndicator(color: AppColor.green),
+                      );
+                    }
+                    if(state.homeState == HomeState.Error){
+                      return Center(child: Text(defaultErrorText),);
+                    }
+                    return BalanceWidget(
+                        balance: state.dompet!.saldo,
+                        actionName: "Tarik",
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.withdraw);
+                        },
+                      );
                   },
                 ),
               ),
@@ -252,17 +445,26 @@ class DashboardHomePage extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(4, 4, 8, 4),
                     child: Icon(Icons.location_pin, size: 16),
                   ),
-                  Expanded(
-                    child: TextFormField(
-                      controller: TextEditingController(text: "Surabaya"),
-                      decoration: InputDecoration(
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.fromLTRB(8, 4, 4, 4),
-                      ),
-                      enabled: false,
-                    ),
+                  Consumer<AppProvider>(
+                    builder: (context,state,_) {
+                      return Expanded(
+                        child: TextFormField(
+                          controller: TextEditingController(text: state.user!.city.toString()),
+                          decoration: InputDecoration(
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            contentPadding: EdgeInsets.fromLTRB(8, 4, 4, 4),
+                          ),
+                          // enabled: false,
+                          onTap: (){
+                            state.setKota();
+                            Navigator.pushNamed(context, Routes.changeLocation);
+
+                          },
+                        ),
+                      );
+                    }
                   ),
                 ],
               ),
@@ -272,110 +474,121 @@ class DashboardHomePage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: Material(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: AppColor.green),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  color: Colors.white,
-                  elevation: 1,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          top: -6,
-                          left: -6,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColor.green,
-                              shape: BoxShape.circle,
+              Consumer<FormUnitProvider>(
+                builder: (context,state,_) {
+                  return Expanded(
+                    child: Material(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(color: AppColor.green),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      color: Colors.white,
+                      elevation: 1,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: -6,
+                              left: -6,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppColor.green,
+                                  shape: BoxShape.circle,
+                                ),
+                                padding: EdgeInsets.all(8),
+                                child: Icon(
+                                  Icons.directions_car,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                            padding: EdgeInsets.all(8),
-                            child: Icon(
-                              Icons.directions_car,
-                              color: Colors.white,
+                            Positioned(
+                              right: -10,
+                              top: -25,
+                              child: Icon(
+                                Icons.directions_car,
+                                color: AppColor.lightGreen,
+                                size: 108,
+                              ),
                             ),
-                          ),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 25),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Galeri Unitku",
+                                style: AppStyle.regular2Text,
+                              ),
+                            ),
+                          ],
                         ),
-                        Positioned(
-                          right: -10,
-                          top: -25,
-                          child: Icon(
-                            Icons.directions_car,
-                            color: AppColor.lightGreen,
-                            size: 108,
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 25),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Galeri Unitku",
-                            style: AppStyle.regular2Text,
-                          ),
-                        ),
-                      ],
+                        onTap: () {
+                          state.getMyUnits();
+                          Navigator.pushNamed(context, Routes.myUnits);
+                        },
+                      ),
                     ),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.myUnits);
-                    },
-                  ),
-                ),
+                  );
+                }
               ),
               SizedBox(width: 16),
-              Expanded(
-                child: Material(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: AppColor.green),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  color: Colors.white,
-                  elevation: 1,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          top: -6,
-                          left: -6,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColor.green,
-                              shape: BoxShape.circle,
+              Consumer<FormUnitProvider>(
+                builder: (context,state,_) {
+                  return Expanded(
+                    child: Material(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(color: AppColor.green),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      color: Colors.white,
+                      elevation: 1,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: -6,
+                              left: -6,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppColor.green,
+                                  shape: BoxShape.circle,
+                                ),
+                                padding: EdgeInsets.all(8),
+                                child: Icon(
+                                  Icons.add_circle_outline,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                            padding: EdgeInsets.all(8),
-                            child: Icon(
-                              Icons.add_circle_outline,
-                              color: Colors.white,
+                            Positioned(
+                              right: -10,
+                              top: -25,
+                              child: Icon(
+                                Icons.add_circle_outline,
+                                color: AppColor.lightGreen,
+                                size: 108,
+                              ),
                             ),
-                          ),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 25),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Tambah Unit Rental",
+                                style: AppStyle.regular2Text,
+                              ),
+                            ),
+                          ],
                         ),
-                        Positioned(
-                          right: -10,
-                          top: -25,
-                          child: Icon(
-                            Icons.add_circle_outline,
-                            color: AppColor.lightGreen,
-                            size: 108,
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 25),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Tambah Unit Rental",
-                            style: AppStyle.regular2Text,
-                          ),
-                        ),
-                      ],
+                        onTap: () async{
+                          state.getKategoriList();
+                          state.notifyListeners();
+                          Navigator.pushNamed(context, Routes.addUnit);
+                        },
+                      ),
                     ),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.addUnit);
-                    },
-                  ),
-                ),
+                  );
+                }
               ),
             ],
           ),
@@ -403,13 +616,17 @@ class DashboardHomePage extends StatelessWidget {
                       "Halo,",
                       style: AppStyle.regular1Text,
                     ),
-                    Text(
-                      "Muhammad",
-                      maxLines: 1,
-                      overflow: TextOverflow.clip,
-                      style: AppStyle.regular1Text.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+                    Consumer<AppProvider>(
+                      builder: (context, app, _){
+                        return Text(
+                            app.user!.name.toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
+                            style: AppStyle.regular1Text.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          );
+                      },
                     ),
                   ],
                 ),
@@ -432,44 +649,43 @@ class DashboardHomePage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 12),
-          InkWell(
-            borderRadius: BorderRadius.circular(10),
-            child: Ink(
-              padding: EdgeInsets.all(12),
-              width: MediaQuery.of(context).size.width - 32,
-              decoration: BoxDecoration(
+          Consumer<UlasanUnitProvider>(
+            builder: (context,state,_) {
+              return InkWell(
                 borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: NetworkImage(
-                      "https://unsplash.com/photos/H7yW_lVGJuI/download?force=true&w=640"),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                    AppColor.green.withOpacity(0.5),
-                    BlendMode.srcOver,
+                child: Ink(
+                  padding: EdgeInsets.all(12),
+                  width: MediaQuery.of(context).size.width - 32,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          "https://unsplash.com/photos/H7yW_lVGJuI/download?force=true&w=640"),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                        AppColor.green.withOpacity(0.5),
+                        BlendMode.srcOver,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "Penilaian dan Ulasan",
+                    style: AppStyle.regular2Text.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-              ),
-              child: Text(
-                "Penilaian dan Ulasan",
-                style: AppStyle.regular2Text.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, Routes.reviewDriver);
-            },
+                onTap: () {
+                  state.getUlasanPemilikByUserId();
+                  state.notifyListeners();
+                  Navigator.pushNamed(context, Routes.reviewDriver);
+                },
+              );
+            }
           )
         ],
       ),
     );
-  }
-
-  Future _getNameUser() async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userPref = prefs.getString('user');
-    Map<String,dynamic> userMap = jsonDecode(userPref!) as Map<String,dynamic>;
-    return userMap['name'];
   }
 }

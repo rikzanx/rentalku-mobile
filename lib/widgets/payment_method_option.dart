@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/payment_method.dart';
 
@@ -39,8 +40,8 @@ class PaymentMethodOption extends StatelessWidget {
                   SizedBox(width: 8),
                   Text(paymentMethod.name, style: AppStyle.smallText),
                   Spacer(),
-                  Image.asset(
-                    "assets/logos/" + paymentMethod.imageURL,
+                  Image.network(
+                    assetURL+paymentMethod.imageURL,
                     height: 20,
                   ),
                 ],

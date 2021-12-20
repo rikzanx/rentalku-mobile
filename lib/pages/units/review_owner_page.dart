@@ -1,8 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/review.dart';
+import 'package:rentalku/providers/ulasan_unit_provider.dart';
 import 'package:rentalku/widgets/review_card_widget.dart';
 import 'package:rentalku/widgets/star_rating_widget.dart';
 
@@ -20,7 +24,7 @@ class ReviewOwnerPage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text("Penilaian & Ulasan Pemilik Mobil"),
+        title: Text("Penilaian & Ulasan Pemilik"),
         titleTextStyle: AppStyle.title3Text.copyWith(color: Colors.white),
         centerTitle: true,
         shape: RoundedRectangleBorder(
@@ -31,43 +35,44 @@ class ReviewOwnerPage extends StatelessWidget {
         ),
         elevation: 2,
       ),
-      body: ListView(
-        padding: EdgeInsets.all(16),
-        children: [
-          Center(child: StarRating(rating: 4)),
-          SizedBox(height: 5),
-          Text(
-            "Rata-Rata Penilaian : 4.2",
-            style: AppStyle.smallText,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 16),
-          Text(
-            "Ulasan Pelanggan",
-            style: AppStyle.regular1Text.copyWith(
-              fontWeight: FontWeight.w600,
+      body: Consumer<UlasanUnitProvider>(
+        builder: (context,state,_){
+          if(state.homeState == HomeState.Loading){
+            return Center(child: CircularProgressIndicator(color: AppColor.green,),);
+          }else if(state.homeState == HomeState.Error){
+            return Center(child: Text(defaultErrorText),);
+          }
+          return Container(
+        child: ListView(
+          padding: EdgeInsets.all(16),
+          children: [
+            Center(child: StarRating(rating: state.ulasanPemilik!.avgRating)),
+            SizedBox(height: 5),
+            Text(
+              "Rata-Rata Penilaian : ${state.ulasanPemilik!.avgRating.toString()}",
+              style: AppStyle.smallText,
+              textAlign: TextAlign.center,
             ),
-          ),
-          ...List.generate(
-            4,
-            (index) => Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: ReviewCardWidget(
-                review: Review(
-                  id: 1,
-                  name: "Ahmad Ujang",
-                  imageURL: "https://dummyimage.com/200x200/000/fff&text=foto+profil",
-                  rating: 4,
-                  text:
-                      "pelayanannya driver nya sabar cara mengemudikan sangat hati",
-                  dateTime: DateTime.now().subtract(
-                    Duration(days: Random().nextInt(10)),
+            SizedBox(height: 16),
+            Text(
+              "Ulasan Pelanggan",
+              style: AppStyle.regular1Text.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            ...List.generate(
+              state.ulasanPemilik!.ratingList.length,
+              (index) => Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: ReviewCardWidget(
+                  rating: state.ulasanPemilik!.ratingList.elementAt(index),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+          ],
+        ),
+      );
+        },
       ),
     );
   }

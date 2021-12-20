@@ -50,10 +50,10 @@ class UnitCardWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: AppStyle.regular1Text,
                     ),
-                    Text(
-                      unit.withDriver ? "Dengan Supir" : "Tanpa Supir",
-                      style: AppStyle.smallText,
-                    ),
+                    // Text(
+                    //   unit.withDriver ? "" : "",
+                    //   style: AppStyle.smallText,
+                    // ),
                     Text(
                       "Harga Mulai Dari",
                       style: AppStyle.smallText.copyWith(

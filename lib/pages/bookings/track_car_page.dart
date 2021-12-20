@@ -5,28 +5,36 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/models/lokasi.dart';
+import 'package:rentalku/models/unit.dart';
+import 'package:rentalku/services/api_response.dart';
+import 'package:rentalku/services/unit_services.dart';
 
 class TrackCarPage extends StatefulWidget {
-  const TrackCarPage({Key? key}) : super(key: key);
+  final Unit unit;
+  const TrackCarPage({Key? key,required this.unit}) : super(key: key);
 
   @override
-  _TrackCarPageState createState() => _TrackCarPageState();
+  _TrackCarPageState createState() => _TrackCarPageState(unit);
 }
 
 class _TrackCarPageState extends State<TrackCarPage> {
   Marker? _marker;
   late Timer timer;
+  final Unit unit;
 
   Completer<GoogleMapController> _controller = Completer();
   CameraPosition _position = CameraPosition(
-    target: LatLng(-7.9680376, 112.5937865),
+    target: LatLng(-7.2974336, 112.7448576),
     zoom: 15,
   );
-  double _latitude = -7.9680376;
-  double _longitude = 112.5937865;
-  String address = "Searching Location....";
+  double _latitude = -7.2974336;
+  double _longitude = 112.7448576;
+  String address = "Mencari Lokasi....";
   String plateNumber = "X 1234 XX";
   bool follow = true;
+
+  _TrackCarPageState(this.unit);
 
   @override
   void initState() {
@@ -43,8 +51,8 @@ class _TrackCarPageState extends State<TrackCarPage> {
   void setupMarker() async {
     _marker = Marker(
       markerId: MarkerId("car"),
-      position: LatLng(-7.9680376, 112.5937865),
-      infoWindow: InfoWindow(title: "Mobil"),
+      position: LatLng(-7.2974336, 112.7448576),
+      infoWindow: InfoWindow(title: unit.name),
       icon: await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(size: Size(12, 12)),
         "assets/images/car_icon.png",
@@ -71,15 +79,15 @@ class _TrackCarPageState extends State<TrackCarPage> {
     final GoogleMapController controller = await _controller.future;
 
     // Simulate change location
-    Map<String, double> coordinate = await Future.delayed(
-      Duration(milliseconds: 500),
-      () => {
-        "latitude": _latitude + 0.00005,
-        "longitude": _longitude + 0.00005,
-      },
-    );
-    _latitude = coordinate['latitude']!;
-    _longitude = coordinate['longitude']!;
+    ApiResponse coordinate = await UnitServices.getUnitLocation(unit.id);
+    print("init");
+    if(coordinate.status){
+      print("oke");
+      Lokasi data = coordinate.data;
+      // print(data.long);
+      _latitude = data.lat;
+      _longitude = data.long;
+    }
 
     await toAddress(_latitude, _longitude);
 
@@ -119,7 +127,8 @@ class _TrackCarPageState extends State<TrackCarPage> {
 
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
-    timer = Timer.periodic(Duration(seconds: 1), (timer) => updateLocation());
+    updateLocation();
+    // timer = Timer.periodic(Duration(seconds: 1), (timer) => updateLocation());
   }
 
   @override
@@ -159,7 +168,7 @@ class _TrackCarPageState extends State<TrackCarPage> {
                       child: Row(
                         children: [
                           Text(
-                            "Detail Objek",
+                            "Lacak Kendaraan",
                             style: AppStyle.regular2Text,
                           ),
                           Spacer(),
@@ -210,7 +219,7 @@ class _TrackCarPageState extends State<TrackCarPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          plateNumber,
+                          unit.nopol,
                           style: AppStyle.regular1Text.copyWith(
                             fontWeight: FontWeight.w600,
                           ),

@@ -18,4 +18,13 @@ class TopUp extends Equatable {
 
   @override
   List<Object?> get props => [id];
+
+  factory TopUp.fromJson(Map<String, dynamic> json){
+    return TopUp(
+      id: json['id'],
+      amount: json['jumlah'],
+      uniqueCode: json['kode_unik'],
+      paymentMethod: PaymentMethod.fromJson(json['rekening'])
+    );
+  }
 }

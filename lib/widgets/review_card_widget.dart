@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/models/review.dart';
+import 'package:rentalku/models/ulasan_unit.dart';
 import 'package:rentalku/widgets/star_rating_widget.dart';
 
 class ReviewCardWidget extends StatelessWidget {
-  final Review review;
+  final Rating rating;
 
   const ReviewCardWidget({
     Key? key,
-    required this.review,
+    required this.rating,
   }) : super(key: key);
 
   @override
@@ -24,7 +26,7 @@ class ReviewCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage(review.imageURL),
+              backgroundImage: NetworkImage(assetURL+rating.user.imageURL),
               radius: 30,
             ),
             SizedBox(width: 16),
@@ -33,7 +35,7 @@ class ReviewCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "${review.name}",
+                    "${rating.user.name}",
                     style: AppStyle.regular1Text.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -42,15 +44,15 @@ class ReviewCardWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      StarRating(rating: review.rating, size: 16),
+                      StarRating(rating: rating.rating, size: 16),
                       SizedBox(width: 10),
                       Text(
-                        DateFormat("d/M/yy").format(review.dateTime),
+                        DateFormat("d/M/yy").format(rating.dateTime),
                         style: AppStyle.smallText,
                       ),
                     ],
                   ),
-                  Text(review.text, style: AppStyle.smallText),
+                  Text(rating.review, style: AppStyle.smallText),
                 ],
               ),
             ),

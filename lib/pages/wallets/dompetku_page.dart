@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/helpers.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
@@ -65,12 +66,31 @@ class DompetkuPage extends StatelessWidget {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        Text(
-                          Helper.toIDR(500000),
-                          style: AppStyle.regular1Text.copyWith(
-                            color: Colors.white,
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0,0,0),
+                          child: Container(
+                          child: Consumer<AppProvider>(
+                            builder: (context,state,_){
+                              if(state.homeState == HomeState.Loading){
+                                return Center(
+                                  child: CircularProgressIndicator(color: AppColor.green),
+                                );
+                              }
+                              if(state.homeState == HomeState.Error){
+                                return Center(child: Text(defaultErrorText),);
+                              }
+
+                              return Text(
+                                Helper.toIDR(state.dompet!.saldo),
+                                style: AppStyle.regular1Text.copyWith(
+                                  color: Colors.white,
+                                ),
+                              );
+                            },
                           ),
-                        )
+                          ),
+                        ),
+                        
                       ],
                     ),
                     Consumer<AppProvider>(
@@ -109,18 +129,25 @@ class DompetkuPage extends StatelessWidget {
                   ),
                 ),
               ),
-              ...List.generate(
-                10,
-                (index) => TransactionCardWidget(
-                  transaction: Transaction(
-                    id: 1,
-                    title: "Pembayaran",
-                    description: "Toyota Avanza",
-                    dateTime: DateTime.now(),
-                    amount: 280000,
-                  ),
-                ),
+              Consumer<AppProvider>(
+                builder: (context, state,_){
+                  return Column(
+                      children: List.generate(
+                      state.transactionList!.length,
+                      (index) => TransactionCardWidget(
+                        transaction: Transaction(
+                          id: state.transactionList![index].id,
+                          title: state.transactionList![index].title,
+                          description: (state.transactionList![index].description.toString() == 'null')?'':state.transactionList![index].description.toString(),
+                          dateTime: state.transactionList![index].dateTime,
+                          amount: state.transactionList![index].amount,
+                        ),
+                      ),
+                    ),
+                    );
+                }
               ),
+              
             ],
           ),
         ),

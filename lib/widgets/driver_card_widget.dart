@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:rentalku/commons/colors.dart';
+import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/styles.dart';
+import 'package:rentalku/models/user.dart';
 
 class DriverCardWidget extends StatelessWidget {
   final bool selected;
   final void Function()? onTap;
+  final User user;
 
   const DriverCardWidget({
     Key? key,
     required this.onTap,
     required this.selected,
+    required this.user
   }) : super(key: key);
 
   @override
@@ -28,13 +32,14 @@ class DriverCardWidget extends StatelessWidget {
               shape: CircleBorder(),
               child: CircleAvatar(
                 backgroundImage:
-                    NetworkImage("https://dummyimage.com/200x200/000/fff&text=foto+profil"),
+                    NetworkImage(assetURL+user.imageURL),
                 radius: 20,
               ),
             ),
             SizedBox(height: 5),
             Text(
-              "Asep",
+              user.name,
+              overflow: TextOverflow.ellipsis,
               style: AppStyle.regular2Text,
             ),
             Row(
@@ -44,7 +49,7 @@ class DriverCardWidget extends StatelessWidget {
                 Icon(Icons.star, size: 12, color: AppColor.yellow),
                 SizedBox(width: 2),
                 Text(
-                  "4.2",
+                  user.rating.toString(),
                   style: AppStyle.smallText,
                 ),
               ],

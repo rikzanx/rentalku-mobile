@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 import 'package:rentalku/commons/constants.dart';
 
 class User extends Equatable {
@@ -8,6 +9,7 @@ class User extends Equatable {
   final String email;
   final DateTime? emailVerifiedAt;
   final String imageURL;
+  final String tanggalLahir;
   final String? nik;
   final String? ktpURL;
   final String? simURL;
@@ -16,6 +18,7 @@ class User extends Equatable {
   final String? phone;
   final double? latitude;
   final double? longitude;
+  final double rating;
 
   User({
     required this.id,
@@ -24,6 +27,7 @@ class User extends Equatable {
     required this.email,
     this.emailVerifiedAt,
     required this.imageURL,
+    this.tanggalLahir ="",
     this.nik,
     this.ktpURL,
     this.simURL,
@@ -32,6 +36,7 @@ class User extends Equatable {
     this.phone,
     this.latitude,
     this.longitude,
+    this.rating = 0,
   });
 
   @override
@@ -45,6 +50,7 @@ class User extends Equatable {
       email: json['email'],
       emailVerifiedAt: json['email_verified_at'] == null ? null : DateTime.tryParse(json['email_verified_at']),
       imageURL: json['image_link'],
+      tanggalLahir: (json['tanggal_lahir'] != null)? DateFormat('yyyy-MM-dd').format(DateTime.parse(json['tanggal_lahir'])):json['tanggal_lahir'].toString(),
       nik: json['nik'],
       ktpURL: json['foto_ktp'],
       simURL: json['foto_sim'],
@@ -53,6 +59,7 @@ class User extends Equatable {
       phone: json['telp'],
       latitude: json['lat'],
       longitude: json['long'],
+      rating: (json.containsKey("avg_rating"))?(json['avg_rating'].length > 0)? double.parse(json['avg_rating'][0]['aggregate']):0:0,
     );
   }
 }

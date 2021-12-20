@@ -48,7 +48,7 @@ class TransactionCardWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      transaction.description,
+                      transaction.description!,
                       style: AppStyle.smallText.copyWith(
                         fontWeight: FontWeight.w300,
                       ),
@@ -57,7 +57,7 @@ class TransactionCardWidget extends StatelessWidget {
                     ),
                     Text(
                       DateFormat("d MMM y H:m", "id_ID")
-                          .format(transaction.dateTime),
+                          .format(transaction.dateTime!),
                       style: AppStyle.smallText.copyWith(
                         fontWeight: FontWeight.w300,
                       ),
@@ -68,7 +68,7 @@ class TransactionCardWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  (transaction.amount < 0 ? "-" : "+") +
+                  (transaction.amount < 0 ? "" : "+") +
                       Helper.toIDR(transaction.amount),
                   style: AppStyle.regular2Text.copyWith(
                     fontWeight: FontWeight.w600,

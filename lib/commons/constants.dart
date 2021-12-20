@@ -11,6 +11,13 @@ enum UserType {
   Driver,
 }
 
+enum HomeState{
+  Initial,
+  Loading,
+  Loaded,
+  Error,
+}
+
 final List<String> carTypes = [
   "Sedan",
   "Crossover",
@@ -25,6 +32,6 @@ final Map<bool, String> carDriverTypes = {
 final String defaultErrorText = "Terjadi kesalahan. Coba lagi nanti";
 
 /* URI */
-Uri apiURL = Uri.parse("http://quiet-stream-85697.herokuapp.com/public/api/");
-String assetURL = "http://quiet-stream-85697.herokuapp.com/public/";
+Uri apiURL = Uri.parse("https://rentalku.pemirahimatepa2021.com/public/api/");
+String assetURL = "https://rentalku.pemirahimatepa2021.com/public/";
 Map<String, String> acceptJson = {HttpHeaders.acceptHeader: "application/json"};

@@ -18,6 +18,7 @@ class TextFieldWithShadow extends StatelessWidget {
   final bool obscureText;
   final double height;
   final void Function()? onTap;
+  final void Function()? onEditingComplete;
   final void Function(String)? onChanged;
 
   const TextFieldWithShadow({
@@ -34,6 +35,7 @@ class TextFieldWithShadow extends StatelessWidget {
     this.obscureText = false,
     this.onChanged,
     this.onTap,
+    this.onEditingComplete,
     this.prefixText,
     this.suffixText,
     this.textInputAction,
@@ -68,6 +70,7 @@ class TextFieldWithShadow extends StatelessWidget {
               ),
             ),
             TextFormField(
+              onEditingComplete: onEditingComplete,
               controller: controller,
               initialValue: initialValue,
               obscureText: obscureText,
