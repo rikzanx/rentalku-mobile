@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/providers/app_provider.dart';
+import 'package:rentalku/providers/password_provider.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';
 
 final _formKey = GlobalKey<FormState>();
@@ -39,37 +40,55 @@ class UpdatePasswordPage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           children: [
-            TextFieldWithShadow(
-              labelText: "Ketik kata sandi sekarang anda",
-              hintText: "kata sandi",
-              obscureText: true,
-              labelColor: Colors.black,
-              textInputAction: TextInputAction.next,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Kolom kata sandi wajib diisi';
-                } else if (value.length < 6) {
-                  return 'Panjang kata sandi minimal 6 karakter';
-                }
-                return null;
-              },
-              onChanged: (value) => password = value,
+            Consumer<PasswordProvider>(
+              builder: (context,state,_) {
+                return TextFieldWithShadow(
+                  labelText: "Ketik kata sandi sekarang anda",
+                  hintText: "kata sandi",
+                  obscureText: state.obsecureText,
+                  withShowPassword: true,
+                  onPressed: (){
+                    state.obsecureText = !state.obsecureText;
+                    state.notifyListeners();
+                  },
+                  labelColor: Colors.black,
+                  textInputAction: TextInputAction.next,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Kolom kata sandi wajib diisi';
+                    } else if (value.length < 6) {
+                      return 'Panjang kata sandi minimal 6 karakter';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) => password = value,
+                );
+              }
             ),
             SizedBox(height: 16),
-            TextFieldWithShadow(
-              labelText: "Ketik kata sandi baru anda",
-              hintText: "kata sandi baru",
-              obscureText: true,
-              labelColor: Colors.black,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Kolom kata sandi baru wajib diisi';
-                } else if (value.length < 6) {
-                  return 'Panjang kata sandi baru minimal 6 karakter';
-                }
-                return null;
-              },
-              onChanged: (value) => password_new = value,
+            Consumer<PasswordProvider>(
+              builder: (context,state,_) {
+                return TextFieldWithShadow(
+                  labelText: "Ketik kata sandi baru anda",
+                  hintText: "kata sandi baru",
+                  obscureText: state.obsecureText2,
+                  withShowPassword: true,
+                  onPressed: (){
+                    state.obsecureText2 = !state.obsecureText2;
+                    state.notifyListeners();
+                  },
+                  labelColor: Colors.black,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Kolom kata sandi baru wajib diisi';
+                    } else if (value.length < 6) {
+                      return 'Panjang kata sandi baru minimal 6 karakter';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) => password_new = value,
+                );
+              }
             ),
             SizedBox(height: 16),
             SizedBox(

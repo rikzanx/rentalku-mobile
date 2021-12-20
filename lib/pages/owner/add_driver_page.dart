@@ -8,6 +8,7 @@ import 'package:rentalku/commons/constants.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/pages/profile/upgrade_owner_car_page.dart';
+import 'package:rentalku/providers/password_provider.dart';
 import 'package:rentalku/providers/sopir_provider.dart';
 import 'package:rentalku/services/sopir_services.dart';
 import 'package:rentalku/widgets/text_field_upload_with_shadow_widget.dart';
@@ -89,23 +90,32 @@ class AddDriverPage extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: 16),
-                    TextFieldWithShadow(
-                      labelText: "Ketik kata sandi",
-                      hintText: "kata sandi",
-                      labelColor: Colors.black,
-                      textInputAction: TextInputAction.next,
-                      obscureText: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Kolom kata sandi wajib diisi';
-                        } else if (value.length < 6) {
-                          return 'Panjang kata sandi minimal 6 karakter';
-                        }
-                        return null;
-                      },
-                      onChanged: (value){
-                        password = value;
-                      },
+                    Consumer<PasswordProvider>(
+                      builder: (context,state,_) {
+                        return TextFieldWithShadow(
+                          labelText: "Ketik kata sandi",
+                          hintText: "kata sandi",
+                          labelColor: Colors.black,
+                          textInputAction: TextInputAction.next,
+                          obscureText: state.obsecureText,
+                          withShowPassword: true,
+                          onPressed: (){
+                            state.obsecureText = !state.obsecureText;
+                            state.notifyListeners();
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Kolom kata sandi wajib diisi';
+                            } else if (value.length < 6) {
+                              return 'Panjang kata sandi minimal 6 karakter';
+                            }
+                            return null;
+                          },
+                          onChanged: (value){
+                            password = value;
+                          },
+                        );
+                      }
                     ),
                     SizedBox(height: 16),
                     TextFieldUploadWithShadow(

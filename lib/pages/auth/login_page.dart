@@ -7,6 +7,7 @@ import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/routes.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/providers/app_provider.dart';
+import 'package:rentalku/providers/password_provider.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -79,19 +80,28 @@ class LoginPage extends StatelessWidget {
                           onChanged: (value) => email = value,
                         ),
                         SizedBox(height: 16),
-                        TextFieldWithShadow(
-                          labelText: "Ketik kata sandi anda",
-                          hintText: "kata sandi",
-                          obscureText: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Kolom kata sandi wajib diisi';
-                            } else if (value.length < 6) {
-                              return 'Panjang kata sandi minimal 6 karakter';
-                            }
-                            return null;
-                          },
-                          onChanged: (value) => password = value,
+                        Consumer<PasswordProvider>(
+                          builder: (context,state,_) {
+                            return TextFieldWithShadow(
+                              labelText: "Ketik kata sandi anda",
+                              hintText: "kata sandi",
+                              obscureText: state.obsecureText,
+                              withShowPassword: true,
+                              onPressed: (){
+                                state.obsecureText = !state.obsecureText;
+                                state.notifyListeners();
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Kolom kata sandi wajib diisi';
+                                } else if (value.length < 6) {
+                                  return 'Panjang kata sandi minimal 6 karakter';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) => password = value,
+                            );
+                          }
                         ),
                         SizedBox(height: 16),
                         ElevatedButton(

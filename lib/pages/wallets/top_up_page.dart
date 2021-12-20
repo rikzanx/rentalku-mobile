@@ -32,7 +32,7 @@ class TopUpPage extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          title: Text("Top Up Dompetku"),
+          title: Text("Isi Saldo Dompetku"),
           titleTextStyle: AppStyle.title3Text.copyWith(color: Colors.white),
           centerTitle: true,
           shape: RoundedRectangleBorder(

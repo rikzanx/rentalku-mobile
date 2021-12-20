@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
 import 'package:rentalku/commons/routes.dart';
+import 'package:rentalku/providers/password_provider.dart';
 import 'package:rentalku/widgets/text_field_with_shadow.dart';
 import 'package:rentalku/providers/app_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -94,36 +95,52 @@ class RegisterPage extends StatelessWidget {
                           onChanged: (value) => email = value,
                         ),
                         SizedBox(height: 16),
-                        TextFieldWithShadow(
-                          labelText: "Ketik kata sandi anda",
-                          hintText: "kata sandi",
-                          obscureText: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Kolom kata sandi wajib diisi';
-                            } else if (value.length < 6) {
-                              return 'Panjang kata sandi minimal 6 karakter';
-                            }
-                            return null;
-                          },
-                          onChanged: (value) => password = value,
+                        Consumer<PasswordProvider>(
+                          builder: (context,state,_) {
+                            return TextFieldWithShadow(
+                              labelText: "Ketik kata sandi anda",
+                              hintText: "kata sandi",
+                              obscureText: state.obsecureText,
+                              withShowPassword: true,
+                              onPressed: (){
+                                state.obsecureText=!state.obsecureText;
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Kolom kata sandi wajib diisi';
+                                } else if (value.length < 6) {
+                                  return 'Panjang kata sandi minimal 6 karakter';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) => password = value,
+                            );
+                          }
                         ),
                         SizedBox(height: 16),
-                        TextFieldWithShadow(
-                          labelText: "Ketik ulang kata sandi anda",
-                          hintText: "kata sandi",
-                          obscureText: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Kolom kata sandi wajib diisi';
-                            } else if (value.length < 6) {
-                              return 'Panjang kata sandi minimal 6 karakter';
-                            } else if (password != value){
-                              return 'kata sandi Tidak sama';
-                            }
-                            return null;
-                          },
-                          onChanged: (value) => password2 = value,
+                        Consumer<PasswordProvider>(
+                          builder: (context,state,_) {
+                            return TextFieldWithShadow(
+                              labelText: "Ketik ulang kata sandi anda",
+                              hintText: "kata sandi",
+                              obscureText: state.obsecureText2,
+                              withShowPassword: true,
+                              onPressed: (){
+                                state.obsecureText2 = !state.obsecureText2;
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Kolom kata sandi wajib diisi';
+                                } else if (value.length < 6) {
+                                  return 'Panjang kata sandi minimal 6 karakter';
+                                } else if (password != value){
+                                  return 'kata sandi Tidak sama';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) => password2 = value,
+                            );
+                          }
                         ),
                         SizedBox(height: 16),
                         ElevatedButton(

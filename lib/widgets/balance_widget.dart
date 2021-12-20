@@ -12,7 +12,7 @@ class BalanceWidget extends StatelessWidget {
 
   const BalanceWidget({
     Key? key,
-    this.actionName = "Top Up",
+    this.actionName = "Isi Saldo",
     this.balance = 0,
     this.enableAction = true,
     this.padding,

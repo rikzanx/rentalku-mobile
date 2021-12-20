@@ -13,6 +13,7 @@ import 'package:rentalku/providers/chat_provider.dart';
 import 'package:rentalku/providers/dashboard_provider.dart';
 import 'package:rentalku/providers/form_unit_provider.dart';
 import 'package:rentalku/providers/order_provider.dart';
+import 'package:rentalku/providers/password_provider.dart';
 import 'package:rentalku/providers/search_units_provider.dart';
 import 'package:rentalku/providers/ulasan_unit_provider.dart';
 import 'package:rentalku/providers/sopir_provider.dart';
@@ -32,6 +33,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => OrderProvider()),
         ChangeNotifierProvider(create: (context) => FormUnitProvider()),
         ChangeNotifierProvider(create: (context) => SopirProvider()),
+        ChangeNotifierProvider(create: (context) => PasswordProvider()),
       ],
       child: MyApp(),
     ),

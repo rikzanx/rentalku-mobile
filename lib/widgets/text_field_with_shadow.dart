@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rentalku/commons/colors.dart';
 import 'package:rentalku/commons/styles.dart';
 
 class TextFieldWithShadow extends StatelessWidget {
@@ -15,9 +16,11 @@ class TextFieldWithShadow extends StatelessWidget {
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
   final bool enabled;
-  final bool obscureText;
+  final obscureText;
+  final bool withShowPassword;
   final double height;
   final void Function()? onTap;
+  final void Function()? onPressed;
   final void Function()? onEditingComplete;
   final void Function(String)? onChanged;
 
@@ -33,6 +36,7 @@ class TextFieldWithShadow extends StatelessWidget {
     this.labelColor = Colors.white,
     this.labelText,
     this.obscureText = false,
+    this.withShowPassword = false,
     this.onChanged,
     this.onTap,
     this.onEditingComplete,
@@ -40,6 +44,7 @@ class TextFieldWithShadow extends StatelessWidget {
     this.suffixText,
     this.textInputAction,
     this.validator,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -74,13 +79,30 @@ class TextFieldWithShadow extends StatelessWidget {
               controller: controller,
               initialValue: initialValue,
               obscureText: obscureText,
-              decoration: InputDecoration(
+              decoration: (withShowPassword)?
+              InputDecoration(
                 hintText: hintText,
                 prefixText: prefixText,
                 prefixStyle: AppStyle.regular1Text,
                 suffixText: suffixText,
                 suffixStyle: AppStyle.regular1Text,
-              ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    // Based on passwordVisible state choose the icon
+                    obscureText
+                    ? Icons.visibility
+                    : Icons.visibility_off,
+                    color: AppColor.green,
+                    ),
+                  onPressed:onPressed,
+                  ),
+                ):InputDecoration(
+                hintText: hintText,
+                prefixText: prefixText,
+                prefixStyle: AppStyle.regular1Text,
+                suffixText: suffixText,
+                suffixStyle: AppStyle.regular1Text,
+                ),
               inputFormatters: inputFormatters,
               keyboardType: keyboardType,
               style: AppStyle.regular1Text,
